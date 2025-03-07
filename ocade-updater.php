@@ -3,8 +3,8 @@
 namespace OcadeChildMinimal;
 
 // Définition des variables globales
-$ORGANISATION_GITHUB = '**NOM_ORGANISATION_GITHUB**';
-$DEPOT_GITHUB = '**NOM_DEPOT_GITHUB**';
+$ORGANISATION_GITHUB = 'ocade-fusion-web-sites';
+$DEPOT_GITHUB = 'no-code-tools';
 
 $OCADE_THEME_REPO = 'https://github.com/' . $ORGANISATION_GITHUB . '/' . $DEPOT_GITHUB;
 $OCADE_VERSION_URL = 'https://raw.githubusercontent.com/' . $ORGANISATION_GITHUB . '/' . $DEPOT_GITHUB . '/master/version.txt';
