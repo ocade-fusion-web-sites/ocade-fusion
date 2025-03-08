@@ -8,6 +8,21 @@
  * Text Domain: no-code-tools
  */
 
+ .skiplink {
+  position: absolute;
+  top: -100vh;
+  left: 10px;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  z-index: 100;
+  text-decoration: none;
+}
+
+.skiplink:focus {
+  top: 1rem;
+}
+
 body, html {
   max-width: 1400px;
   margin: 0 auto;
@@ -22,6 +37,7 @@ body {
 
 button { 
   cursor: pointer; 
+  padding: 0.3rem;
   border: none;
   border-radius: 4px;
 }
@@ -34,11 +50,17 @@ button:hover {
 
 a {
   text-decoration: none;
-  color: #EF4E39;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
 }
 
 
 header {
+  z-index: 1000;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -50,12 +72,19 @@ header a.custom-logo-link {
   display: inline-flex;
 }
 
-header button[aria-controls="menu-principale"] {
+header button[aria-controls="menu-principal"] {
   display: flex;
   background-color: transparent;
 }
 
-header button[aria-expanded="false"] + #menu-principale {
+header button[aria-expanded="true"] .burger {
+  display: none;
+}
+header button[aria-expanded="true"] .cross {
+  display: block !important;
+}
+
+header button[aria-expanded="false"] + #list-menu-principal {
   left: -100vw;
 }
 
@@ -80,9 +109,20 @@ header li:last-child {
   border-bottom: none;
 }
 
-header li a {
+header li a,
+header li span {
   display: block;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+header li span {
+  color: #FFF;
+  background-color: #EF4E39;
+  font-weight: 500;
+}
+
+header li a {
+  padding-left: 1.5rem;
 }
 
 header li a:hover {

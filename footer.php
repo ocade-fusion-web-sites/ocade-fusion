@@ -10,7 +10,7 @@ $footer_query = new WP_Query(array(
   'order' => 'DESC'
 )) ?? null; ?>
 
-<footer>
+<footer id="footer" tabindex="0">
   <?php if ($footer_query && $footer_query->have_posts()) : ?>
     <?php while ($footer_query->have_posts()) : $footer_query->the_post(); ?>
       <?php the_content(); ?>
@@ -22,7 +22,7 @@ $footer_query = new WP_Query(array(
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const menuButton = document.querySelector('button[aria-controls="menu-principale"]');
+    const menuButton = document.querySelector('button[aria-controls="menu-principal"]');
     if (!menuButton) return;
     // Gestion du clic pour ouvrir/fermer le menu
     menuButton.addEventListener("click", function() {
