@@ -8,6 +8,7 @@
  * Text Domain: no-code-tools
  */
 
+/****** ACCESSIBILITE ******/
 .skiplink {
   position: absolute;
   top: -100vh;
@@ -23,6 +24,7 @@
   top: 1rem;
 }
 
+/********** GENERAL **********/
 body,
 html {
   max-width: 1400px;
@@ -61,6 +63,7 @@ a:hover {
 }
 
 
+/********** HEADER **********/
 header {
   z-index: 1000;
   position: sticky;
@@ -91,6 +94,7 @@ header button[aria-expanded="true"] .cross {
 
 header button[aria-expanded="false"]+#list-menu-principal {
   left: -100vw;
+  display: none;
 }
 
 header ul {
@@ -201,3 +205,17 @@ header ul button::before {
 header ul button[aria-expanded="true"]::before {
   content: "▼";
 }
+
+/********** BLOCKS **********/
+/** GROUP **/
+body > .wp-block-group {
+  margin: 2rem 0;
+}
+
+/** MEDIA TEXT **/
+.wp-block-media-text { 
+  max-width: 1300px;
+  margin: 0 auto;
+  grid-template-columns: 300px 1fr !important; 
+}
+.wp-block-media-text.has-media-on-the-right { grid-template-columns: 1fr 300px !important; }
