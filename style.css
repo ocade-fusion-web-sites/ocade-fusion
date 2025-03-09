@@ -4,11 +4,11 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.3
+ * Version: 1.0.2
  * Text Domain: no-code-tools
  */
 
- .skiplink {
+.skiplink {
   position: absolute;
   top: -100vh;
   left: 10px;
@@ -23,7 +23,8 @@
   top: 1rem;
 }
 
-body, html {
+body,
+html {
   max-width: 1400px;
   margin: 0 auto;
   background-color: #FBFCFE;
@@ -35,17 +36,17 @@ body {
   line-height: 1.6;
 }
 
-button { 
-  cursor: pointer; 
+button {
+  cursor: pointer;
   padding: 0.3rem;
   border: none;
   border-radius: 4px;
 }
 
-button:focus,
-button:focus-visible,
-button:hover { 
-  outline: 2px solid black; 
+*:focus,
+*:focus-visible,
+button:hover {
+  outline: 2px solid black;
 }
 
 a {
@@ -55,13 +56,16 @@ a {
 
 a:hover {
   text-decoration: underline;
-  text-underline-offset: 0.2rem;
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 2px;
 }
 
 
 header {
   z-index: 1000;
-  position: relative;
+  position: sticky;
+  top: 0;
+  background-color: inherit;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,11 +84,12 @@ header button[aria-controls="menu-principal"] {
 header button[aria-expanded="true"] .burger {
   display: none;
 }
+
 header button[aria-expanded="true"] .cross {
   display: block !important;
 }
 
-header button[aria-expanded="false"] + #list-menu-principal {
+header button[aria-expanded="false"]+#list-menu-principal {
   left: -100vw;
 }
 
@@ -95,13 +100,18 @@ header ul {
   width: 100%;
   margin: 0;
   padding-left: 0;
-  background-color: #FFF;
+  background-color: hsl(0, 0%, 98%);
   transition: left 0.3s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+header ul#list-menu-principal {
+  overflow: auto;
+  max-height: calc(100vh - 82px);
+}
+
 header li {
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
   list-style-type: none;
 }
 
@@ -115,8 +125,13 @@ header li span {
   padding: 0.5rem 1rem;
 }
 
+
+header li.entete {
+  border-bottom-color: #EF4E39;
+}
+
 header li span {
-  color: #FFF;
+  color: hsl(0, 0%, 100%);
   background-color: #EF4E39;
   font-weight: 500;
 }
@@ -126,5 +141,63 @@ header li a {
 }
 
 header li a:hover {
-  background-color: #F5F5F5;
+  background-color: hsl(0, 0%, 95%);
+}
+
+header ul ul {
+  position: relative;
+  top: 2px;
+  display: none;
+  background-color: #FFF;
+}
+
+header ul ul li a {
+  display: flex;
+  align-items: center;
+  padding-left: 3.2rem;
+}
+
+header ul ul li a::before {
+  content: "➷";
+  position: absolute;
+  transform: translate3D(-1.7rem, -0.2rem, 0);
+  font-size: 1.4rem;
+}
+
+header ul button {
+  background-color: hsl(0, 0%, 98%);
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  border-radius: 0;
+  outline: none;
+}
+
+header ul button:focus-visible {
+  outline: 2px solid black;
+}
+
+header ul button:hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+header ul button[aria-expanded="true"] {
+  background-color: hsl(0, 0%, 25%);
+  color: hsl(0, 0%, 100%);
+}
+
+header ul button[aria-expanded="true"]+ul {
+  display: block;
+  margin-bottom: 3px;
+}
+
+header ul button::before {
+  content: "▶";
+  margin-right: 0.5rem;
+}
+
+header ul button[aria-expanded="true"]::before {
+  content: "▼";
 }

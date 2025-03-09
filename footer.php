@@ -22,16 +22,22 @@ $footer_query = new WP_Query(array(
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const menuButton = document.querySelector('button[aria-controls="menu-principal"]');
-    if (!menuButton) return;
-    // Gestion du clic pour ouvrir/fermer le menu
-    menuButton.addEventListener("click", function() {
-      this.setAttribute("aria-expanded", this.getAttribute("aria-expanded") === "true" ? "false" : "true");
+    const menuButtons = document.querySelectorAll('button[aria-controls]');
+
+    menuButtons.forEach(button => {
+      // Gestion du clic pour ouvrir/fermer le menu
+      button.addEventListener("click", function() {
+        this.setAttribute("aria-expanded", this.getAttribute("aria-expanded") === "true" ? "false" : "true");
+      });
+
+      // Gestion de la touche Échap pour fermer le menu correspondant
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape" && button.getAttribute("aria-expanded") === "true") button.setAttribute("aria-expanded", "false");
+      });
     });
-    // Gestion de la touche Échap pour fermer le menu
-    document.addEventListener("keydown", e => e.key === "Escape" && menuButton.setAttribute("aria-expanded", "false"));
   });
 </script>
+
 </body>
 
 </html>

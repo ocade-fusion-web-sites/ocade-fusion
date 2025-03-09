@@ -27,10 +27,25 @@
         </svg>
       </button>
 
-      <ul  role="menu" id="list-menu-principal">
-        <li><span role="presentation">N8N</span></li>
-        <li role="menuitem"><a href="/installation-n8n">Installation</a></li>
-        <li role="menuitem"><a href="/noeuds-n8n">Noeuds</a></li>
+      <ul role="menu" id="list-menu-principal">
+        <li class="entete"><span role="presentation">N8N</span></li>
+
+        <li role="menuitem">
+          <button href="/installation-n8n" aria-controls="menu-installation-n8n">Installation</button>
+          <ul id="menu-installation-n8n" role="menu">
+            <li role="menuitem"><a href="/installation-n8n-docker">Installation avec Docker</a></li>
+            <li role="menuitem"><a href="/installation-n8n-npm">Installation avec NPM</a></li>
+          </ul>
+        </li>
+
+        <li role="menuitem">
+          <button href="/noeuds-n8n" aria-controls="menu-noeuds-n8n">Noeuds</button>
+          <ul id="menu-noeuds-n8n" role="menu">
+            <li role="menuitem"><a href="/noeud-n8n-edit">Edit</a></li>
+            <li role="menuitem"><a href="/noeud-n8n-if">If</a></li>
+          </ul>
+        </li>
+
         <li role="menuitem"><a href="/agents-ia-n8n">Agents IA</a></li>
         <li role="menuitem"><a href="/workflows-n8n">Workflows</a>
         </li>
