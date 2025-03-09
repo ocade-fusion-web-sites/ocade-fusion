@@ -10,7 +10,7 @@ $footer_query = new WP_Query(array(
   'order' => 'DESC'
 )) ?? null; ?>
 
-<footer id="footer" tabindex="0">
+<footer id="footer" class="alignfull" tabindex="0">
   <?php if ($footer_query && $footer_query->have_posts()) : ?>
     <?php while ($footer_query->have_posts()) : $footer_query->the_post(); ?>
       <?php the_content(); ?>
