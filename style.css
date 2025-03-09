@@ -69,7 +69,11 @@ a:hover {
   max-width: 100vw;
 }
 
-.alignwide { max-width: 1400px; }
+.alignwide { 
+  max-width: 1400px; 
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /********** HEADER **********/
 header {
