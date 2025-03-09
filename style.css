@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.7
+ * Version: 1.0.5
  * Text Domain: no-code-tools
  */
 
@@ -72,7 +72,7 @@ a:hover {
 .alignwide { 
   max-width: 1400px; 
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; 
 }
 
 /********** HEADER **********/
