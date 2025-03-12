@@ -15,7 +15,7 @@
     <a href="#footer" class="skiplink">Pied de page</a>
   </nav>
 
-  <header>
+  <header class="alignfull">
     <?php if (has_custom_logo()) the_custom_logo(); ?>
     <nav role="navigation" aria-label="Menu principal">
       <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="menu-principal">

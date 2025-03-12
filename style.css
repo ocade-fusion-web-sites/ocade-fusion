@@ -35,14 +35,85 @@ body,
 html {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0;
   background-color: #FBFCFE;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  padding: 0 2rem;
+  padding: 0 0.5rem;
+}
+
+h1 {
+  font-size: 1.15rem;
+  margin: .5rem 0;
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+}
+
+h2 {
+  font-size: 1.14rem;
+  margin: 1.4rem 0;
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 1.75rem;
+    margin: 1.5rem 0;
+  }
+}
+
+h3 {
+  font-size: 1.13rem;
+  margin: 1.3rem 0;
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.5rem;
+    margin: 1.2rem 0;
+  }
+}
+
+h4 {
+  font-size: 1.12rem;
+  margin: 1.1rem 0;
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+  }
+}
+
+h5 {
+  font-size: 1.1rem;
+  margin: 0.9rem 0;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.1rem;
+    margin: 0.8rem 0;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+  margin: 0.8rem 0;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+    margin: 0.7rem 0;
+  }
 }
 
 button {
@@ -91,7 +162,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem 2rem;
 }
 
 header a.custom-logo-link {
@@ -130,7 +201,7 @@ header ul {
 
 header ul#list-menu-principal {
   overflow: auto;
-  max-height: calc(100vh - 82px);
+  height: calc(100vh - 60px);
 }
 
 header li {
@@ -145,7 +216,7 @@ header li:last-child {
 header li a,
 header li span {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 5px 1rem;
 }
 
 
@@ -241,14 +312,20 @@ body>.wp-block-group {
 }
 
 /** MEDIA TEXT **/
-.wp-block-media-text {
-  max-width: 1300px;
-  margin: 0 auto;
-  grid-template-columns: 300px 1fr !important;
+.wp-block-media-text__content {
+  padding: 0 !important;
 }
 
-.wp-block-media-text.has-media-on-the-right {
-  grid-template-columns: 1fr 300px !important;
+@media(min-width:768px) {
+  .wp-block-media-text {
+    max-width: 1300px;
+    margin: 0 auto;
+    grid-template-columns: 300px 1fr !important;
+  }
+
+  .wp-block-media-text.has-media-on-the-right {
+    grid-template-columns: 1fr 300px !important;
+  }
 }
 
 /** BOUTON **/
