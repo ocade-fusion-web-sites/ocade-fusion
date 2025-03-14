@@ -76,6 +76,11 @@ html body>.video {
   margin-right: auto;
 }
 
+.wp-block-heading + .video {
+	margin-top: .5rem;
+	margin-bottom: .5rem;
+}
+
 .video .wp-block-group__inner-container {
   height: 100%;
 }
@@ -84,6 +89,15 @@ html body>.video {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.video + .wp-block-heading {
+	margin-top: 0.5rem;
+}
+@media (min-width:768px) {
+  .video + .wp-block-heading {
+	margin-top: 2rem;
+  }
 }
 
 *:focus,
@@ -104,11 +118,24 @@ a:hover {
   text-decoration-color: var(--orange);
 }
 
+/** Lien Sortants **/
+a[href^="http"]:not([href*="no-code-tools.ocade-fusion.com"]) {
+    position: relative;
+}
+a[href^="http"]:not([href*="no-code-tools.ocade-fusion.com"]):after {
+    content: '\1F517'; /* Icône Unicode pour un lien */
+    font-size: inherit;
+    margin-left: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+
 h1 {
   font-size: 1.5rem;
   line-height: 120%;
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
 }
 
 @media (min-width: 768px) {
@@ -133,10 +160,7 @@ h1 strong {
   font-weight: inherit;
   font-size: inherit;
   font-family: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.2rem;
-  text-decoration-color: var(--violet);
+  color: black;
 }
 
 @media (min-width: 768px) {
@@ -431,6 +455,8 @@ body>.wp-block-group {
   color: white;
   padding: .5rem 0.5rem 0.5rem 0.5rem;
   font-size: 0.9rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .wp-block-yoast-faq-block .schema-faq-section .schema-faq-answer {
@@ -439,4 +465,6 @@ body>.wp-block-group {
   color: black;
   font-size: 0.9rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0 1px 1px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
