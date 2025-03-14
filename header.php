@@ -33,8 +33,8 @@
         <li role="menuitem">
           <button href="/installation-n8n" aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
-            <li role="menuitem"><a href="/installation-n8n-docker">Installation avec Docker</a></li>
-            <li role="menuitem"><a href="/installation-n8n-npm">Installation avec NPM</a></li>
+            <li role="menuitem"><a href="/n8n/installer-n8n-avec-docker-compose/">Avec Docker Compose</a></li>
+            <li role="menuitem"><a href="/n8n/installer-n8n-avec-node-npm/">Avec Node NPM</a></li>
           </ul>
         </li>
 

@@ -16,7 +16,7 @@
   background: #000;
   color: #fff;
   padding: 10px;
-  z-index: 100;
+  z-index: 10000;
   text-decoration: none;
 }
 
@@ -28,7 +28,9 @@
 :root {
   --orange: #ef4e39;
   --gris: #f2f2f2;
+  --gris-clair: #f4f4f4;
   --nuit: #32373c;
+  --violet: #303579;
 }
 
 body,
@@ -47,72 +49,12 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
 }
 
-h1 {
-  font-size: 1.15rem;
-  margin: .5rem 0;
-}
-@media screen and (min-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-  }
-}
-
-h2 {
-  font-size: 1.14rem;
-  margin: 1.4rem 0;
-}
-@media screen and (min-width: 768px) {
-  h2 {
-    font-size: 1.75rem;
-    margin: 1.5rem 0;
-  }
-}
-
-h3 {
-  font-size: 1.13rem;
-  margin: 1.3rem 0;
-}
-@media screen and (min-width: 768px) {
-  h3 {
-    font-size: 1.5rem;
-    margin: 1.2rem 0;
-  }
-}
-
-h4 {
-  font-size: 1.12rem;
-  margin: 1.1rem 0;
-}
-@media screen and (min-width: 768px) {
-  h4 {
-    font-size: 1.25rem;
-    margin: 1rem 0;
-  }
-}
-
-h5 {
-  font-size: 1.1rem;
-  margin: 0.9rem 0;
-}
-@media screen and (min-width: 768px) {
-  h5 {
-    font-size: 1.1rem;
-    margin: 0.8rem 0;
-  }
-}
-
-h6 {
-  font-size: 1rem;
-  margin: 0.8rem 0;
-}
-@media screen and (min-width: 768px) {
-  h6 {
-    font-size: 1rem;
-    margin: 0.7rem 0;
+@media (min-width: 1400px) {
+  body {
+    padding: 0;
   }
 }
 
@@ -123,6 +65,26 @@ button {
   border-radius: 4px;
 }
 
+strong { color: var(--violet); }
+
+html body>.video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.video .wp-block-group__inner-container {
+  height: 100%;
+}
+
+.video iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 *:focus,
 *:focus-visible,
 button:hover {
@@ -130,15 +92,135 @@ button:hover {
 }
 
 a {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 2px;
+  text-decoration-color: var(--nuit);
+  color: var(--nuit);
 }
+
+a:hover {
+  text-decoration-color: var(--orange);
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 120%;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    line-height: 130%;
+    margin-top: 2.5rem;
+    margin-bottom: 1.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: 140%;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+}
+
+h1 strong {
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2rem;
+  text-decoration-color: var(--violet);
+}
+
+@media (min-width: 768px) {
+  h1 strong {
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  h1 strong {
+    text-decoration-thickness: 4px;
+    text-underline-offset: 0.4rem;
+  }
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 130%;
+  margin-top: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 1.75rem;
+    line-height: 140%;
+  }
+}
+
+@media (min-width: 1280px) {
+  h2 {
+    font-size: 2rem;
+    line-height: 150%;
+    margin-top: 3.5rem;
+  }
+}
+
+h3 {
+  font-size: 1.125rem;
+  line-height: 140%;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.5rem;
+    line-height: 150%;
+  }
+}
+
+@media (min-width: 1280px) {
+  h3 {
+    line-height: 160%;
+  }
+}
+
+p,
+p strong {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  ;
+  line-height: 140%;
+}
+
+p+p {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+
+  p,
+  p strong {
+    font-size: 1rem;
+    line-height: 150%;
+  }
+
+  p+p {
+    margin-top: 1rem;
+  }
+}
+
+
 
 /** CLASSES **/
 .alignfull {
@@ -158,11 +240,11 @@ header {
   z-index: 1000;
   position: sticky;
   top: 0;
-  background-color: inherit;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
+  background-color: var(--gris-clair);
 }
 
 header a.custom-logo-link {
@@ -311,23 +393,6 @@ body>.wp-block-group {
   margin: 2rem 0;
 }
 
-/** MEDIA TEXT **/
-.wp-block-media-text__content {
-  padding: 0 !important;
-}
-
-@media(min-width:768px) {
-  .wp-block-media-text {
-    max-width: 1300px;
-    margin: 0 auto;
-    grid-template-columns: 300px 1fr !important;
-  }
-
-  .wp-block-media-text.has-media-on-the-right {
-    grid-template-columns: 1fr 300px !important;
-  }
-}
-
 /** BOUTON **/
 .wp-element-button {
   transition: background-color 0.3s;
@@ -336,4 +401,32 @@ body>.wp-block-group {
 .wp-element-button:hover {
   background-color: var(--orange);
   text-decoration: none;
+}
+
+/** YOAST FAQ **/
+.wp-block-yoast-faq-block {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1280px) {
+  .wp-block-yoast-faq-block {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wp-block-yoast-faq-block .schema-faq-section .schema-faq-question {
+  background-color: var(--violet);
+  display: flex;
+  color: white;
+  padding: .5rem 0.5rem 0.5rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+.wp-block-yoast-faq-block .schema-faq-section .schema-faq-answer {
+  padding: 0.5rem;
+  background-color: white;
+  color: black;
+  font-size: 0.9rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 1px 1px;
 }
