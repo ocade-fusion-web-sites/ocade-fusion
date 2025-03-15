@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.21
+ * Version: 1.0.20
  * Text Domain: no-code-tools
  */
 
@@ -31,7 +31,7 @@
   --wp--preset--color--gris-clair: rgb(251 253 255);
   --wp--preset--color--nuit: #32373c;
   --wp--preset--color--violet: #303579;
-  --wp--preset--color--violet--clair: #AFAFBF;
+  --wp--preset--color--violet--clair: #ececfe;
 }
 
 /** Colors **/
@@ -377,7 +377,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
-  background-color: var(--wp--preset--color--gris-clair);
+  background-color: var(--wp--preset--color--violet-clair);
 }
 
 header a.custom-logo-link {
