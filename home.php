@@ -1,22 +1,5 @@
 <?php get_header(); ?>
 
-<video
-  autoplay
-  muted
-  playsinline
-  width="100%"
-  preload="metadata"
-  poster="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/demo-n8n.webp"
-  style="margin: 1rem 0;"
->
-  <source src="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/demo-n8n.mp4" type="video/mp4">
-  <source src="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/demo-n8n.webm" type="video/webm">
-  <p>
-    Votre navigateur ne supporte pas la vidéo.
-    <a href="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/demo-n8n.mp4">Télécharger la vidéo</a>.
-  </p>
-</video>
-
 <?php 
 /** Récupération du CPT Actualités. */
   $actualites_query = new WP_Query(array(
