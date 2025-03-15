@@ -14,7 +14,8 @@ function personnalisation_gutenberg_colors() {
     ['name'  => __('Gris', 'mon-theme'), 'slug'  => 'gris', 'color' => '#f2f2f2'],
     ['name'  => __('Gris Clair', 'mon-theme'), 'slug'  => 'gris-clair', 'color' => '#f4f4f4'],
     ['name'  => __('Nuit', 'mon-theme'), 'slug'  => 'nuit', 'color' => '#32373c'],
-    ['name'  => __('Violet', 'mon-theme'), 'slug'  => 'violet', 'color' => '#303579']
+    ['name'  => __('Violet', 'mon-theme'), 'slug'  => 'violet', 'color' => '#303579'],
+    ['name'  => __('Violet Clair', 'mon-theme'), 'slug'  => 'violet-clair', 'color' => '#AFAFBF']
   ]);
   add_theme_support('disable-custom-colors');
 }

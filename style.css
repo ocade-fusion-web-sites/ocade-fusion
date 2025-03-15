@@ -28,9 +28,10 @@
 :root {
   --wp--preset--color--orange: #ef4e39;
   --wp--preset--color--gris: #f2f2f2;
-  --wp--preset--color--gris-clair: #f4f4f4;
+  --wp--preset--color--gris-clair: rgb(251 253 255);
   --wp--preset--color--nuit: #32373c;
   --wp--preset--color--violet: #303579;
+  --wp--preset--color--violet--clair: #AFAFBF;
 }
 
 /** Colors **/
@@ -54,6 +55,10 @@
   color: var(--wp--preset--color--violet) !important;
 }
 
+.has-violet-clair-color {
+  color: var(--wp--preset--color--violet--clair) !important;
+}
+
 /* Background Colors */
 .has-orange-background-color {
   background-color: var(--wp--preset--color--orange) !important;
@@ -75,13 +80,17 @@
   background-color: var(--wp--preset--color--violet) !important;
 }
 
+.has-violet-clair-background-color {
+  background-color: var(--wp--preset--color--violet--clair) !important;
+}
+
 
 body,
 html {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0;
-  background-color: #FBFCFE;
+  background-color: var(--wp--preset--color--gris-clair);
 }
 
 html {
