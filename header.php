@@ -17,6 +17,7 @@
 
   <header class="alignfull">
     <?php if (has_custom_logo()) the_custom_logo(); ?>
+    <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
     <nav role="navigation" aria-label="Menu principal">
       <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="menu-principal">
         <svg class="burger" width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

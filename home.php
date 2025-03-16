@@ -1,3 +1,4 @@
+<?php add_filter('ocade_h1', fn($title) => 'Actualités Ocade Fusion'); ?>
 <?php get_header(); ?>
 
 <?php 
