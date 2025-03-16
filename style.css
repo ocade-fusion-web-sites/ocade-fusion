@@ -398,6 +398,7 @@ header nav {
 @media (min-width: 1280px) {
   header nav {
     order: 3;
+    margin-left: 130px;
   }
 }
 
