@@ -174,11 +174,11 @@ a:hover {
 }
 
 /** Lien Sortants **/
-a[href^="http"]:not([href*="no-code-tools.ocade-fusion.com"]) {
+a[href^="http"]:not([href*="ocadefusion.fr"]) {
   position: relative;
 }
 
-a[href^="http"]:not([href*="no-code-tools.ocade-fusion.com"]):after {
+a[href^="http"]:not([href*="ocadefusion.fr"]):after {
   content: '\1F517';
   /* Icône Unicode pour un lien */
   font-size: inherit;
