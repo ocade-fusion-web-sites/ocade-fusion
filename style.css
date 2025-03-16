@@ -298,6 +298,13 @@ p+p {
   margin-top: 0.5rem;
 }
 
+@media (max-width: 768px) AND (orientation: landscape) {
+  p,
+  p strong {
+    font-size: 0.65rem !important;
+  }
+}
+
 @media (min-width: 1280px) {
 
   p,
