@@ -527,6 +527,12 @@ body>.wp-block-group {
   margin-bottom: 2rem;
 }
 
+/** COLONNES **/
+.wp-block-columns .wp-block-column {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 /** BOUTON **/
 .wp-element-button {
   transition: background-color 0.3s;
