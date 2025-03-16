@@ -454,12 +454,12 @@ header li span {
 
 
 header li.entete {
-  border-bottom-color: var(--wp--preset--color--orange);
+  border-bottom-color: var(--wp--preset--color--nuit);
 }
 
 header li span {
   color: hsl(0, 0%, 100%);
-  background-color: var(--wp--preset--color--orange);
+  background-color: var(--wp--preset--color--nuit);
   font-weight: 500;
 }
 
@@ -511,8 +511,8 @@ header ul button:hover {
 }
 
 header ul button[aria-expanded="true"] {
-  background-color: hsl(0, 0%, 25%);
-  color: hsl(0, 0%, 100%);
+  background-color: var(--wp--preset--color--violet-clair);
+  color: black;
 }
 
 header ul button[aria-expanded="true"]+ul {
