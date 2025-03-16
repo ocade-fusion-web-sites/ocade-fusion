@@ -298,7 +298,7 @@ p+p {
   margin-top: 0.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
 
   p,
   p strong {
