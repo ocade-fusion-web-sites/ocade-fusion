@@ -43,7 +43,9 @@ $footer_query = new WP_Query(array(
   const handleScroll = () => {
     let currentScrollY = window.scrollY
     let isAtBottom = window.innerHeight + currentScrollY >= document.documentElement.scrollHeight - 10
-    if (!isAtBottom) document.documentElement.classList.toggle("hide-logo", currentScrollY > lastScrollY)
+    let isAtTop = currentScrollY <= 10
+    if (!isAtBottom && !isAtTop)
+      document.documentElement.classList.toggle("hide-logo", currentScrollY > lastScrollY)
     lastScrollY = window.scrollY
     ticking = false
   }
