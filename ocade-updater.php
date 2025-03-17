@@ -7,7 +7,7 @@ $ORGANISATION_GITHUB = 'ocade-fusion-web-sites';
 $DEPOT_GITHUB = 'no-code-tools';
 
 $OCADE_THEME_REPO = 'https://github.com/' . $ORGANISATION_GITHUB . '/' . $DEPOT_GITHUB;
-$OCADE_VERSION_URL = 'https://raw.githubusercontent.com/' . $ORGANISATION_GITHUB . '/' . $DEPOT_GITHUB . '/master/version.txt';
+$OCADE_GITHUB_API_URL = "https://api.github.com/repos/$ORGANISATION_GITHUB/$DEPOT_GITHUB/releases/latest";
 $OCADE_ZIP_URL = $OCADE_THEME_REPO . '/releases/latest/download/' . $DEPOT_GITHUB . '.zip';
 $OCADE_REMOTE_VERSION = $DEPOT_GITHUB . '_remote_version';
 $OCADE_ICONS = [
@@ -19,7 +19,7 @@ $OCADE_ICONS = [
     '5x' => 'https://raw.githubusercontent.com/' . $ORGANISATION_GITHUB . '/' . $DEPOT_GITHUB . '/master/assets/icons/icon-5x.png'
 ];
 
-add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THEME_REPO, $OCADE_VERSION_URL, $OCADE_ZIP_URL, $OCADE_REMOTE_VERSION, $OCADE_ICONS) {
+add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THEME_REPO, $OCADE_GITHUB_API_URL, $OCADE_ZIP_URL, $OCADE_REMOTE_VERSION, $OCADE_ICONS) {
     if (!is_object($transient)) $transient = new \stdClass();
 
     $theme = wp_get_theme();
@@ -29,27 +29,50 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
     // Récupérer la version distante
     $remote_version = get_transient($OCADE_REMOTE_VERSION);
     if (!$remote_version) {
-       
-        $response = wp_remote_get($OCADE_VERSION_URL);
+
+        // Récupérer la dernière release depuis l'API GitHub
+        $response = wp_remote_get($OCADE_GITHUB_API_URL, [
+            'headers' => [
+                'User-Agent' => 'WordPress' // GitHub requiert un User-Agent personnalisé
+            ]
+        ]);
 
         if (is_wp_error($response)) {
-            error_log('Erreur lors de la récupération de la version distante : ' . $response->get_error_message());
+            error_log('Erreur lors de la récupération de la release GitHub : ' . $response->get_error_message());
             return $transient;
         }
 
-        $remote_version = trim(wp_remote_retrieve_body($response));
-        $remote_version = preg_replace('/[^0-9.]/', '', $remote_version);
-        
-        if (empty($remote_version)) {
-            error_log('La version distante est vide.');
-            return $transient;
+        $body = json_decode(wp_remote_retrieve_body($response), true);
+
+        if (!empty($body['assets'])) {
+            foreach ($body['assets'] as $asset) {
+                if ($asset['name'] === 'version.txt') {
+                    $version_file_url = $asset['browser_download_url'];
+                    break;
+                }
+            }
         }
 
-        set_transient($OCADE_REMOTE_VERSION, $remote_version, 6 * HOUR_IN_SECONDS);
+        if (!empty($version_file_url)) {
+            $version_response = wp_remote_get($version_file_url);
+
+            if (!is_wp_error($version_response)) {
+                $remote_version = trim(wp_remote_retrieve_body($version_response));
+                $remote_version = preg_replace('/[^0-9.]/', '', $remote_version);
+
+                if (!empty($remote_version)) {
+                    set_transient($OCADE_REMOTE_VERSION, $remote_version, 6 * HOUR_IN_SECONDS);
+                } else {
+                    error_log('La version récupérée depuis les assets est vide.');
+                }
+            }
+        } else {
+            error_log('Aucun fichier version.txt trouvé dans les assets de la dernière release.');
+        }
     }
 
     // Comparaison des versions
-    if (version_compare($remote_version, $current_version, '>')) {
+    if (!empty($remote_version) && version_compare($remote_version, $current_version, '>')) {
         if (!isset($transient->response)) $transient->response = [];
 
         $transient->response[$theme_slug] = [
