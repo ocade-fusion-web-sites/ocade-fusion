@@ -26,7 +26,7 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
     $theme_slug = $theme->get_stylesheet();
     $current_version = $theme->get('Version');
 
-    // Récupérer la version distante
+    // Récupérer la version distante 
     $remote_version = get_transient($OCADE_REMOTE_VERSION);
     if (!$remote_version) {
        
