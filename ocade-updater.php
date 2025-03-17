@@ -29,7 +29,10 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
     // Récupérer la version distante
     $remote_version = get_transient($OCADE_REMOTE_VERSION);
     if (!$remote_version) {
-        $response = wp_remote_get($OCADE_VERSION_URL);
+        // Ajout du timestamp pour éviter le cache de GitHub
+        $url_with_timestamp = $OCADE_VERSION_URL . '?nocache=' . time();
+
+        $response = wp_remote_get($url_with_timestamp);
 
         if (is_wp_error($response)) {
             error_log('Erreur lors de la récupération de la version distante : ' . $response->get_error_message());
@@ -38,7 +41,7 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
 
         $remote_version = trim(wp_remote_retrieve_body($response));
         $remote_version = preg_replace('/[^0-9.]/', '', $remote_version);
-        
+
         if (empty($remote_version)) {
             error_log('La version distante est vide.');
             return $transient;
@@ -46,6 +49,7 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
 
         set_transient($OCADE_REMOTE_VERSION, $remote_version, 6 * HOUR_IN_SECONDS);
     }
+
 
     // Comparaison des versions
     if (version_compare($remote_version, $current_version, '>')) {
