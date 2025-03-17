@@ -41,7 +41,9 @@ $footer_query = new WP_Query(array(
   // **************** Sticky Logo ****************
   let lastScrollY = window.scrollY, ticking = false
   const handleScroll = () => {
-    document.documentElement.classList.toggle("hide-logo", window.scrollY > lastScrollY)
+    let currentScrollY = window.scrollY
+    let isAtBottom = window.innerHeight + currentScrollY >= document.documentElement.scrollHeight - 10
+    if (!isAtBottom) document.documentElement.classList.toggle("hide-logo", currentScrollY > lastScrollY)
     lastScrollY = window.scrollY
     ticking = false
   }
