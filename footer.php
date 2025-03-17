@@ -21,6 +21,7 @@ $footer_query = new WP_Query(array(
 
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 <script>
+  // **************** Gestion de l'ouverture/fermeture des menus ****************
   document.addEventListener("DOMContentLoaded", function() {
     const menuButtons = document.querySelectorAll('button[aria-controls]');
 
@@ -36,6 +37,21 @@ $footer_query = new WP_Query(array(
       });
     });
   });
+
+  // **************** Sticky Logo ****************
+  let lastScrollY = window.scrollY, ticking = false
+  const handleScroll = () => {
+    document.documentElement.classList.toggle("hide-logo", window.scrollY > lastScrollY)
+    lastScrollY = window.scrollY
+    ticking = false
+  }
+
+  document.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(handleScroll)
+      ticking = true
+    }
+  })
 </script>
 
 </body>
