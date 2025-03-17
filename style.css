@@ -180,7 +180,7 @@ a[href^="http"]:not([href*="ocadefusion.fr"]) {
 
 a[href^="http"]:not([href*="ocadefusion.fr"]):after {
   content: '\1F517';
-  /* Icône Unicode pour un lien */
+  /* Icône Unicode pour un lien */ 
   font-size: inherit;
   margin-left: 5px;
   display: inline-block;
