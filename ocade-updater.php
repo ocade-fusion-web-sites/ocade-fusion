@@ -71,7 +71,7 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
         }
     }
 
-    // Comparaison des versions
+    // Comparaison des versions 
     if (!empty($remote_version) && version_compare($remote_version, $current_version, '>')) {
         if (!isset($transient->response)) $transient->response = [];
 
