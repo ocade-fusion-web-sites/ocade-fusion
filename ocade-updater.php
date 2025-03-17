@@ -50,8 +50,7 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
         set_transient($OCADE_REMOTE_VERSION, $remote_version, 6 * HOUR_IN_SECONDS);
     }
 
-
-    // Comparaison des versions
+    // Comparaison des versions git
     if (version_compare($remote_version, $current_version, '>')) {
         if (!isset($transient->response)) $transient->response = [];
 
