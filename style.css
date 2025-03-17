@@ -367,7 +367,7 @@ p+p {
 
 
 /********** HEADER **********/
-@media (min-width: 1280px) {
+@media (max-width: 1280px) {
   .custom-logo-link {
     top: 0;
     opacity: 1;
