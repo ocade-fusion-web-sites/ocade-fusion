@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.44
+ * Version: 1.0.43
  * Text Domain: no-code-tools
  */
 
@@ -180,7 +180,7 @@ a[href^="http"]:not([href*="ocadefusion.fr"]) {
 
 a[href^="http"]:not([href*="ocadefusion.fr"]):after {
   content: '\1F517';
-  /* Icône Unicode pour un lien */ 
+  /* Icône Unicode pour un lien */
   font-size: inherit;
   margin-left: 5px;
   display: inline-block;
