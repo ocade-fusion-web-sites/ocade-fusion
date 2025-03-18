@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.53
+ * Version: 1.0.51
  * Text Domain: no-code-tools
  */
 
@@ -480,7 +480,7 @@ header ul {
   header ul {
     width: 25rem;
   }
-} 
+}
 
 header ul#list-menu-principal {
   overflow: auto;
