@@ -1,3 +1,12 @@
+<?php
+
+// Variables globales pour les templates 
+global $_HAS_GO_TO_TOP, $_IS_ARTICLE;
+$_HAS_GO_TO_TOP = true;
+$_IS_ARTICLE = is_singular('post');
+
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
