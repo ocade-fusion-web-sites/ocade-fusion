@@ -481,7 +481,7 @@ header ul {
     width: 25rem; 
   }
 }
-
+ 
 header ul#list-menu-principal {
   overflow: auto;
   height: calc(100vh - 60px);
