@@ -38,6 +38,7 @@ $_IS_ARTICLE = is_singular('post');
       </button>
 
       <ul role="menu" id="list-menu-principal">
+        <li class="entete accueil"><a href="/"><span role="presentation">Ocade Fusion</span></a></li>
         <li class="entete"><span role="presentation">N8N</span></li>
 
         <li role="menuitem">

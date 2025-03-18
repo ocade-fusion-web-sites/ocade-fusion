@@ -505,18 +505,41 @@ header li.entete {
   border-bottom-color: var(--wp--preset--color--nuit);
 }
 
+header li.entete.accueil {
+  background-color: var(--wp--preset--color--orange);
+  border-bottom-color: var(--wp--preset--color--nuit);
+}
+
 header li span {
   color: hsl(0, 0%, 100%);
   background-color: var(--wp--preset--color--nuit);
   font-weight: 500;
 }
 
+header li.entete.accueil span {
+  background-color: var(--wp--preset--color--orange);
+}
+
 header li a {
   padding-left: 1.5rem;
+  text-decoration: none;
+}
+
+header li.entete.accueil a {
+  padding: 0;
+  text-decoration: none;
 }
 
 header li a:hover {
   background-color: hsl(0, 0%, 95%);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+header li.entete.accueil a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: white;
 }
 
 header ul ul {
@@ -639,14 +662,6 @@ footer .wp-block-columns {
 
 #mobile-footer-menu li.go-to-top button:after {
   background-image: url(./assets/svgs/go-to-top.svg);
-}
-
-
-
-@media (min-width: 768px) {
-  #mobile-footer-menu {
-    display: none;
-  }
 }
 
 /********** BLOCKS **********/
