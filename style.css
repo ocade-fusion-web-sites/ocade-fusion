@@ -107,10 +107,6 @@ body {
 
 html.panel-expanded,
 html.panel-expanded body {
-  @media (max-width: 768px) {
-    overflow: hidden; 
-  }
-
   @media(min-width: 1280px) {
     max-width: 100%;
   }
