@@ -7,14 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const linksMap = new Map();
 
   headers.forEach((header, index) => {
-    if (!header.id) {
-      header.id = "section-" + index;
-    }
+    if (!header.id) header.id = "section-" + index;
 
     const listItem = document.createElement("li");
     const link = document.createElement("a");
     link.href = "#" + header.id;
     link.textContent = header.textContent;
+    link.onclick = () => sommaireClose({keepOpen: true});
 
     listItem.appendChild(link);
     sommaireList.appendChild(listItem);

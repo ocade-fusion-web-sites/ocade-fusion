@@ -1,8 +1,10 @@
 <?php add_filter('ocade_h1', fn($title) => 'Actualités Ocade Fusion'); ?>
 <?php get_header(); ?>
 
-<?php 
-/** Récupération du CPT Actualités. */
+<main role="main">
+
+  <?php
+  /** Récupération du CPT Actualités. */
   $actualites_query = new WP_Query(array(
     'post_type' => 'actualites',
     'post_status' => 'publish',
@@ -17,6 +19,8 @@
       <?php the_content(); ?>
     <?php endwhile; ?>
     <?php wp_reset_postdata(); ?>
-  <?php endif;
+  <?php endif; ?>
 
-get_footer(); ?>
+</main>
+
+<?php get_footer(); ?>

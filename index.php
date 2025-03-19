@@ -1,13 +1,15 @@
-<?php 
+<?php
 
-get_header();
+get_header(); ?>
 
-// Afficher le contenu de la page
-if (have_posts()) {
-  while (have_posts()) {
-    the_post();
-    the_content();
+<main role="main">
+  <?php if (have_posts()) {
+    while (have_posts()) {
+      the_post();
+      the_content();
+    }
   }
-}
+  ?>
+</main>
 
-get_footer();
+<?php get_footer();

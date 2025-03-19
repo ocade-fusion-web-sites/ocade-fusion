@@ -20,7 +20,7 @@ $_IS_ARTICLE = is_singular('post');
   <?php wp_body_open(); ?>
 
   <nav role="navigation" aria-label="Accès rapide">
-    <a href="#menu-principal" class="skiplink" onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', 'true')">Menu Principal</a>
+    <a href="#menu-principal" class="skiplink">Menu Principal</a>
     <a href="#footer" class="skiplink">Pied de page</a>
   </nav>
 
@@ -64,9 +64,11 @@ $_IS_ARTICLE = is_singular('post');
     </nav>
     <?php if ($_IS_ARTICLE) : ?>
       <script>
-        const sommaireClose = () => {
+        const sommaireClose = (options = {}) => {
+          if (window.innerWidth > 1280 && options.keepOpen) return;
           document.getElementById('sommaire').setAttribute('aria-expanded', 'false');
           document.getElementById('sommaire-button').classList.remove('expanded');
+          document.documentElement.classList.remove('panel-expanded');
         }
 
         const sommaireOpen = () => {
@@ -77,6 +79,7 @@ $_IS_ARTICLE = is_singular('post');
           }
           sommairePanel.setAttribute('aria-expanded', 'true');
           document.getElementById('sommaire-button').classList.add('expanded');
+          document.documentElement.classList.add('panel-expanded');
         }
       </script>
       <nav class="sommaire expanded" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">

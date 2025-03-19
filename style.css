@@ -112,6 +112,23 @@ body {
   }
 }
 
+html.panel-expanded,
+html.panel-expanded body {
+  @media(min-width: 1280px) {
+    max-width: 100%;
+  }
+}
+
+html.panel-expanded main {
+  @media(min-width: 1280px) {
+    width: calc(100% - 29rem);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+
+
 button {
   padding: 0.3rem;
   color: var(--wp--preset--color--nuit);
