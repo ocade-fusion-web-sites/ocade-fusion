@@ -698,6 +698,8 @@ header .sommaire[aria-expanded="false"] {
 }
 
 .sommaire .sommaire-title button {
+  width: 6.25rem;
+  height: 2.375rem;
   background-color: var(--wp--preset--color--gris-clair);
   border: none;
   cursor: pointer;
