@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.67
+ * Version: 1.0.66
  * Text Domain: no-code-tools
  */
 
@@ -100,16 +100,9 @@ html {
 }
 
 body {
-  padding: 0 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-}
-
-@media (min-width: 1400px) {
-  body {
-    padding: 0;
-  }
 }
 
 html.panel-expanded,
@@ -119,15 +112,19 @@ html.panel-expanded body {
   }
 }
 
-html.panel-expanded main {
-  @media(min-width: 1280px) {
-    width: calc(100% - 29rem);
-    padding-left: 2rem;
-    padding-right: 2rem;
+html main {
+  padding: 1rem;
+
+  @media(min-width: 768px) {
+    padding: 2rem;
   }
 }
 
-
+html.panel-expanded main {
+  @media(min-width: 1280px) {
+    width: calc(100% - 29rem);
+  }
+}
 
 button {
   padding: 0.3rem;
@@ -256,7 +253,8 @@ h2 {
   margin-bottom: 1rem;
   font-size: 1.25rem;
   line-height: 130%;
-  scroll-margin-top: 120px; /** Sommaire scroll jusqu'au dessous du header */
+  scroll-margin-top: 120px;
+  /** Sommaire scroll jusqu'au dessous du header */
 }
 
 @media (min-width: 768px) {
@@ -636,8 +634,8 @@ header ul button[aria-expanded="true"]::before {
 }
 
 header .sommaire[aria-expanded="false"] {
-	left: -100vw;
-	display: none;
+  left: -100vw;
+  display: none;
 }
 
 @media (min-width: 768px) {
