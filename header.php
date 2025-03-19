@@ -16,7 +16,7 @@ $_IS_ARTICLE = is_singular('post');
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body id="body" <?php body_class(); ?>>
   <?php wp_body_open(); ?>
 
   <nav role="navigation" aria-label="Accès rapide">
@@ -83,7 +83,10 @@ $_IS_ARTICLE = is_singular('post');
         }
       </script>
       <nav class="sommaire expanded" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
-        <p class="sommaire-title">Sommaire <button onclick="sommaireClose()">Fermer</button></p>
+        <p class="sommaire-title">
+          <a href="#body" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
+          <button onclick="sommaireClose()">Fermer</button>
+        </p>
         <ul class="sommaire-list"></ul>
       </nav>
     <?php endif; ?>

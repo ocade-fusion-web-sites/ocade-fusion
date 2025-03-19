@@ -660,6 +660,16 @@ header .sommaire[aria-expanded="false"] {
   background-color: var(--wp--preset--color--orange);
 }
 
+.sommaire .sommaire-title a {
+  color: white;
+  text-decoration: none;
+}
+
+.sommaire .sommaire-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
 .sommaire .sommaire-title button {
   background-color: var(--wp--preset--color--gris-clair);
   border: none;
