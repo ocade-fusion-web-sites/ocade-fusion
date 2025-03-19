@@ -701,7 +701,7 @@ header .sommaire[aria-expanded="false"] {
   width: 6.25rem;
   height: 2.375rem;
   background-color: var(--wp--preset--color--gris-clair);
-  font-size: 1rem;
+  font-size: 1rem; 
   border: none;
   cursor: pointer;
 }
