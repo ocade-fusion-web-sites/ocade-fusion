@@ -21,10 +21,13 @@ $_IS_ARTICLE = is_singular('post');
 
   <nav role="navigation" aria-label="Accès rapide">
     <a href="#menu-principal" class="skiplink">Menu Principal</a>
+    <?php if ($_IS_ARTICLE) : ?>
+      <a href="#sommaire" onkeydown="sommaireOpen()" class="skiplink">Sommaire</a>
+    <?php endif; ?>
     <a href="#footer" class="skiplink">Pied de page</a>
   </nav>
 
-  <header class="alignfull">
+  <header role="banner" class="alignfull">
     <?php if (has_custom_logo()) the_custom_logo(); ?>
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
     <nav role="navigation" aria-label="Menu principal">
@@ -42,7 +45,7 @@ $_IS_ARTICLE = is_singular('post');
         <li class="entete"><span role="presentation">N8N</span></li>
 
         <li role="menuitem">
-          <button href="/installation-n8n" aria-controls="menu-installation-n8n">Installation</button>
+          <button aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
             <li role="menuitem"><a href="/n8n/installer-n8n-sur-le-cloud/">Sur le Cloud</a></li>
             <li role="menuitem"><a href="/n8n/installer-n8n-avec-docker-compose/">Avec Docker Compose</a></li>
@@ -50,7 +53,7 @@ $_IS_ARTICLE = is_singular('post');
         </li>
 
         <li role="menuitem">
-          <button href="/noeuds-n8n" aria-controls="menu-noeuds-n8n">Noeuds</button>
+          <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
             <li role="menuitem"><a href="/noeud-n8n-edit">Edit</a></li>
             <li role="menuitem"><a href="/noeud-n8n-if">If</a></li>
