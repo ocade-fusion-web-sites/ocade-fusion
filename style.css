@@ -96,6 +96,7 @@ html {
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -238,6 +239,7 @@ h2 {
   margin-bottom: 1rem;
   font-size: 1.25rem;
   line-height: 130%;
+  scroll-margin-top: 120px; /** Sommaire scroll jusqu'au dessous du header */
 }
 
 @media (min-width: 768px) {
@@ -473,14 +475,15 @@ header ul {
   background-color: hsl(0, 0%, 98%);
   transition: left 0.3s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  animation:  menu-principal-slide 0.3s;
+  animation: menu-principal-slide 0.3s;
 }
+
 @media (min-width: 768px) {
   header ul {
-    width: 25rem; 
+    width: 25rem;
   }
-} 
- 
+}
+
 header ul#list-menu-principal {
   overflow: auto;
   height: calc(100vh - 60px);
@@ -498,7 +501,7 @@ header li:last-child {
 header li a,
 header li span {
   display: block;
-  padding: 5px 1rem;
+  padding: .5rem 1rem;
 }
 
 
@@ -542,7 +545,7 @@ header li.entete.accueil a:hover {
   text-decoration-thickness: 2px;
   text-decoration-color: white;
 }
- 
+
 header ul ul {
   position: relative;
   top: 2px;
@@ -601,6 +604,64 @@ header ul button[aria-expanded="true"]::before {
   content: "▼";
 }
 
+/********** SOMMAIRE PAGE **********/
+.sommaire {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 124px);
+  margin-left: 0;
+  background-color: white;
+  transition: left 0.3s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: menu-principal-slide 0.3s;
+}
+
+header .sommaire[aria-expanded="false"] {
+	left: -100vw;
+	display: none;
+}
+
+@media (min-width: 768px) {
+  .sommaire {
+    width: 25rem;
+  }
+}
+
+.sommaire .sommaire-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: .5rem 1rem;
+  color: white;
+  background-color: var(--wp--preset--color--orange);
+}
+
+.sommaire .sommaire-title button {
+  background-color: var(--wp--preset--color--gris-clair);
+  border: none;
+  cursor: pointer;
+}
+
+.sommaire .sommaire-list {
+  overflow: auto;
+  position: relative;
+  top: 0;
+  width: inherit;
+  animation: none;
+}
+
+.sommaire .sommaire-list a {
+  font-size: 0.9rem;
+}
+
+.sommaire .sommaire-list a.active {
+  background-color: var(--wp--preset--color--violet--clair);
+}
+
+
 /********** FOOTER **********/
 footer {
   margin-top: 4rem;
@@ -657,8 +718,12 @@ footer .wp-block-columns {
   border-radius: 4px;
 }
 
-#mobile-footer-menu li.sommaire button:after {
-  background-image: url(./assets/svgs/sommaire.svg);  
+#mobile-footer-menu li.sommaire-item button:after {
+  background-image: url(./assets/svgs/sommaire.svg);
+}
+
+#mobile-footer-menu li.sommaire-item button.expanded:after {
+  background-image: url(./assets/svgs/close.svg);
 }
 
 #mobile-footer-menu li.go-to-top button:after {

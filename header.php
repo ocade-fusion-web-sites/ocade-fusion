@@ -28,7 +28,7 @@ $_IS_ARTICLE = is_singular('post');
     <?php if (has_custom_logo()) the_custom_logo(); ?>
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
     <nav role="navigation" aria-label="Menu principal">
-      <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="menu-principal">
+      <button id="menu-principal" class="expanded" title="Menu principal" aria-expanded="false" aria-controls="menu-principal">
         <svg class="burger" width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
@@ -62,4 +62,26 @@ $_IS_ARTICLE = is_singular('post');
         </li>
       </ul>
     </nav>
+    <?php if ($_IS_ARTICLE) : ?>
+      <script>
+        const sommaireClose = () => {
+          document.getElementById('sommaire').setAttribute('aria-expanded', 'false');
+          document.getElementById('sommaire-button').classList.remove('expanded');
+        }
+
+        const sommaireOpen = () => {
+          const sommairePanel = document.getElementById('sommaire');
+          if (sommairePanel.getAttribute('aria-expanded') === 'true') {
+            sommaireClose();
+            return;
+          }
+          sommairePanel.setAttribute('aria-expanded', 'true');
+          document.getElementById('sommaire-button').classList.add('expanded');
+        }
+      </script>
+      <nav class="sommaire expanded" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
+        <p class="sommaire-title">Sommaire <button onclick="sommaireClose()">Fermer</button></p>
+        <ul class="sommaire-list"></ul>
+      </nav>
+    <?php endif; ?>
   </header>

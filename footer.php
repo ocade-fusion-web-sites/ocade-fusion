@@ -25,8 +25,8 @@ $footer_query = new WP_Query(array(
   <nav id="mobile-footer-menu" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
     <ul role="menu">
       <?php if ($_IS_ARTICLE) : ?>
-        <li role="menuitem" class="sommaire">
-          <button title="Sommaire de la page" onclick="console.log('click sur sommaire')">
+        <li role="menuitem" class="sommaire-item">
+          <button id="sommaire-button" title="Sommaire de la page" onclick="sommaireOpen()">
             <span class="skiplink">Sommaire</span>
           </button>
         </li>
@@ -36,6 +36,7 @@ $footer_query = new WP_Query(array(
       <?php endif; ?>
     </ul>
   </nav>
+  <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/sommaire.js"></script>
 <?php endif; ?>
 
 <?php /** Implémentation des scripts */ wp_footer(); ?>
@@ -57,6 +58,28 @@ $footer_query = new WP_Query(array(
       });
     });
   });
+
+  // **************** Gestion des z-index des Panneaux de navigation ****************
+  let zIndexCounter = 1000;
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.type === "attributes" && mutation.attributeName === "aria-expanded") {
+        let expandedElement = mutation.target;
+        let isExpanded = expandedElement.getAttribute("aria-expanded") === "true";
+        if (isExpanded) {
+          // Vérifier si l'élément est une <nav>, sinon trouver son parent navigation
+          let navElement = expandedElement.closest("nav") || expandedElement;
+          // Appliquer l'incrémentation du z-index sur la navigation trouvée
+          zIndexCounter++;
+          navElement.style.zIndex = zIndexCounter;
+        }
+      }
+    });
+  });
+  // Sélectionne tout les panels (panneau de navigation) et observe les changements d'attribut
+  document.querySelectorAll(".expanded").forEach(expandEl => observer.observe(expandEl, {
+    attributes: true
+  }));
 
   // **************** Sticky Logo ****************
   let lastScrollY = window.scrollY,
