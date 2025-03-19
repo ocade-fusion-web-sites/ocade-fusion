@@ -84,7 +84,7 @@ $_IS_ARTICLE = is_singular('post');
       </script>
       <nav class="sommaire expanded" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
         <p class="sommaire-title">
-          <a href="#body" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
+          <a href="#body" onclick="sommaireClose({keepOpen: true})" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
           <button onclick="sommaireClose()">Fermer</button>
         </p>
         <ul class="sommaire-list"></ul>
