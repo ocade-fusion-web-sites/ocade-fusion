@@ -141,7 +141,7 @@ strong {
   color: var(--wp--preset--color--violet);
 }
 
-html body>.video {
+html main>.video {
   aspect-ratio: 16 / 9;
   position: relative;
   width: 100%;
