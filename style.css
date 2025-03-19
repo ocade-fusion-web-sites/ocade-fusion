@@ -4,13 +4,10 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.62
+ * Version: 1.0.61
  * Text Domain: no-code-tools
  */
 
- * {
-  background-color: red !important;
- }
 
 /****** ACCESSIBILITE ******/
 .skiplink {
