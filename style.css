@@ -125,7 +125,7 @@ html main {
     width: calc(100% - 29rem);
   }
 
-  html main > * {
+  html main>* {
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
@@ -368,52 +368,54 @@ p+p {
   margin-right: auto;
 }
 
-.mobile-only {
-  display: flex !important;
-
-  @media (min-width: 1280px) {
-    display: none !important;
-  }
-}
-
-.desktop-only {
-  display: none !important;
-
-  @media (min-width: 1280px) {
+@media (min-width: 0px) { /** Ajout du poids au selecteur CSS */
+  .mobile-only {
     display: flex !important;
+
+    @media (min-width: 1280px) {
+      display: none !important;
+    }
   }
-}
 
-.mt-0 {
-  margin-top: 0 !important;
-}
+  .desktop-only {
+    display: none !important;
 
-.mr-0 {
-  margin-right: 0 !important;
-}
+    @media (min-width: 1280px) {
+      display: flex !important;
+    }
+  }
 
-.mb-0 {
-  margin-bottom: 0 !important;
-}
+  .mt-0 {
+    margin-top: 0 !important;
+  }
 
-.ml-0 {
-  margin-left: 0 !important;
-}
+  .mr-0 {
+    margin-right: 0 !important;
+  }
 
-.pt-0 {
-  padding-top: 0 !important;
-}
+  .mb-0 {
+    margin-bottom: 0 !important;
+  }
 
-.pr-0 {
-  padding-right: 0 !important;
-}
+  .ml-0 {
+    margin-left: 0 !important;
+  }
 
-.pb-0 {
-  padding-bottom: 0 !important;
-}
+  .pt-0 {
+    padding-top: 0 !important;
+  }
 
-.pl-0 {
-  padding-left: 0 !important;
+  .pr-0 {
+    padding-right: 0 !important;
+  }
+
+  .pb-0 {
+    padding-bottom: 0 !important;
+  }
+
+  .pl-0 {
+    padding-left: 0 !important;
+  }
 }
 
 
