@@ -8,6 +8,10 @@
  * Text Domain: no-code-tools
  */
 
+ * {
+  background-color: red !important;
+ }
+
 /****** ACCESSIBILITE ******/
 .skiplink {
   position: absolute;
