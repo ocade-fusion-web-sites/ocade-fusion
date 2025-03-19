@@ -107,6 +107,8 @@ body {
 
 html.panel-expanded,
 html.panel-expanded body {
+  overflow: hidden;
+
   @media(min-width: 1280px) {
     max-width: 100%;
   }
@@ -709,6 +711,7 @@ header .sommaire[aria-expanded="false"] {
   top: 0;
   width: inherit;
   height: calc(var(--height) - 42px);
+  padding-bottom: 1rem;
   animation: none;
 }
 
