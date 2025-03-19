@@ -368,55 +368,62 @@ p+p {
   margin-right: auto;
 }
 
-@media (min-width: 0px) { /** Ajout du poids au selecteur CSS */
-  .mobile-only {
-    display: flex !important;
+.mobile-only {
+  display: flex !important;
 
-    @media (min-width: 1280px) {
-      display: none !important;
-    }
-  }
-
-  .desktop-only {
+  @media (min-width: 1280px) {
     display: none !important;
-
-    @media (min-width: 1280px) {
-      display: flex !important;
-    }
-  }
-
-  .mt-0 {
-    margin-top: 0 !important;
-  }
-
-  .mr-0 {
-    margin-right: 0 !important;
-  }
-
-  .mb-0 {
-    margin-bottom: 0 !important;
-  }
-
-  .ml-0 {
-    margin-left: 0 !important;
-  }
-
-  .pt-0 {
-    padding-top: 0 !important;
-  }
-
-  .pr-0 {
-    padding-right: 0 !important;
-  }
-
-  .pb-0 {
-    padding-bottom: 0 !important;
-  }
-
-  .pl-0 {
-    padding-left: 0 !important;
   }
 }
+
+.desktop-only {
+  display: none !important;
+
+  @media (min-width: 1280px) {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 0px) {
+
+  /** Ajout du poids au selecteur CSS */
+  .flex {
+    display: flex !important;
+  }
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mr-0 {
+  margin-right: 0 !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
 
 
 /********** HEADER **********/
