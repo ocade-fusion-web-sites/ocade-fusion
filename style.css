@@ -368,6 +368,22 @@ p+p {
   margin-right: auto;
 }
 
+.mobile-only {
+  display: flex !important;
+
+  @media (min-width: 1280px) {
+    display: none !important;
+  }
+}
+
+.desktop-only {
+  display: none !important;
+
+  @media (min-width: 1280px) {
+    display: flex !important;
+  }
+}
+
 .mt-0 {
   margin-top: 0 !important;
 }
