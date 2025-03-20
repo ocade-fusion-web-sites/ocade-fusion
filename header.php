@@ -3,9 +3,7 @@
 // Variables globales pour les templates 
 global $_HAS_GO_TO_TOP, $_IS_ARTICLE;
 $_HAS_GO_TO_TOP = true;
-$_IS_ARTICLE = is_singular('post');
-
-?>
+$_IS_ARTICLE = is_singular('post'); ?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -20,18 +18,18 @@ $_IS_ARTICLE = is_singular('post');
   <?php wp_body_open(); ?>
 
   <nav role="navigation" aria-label="Accès rapide">
-    <a href="#menu-principal" class="skiplink">Menu Principal</a>
+    <button onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus();" class="skiplink">Menu Principal</button>
     <?php if ($_IS_ARTICLE) : ?>
-      <a href="#sommaire" onkeydown="sommaireOpen()" class="skiplink">Sommaire</a>
+      <button class="skiplink" onclick="document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
     <?php endif; ?>
-    <a href="#footer" class="skiplink">Pied de page</a>
+    <button onclick="document.getElementById('footer').scrollIntoView({ behavior: 'smooth' })" class="skiplink">Pied de page</button>
   </nav>
 
   <header role="banner" class="alignfull">
     <?php if (has_custom_logo()) the_custom_logo(); ?>
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
     <nav role="navigation" aria-label="Menu principal">
-      <button id="menu-principal" class="expanded" title="Menu principal" aria-expanded="false" aria-controls="menu-principal">
+      <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="list-menu-principal">
         <svg class="burger" width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
@@ -41,7 +39,7 @@ $_IS_ARTICLE = is_singular('post');
       </button>
 
       <ul role="menu" id="list-menu-principal">
-        <li class="entete accueil"><a href="/"><span role="presentation">Ocade Fusion</span></a></li>
+        <li class="entete accueil"><a href="/" id="entete-accueil-link"><span role="presentation">Ocade Fusion</span></a></li>
         <li class="entete"><span role="presentation">N8N</span></li>
 
         <li role="menuitem">
@@ -59,36 +57,13 @@ $_IS_ARTICLE = is_singular('post');
             <li role="menuitem"><a href="/noeud-n8n-if">If</a></li>
           </ul>
         </li>
-
-        <li role="menuitem"><a href="/agents-ia-n8n">Agents IA</a></li>
-        <li role="menuitem"><a href="/workflows-n8n">Workflows</a>
-        </li>
       </ul>
     </nav>
     <?php if ($_IS_ARTICLE) : ?>
-      <script>
-        const sommaireClose = (options = {}) => {
-          if (window.innerWidth > 1280 && options.keepOpen) return;
-          document.getElementById('sommaire').setAttribute('aria-expanded', 'false');
-          document.getElementById('sommaire-button').classList.remove('expanded');
-          document.documentElement.classList.remove('panel-expanded');
-        }
-
-        const sommaireOpen = () => {
-          const sommairePanel = document.getElementById('sommaire');
-          if (sommairePanel.getAttribute('aria-expanded') === 'true') {
-            sommaireClose();
-            return;
-          }
-          sommairePanel.setAttribute('aria-expanded', 'true');
-          document.getElementById('sommaire-button').classList.add('expanded');
-          document.documentElement.classList.add('panel-expanded');
-        }
-      </script>
-      <nav class="sommaire expanded" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
+      <nav class="sommaire" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
         <p class="sommaire-title">
-          <a href="#body" onclick="sommaireClose({keepOpen: true})" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
-          <button onclick="sommaireClose()">Fermer</button>
+          <a href="#body" id="sommaire-title-link" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
+          <button onclick="document.getElementById('sommaire').setAttribute('aria-expanded', false); document.getElementById('sommaire-button').focus();">Fermer</button>
         </p>
         <ul class="sommaire-list"></ul>
       </nav>

@@ -345,7 +345,6 @@ p+p {
 }
 
 
-
 /** CLASSES **/
 .alignfull {
   max-width: 100vw;
@@ -493,7 +492,7 @@ header nav {
   }
 }
 
-header button[aria-controls="menu-principal"] {
+header button[aria-controls="list-menu-principal"] {
   display: flex;
   background-color: transparent;
 }
@@ -532,7 +531,8 @@ header ul {
 
 header ul#list-menu-principal {
   overflow: auto;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 140px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header li {
@@ -578,6 +578,14 @@ header li a {
 header li.entete.accueil a {
   padding: 0;
   text-decoration: none;
+}
+
+header li.entete.accueil a:focus,
+header li.entete.accueil a:focus-visible
+ {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: white;
 }
 
 header li a:hover {
@@ -655,19 +663,18 @@ header ul button[aria-expanded="true"]::before {
   --height: calc(100vh - 124px);
   position: absolute;
   top: 100%;
-  right: 0;
+  right: -500px;
   width: 100%;
   height: var(--height);
   margin-left: 0;
   background-color: white;
-  transition: left 0.3s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  animation: menu-principal-slide 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
-header .sommaire[aria-expanded="false"] {
-  left: -100vw;
-  display: none;
+header .sommaire[aria-expanded="true"] {
+  right: 0;
+  transition: 0s;
 }
 
 @media (min-width: 768px) {
@@ -679,27 +686,33 @@ header .sommaire[aria-expanded="false"] {
 .sommaire .sommaire-title {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   min-height: 42px;
   margin: 0;
-  padding: .5rem 1rem;
   color: white;
   background-color: var(--wp--preset--color--orange);
 }
 
 .sommaire .sommaire-title a {
+  align-content: center;
+  width: 100%;
+  padding: .5rem 1rem;
   color: white;
   text-decoration: none;
 }
 
-.sommaire .sommaire-title a:hover {
+.sommaire .sommaire-title a:hover,
+.sommaire .sommaire-title a:focus,
+.sommaire .sommaire-title a:focus-visible {
   text-decoration: underline;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
+  outline: none;
 }
 
 .sommaire .sommaire-title button {
   width: 6.25rem;
-  height: 2.375rem;
+  height: 2rem;
+  margin: auto .5rem auto;
   background-color: var(--wp--preset--color--gris-clair);
   font-size: 1rem; 
   border: none;

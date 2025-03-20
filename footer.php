@@ -22,11 +22,18 @@ $footer_query = new WP_Query(array(
 </footer>
 
 <?php if ($_IS_ARTICLE) : ?>
-  <nav id="mobile-footer-menu" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
+  <nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
     <ul role="menu">
       <?php if ($_IS_ARTICLE) : ?>
         <li role="menuitem" class="sommaire-item">
-          <button id="sommaire-button" title="Sommaire de la page" onclick="sommaireOpen()">
+          <button
+            id="sommaire-button" title="Sommaire de la page"
+            onclick="(() => {
+              const sommaire = document.getElementById('sommaire');
+              const expanded = sommaire.getAttribute('aria-expanded') === 'true';
+              sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+              if (!expanded) document.getElementById('sommaire-title-link').focus();
+            })();">
             <span class="skiplink">Sommaire</span>
           </button>
         </li>
@@ -36,71 +43,10 @@ $footer_query = new WP_Query(array(
       <?php endif; ?>
     </ul>
   </nav>
-  <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/sommaire.js"></script>
 <?php endif; ?>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
 <?php /** Implémentation des scripts */ wp_footer(); ?>
-
-<script>
-  // **************** Gestion de l'ouverture/fermeture des menus ****************
-  document.addEventListener("DOMContentLoaded", function() {
-    const menuButtons = document.querySelectorAll('button[aria-controls]');
-
-    menuButtons.forEach(button => {
-      // Gestion du clic pour ouvrir/fermer le menu
-      button.addEventListener("click", function() {
-        this.setAttribute("aria-expanded", this.getAttribute("aria-expanded") === "true" ? "false" : "true");
-      });
-
-      // Gestion de la touche Échap pour fermer le menu correspondant
-      document.addEventListener("keydown", function(e) {
-        if (e.key === "Escape" && button.getAttribute("aria-expanded") === "true") button.setAttribute("aria-expanded", "false");
-      });
-    });
-  });
-
-  // **************** Gestion des z-index des Panneaux de navigation ****************
-  let zIndexCounter = 1000;
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.type === "attributes" && mutation.attributeName === "aria-expanded") {
-        let expandedElement = mutation.target;
-        let isExpanded = expandedElement.getAttribute("aria-expanded") === "true";
-        if (isExpanded) {
-          // Vérifier si l'élément est une <nav>, sinon trouver son parent navigation
-          let navElement = expandedElement.closest("nav") || expandedElement;
-          // Appliquer l'incrémentation du z-index sur la navigation trouvée
-          zIndexCounter++;
-          navElement.style.zIndex = zIndexCounter;
-        }
-      }
-    });
-  });
-  // Sélectionne tout les panels (panneau de navigation) et observe les changements d'attribut
-  document.querySelectorAll(".expanded").forEach(expandEl => observer.observe(expandEl, {
-    attributes: true
-  }));
-
-  // **************** Sticky Logo ****************
-  let lastScrollY = window.scrollY,
-    ticking = false
-  const handleScroll = () => {
-    let currentScrollY = window.scrollY
-    let isAtBottom = window.innerHeight + currentScrollY >= document.documentElement.scrollHeight - 10
-    let isAtTop = currentScrollY <= 10
-    if (!isAtBottom && !isAtTop)
-      document.documentElement.classList.toggle("hide-logo", currentScrollY > lastScrollY)
-    lastScrollY = window.scrollY
-    ticking = false
-  }
-
-  document.addEventListener("scroll", () => {
-    if (!ticking) {
-      requestAnimationFrame(handleScroll)
-      ticking = true
-    }
-  })
-</script>
 
 </body>
 
