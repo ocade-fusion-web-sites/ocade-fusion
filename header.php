@@ -3,7 +3,10 @@
 // Variables globales pour les templates 
 global $_HAS_GO_TO_TOP, $_IS_ARTICLE;
 $_HAS_GO_TO_TOP = true;
-$_IS_ARTICLE = is_singular('post'); ?>
+$_IS_ARTICLE = is_singular('post');
+$_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
+
+?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -39,22 +42,35 @@ $_IS_ARTICLE = is_singular('post'); ?>
       </button>
 
       <ul role="menu" id="list-menu-principal">
-        <li class="entete accueil"><a href="/" id="entete-accueil-link"><span role="presentation">Ocade Fusion</span></a></li>
+        <li class="entete accueil <?php echo ($_URL_CURRENT == '/') ? 'current' : ''; ?>">
+          <a href="/" id="entete-accueil-link">
+            <span role="presentation">Ocade Fusion</span>
+          </a>
+        </li>
+
         <li class="entete"><span role="presentation">N8N</span></li>
 
         <li role="menuitem">
           <button aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
-            <li role="menuitem"><a href="/n8n/installer-n8n-sur-le-cloud/">Sur le Cloud</a></li>
-            <li role="menuitem"><a href="/n8n/installer-n8n-avec-docker-compose/">Avec Docker Compose</a></li>
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installer-n8n-sur-le-cloud/') ? 'current' : ''; ?>">
+              <a href="/n8n/installer-n8n-sur-le-cloud/">Sur le Cloud</a>
+            </li>
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installer-n8n-avec-docker-compose/') ? 'current' : ''; ?>">
+              <a href="/n8n/installer-n8n-avec-docker-compose/">Avec Docker Compose</a>
+            </li>
           </ul>
         </li>
 
         <li role="menuitem">
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
-            <li role="menuitem"><a href="/n8n/noeuds/noeud-n8n-edit/">Edit</a></li>
-            <li role="menuitem"><a href="/n8n/noeuds/noeud-n8n-if/">If</a></li>
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/noeud-n8n-edit/') ? 'current' : ''; ?>">
+              <a href="/n8n/noeuds/noeud-n8n-edit/">Edit</a>
+            </li>
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/noeud-n8n-if/') ? 'current' : ''; ?>">
+              <a href="/n8n/noeuds/noeud-n8n-if/">If</a>
+            </li>
           </ul>
         </li>
       </ul>
