@@ -836,6 +836,12 @@ body>.wp-block-group {
   text-decoration: none;
 }
 
+/** YOAST BREADCRUMBS **/
+.yoast-breadcrumbs {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
 /** YOAST FAQ **/
 .wp-block-yoast-faq-block {
   display: grid;
