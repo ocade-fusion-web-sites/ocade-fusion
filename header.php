@@ -53,8 +53,8 @@ $_IS_ARTICLE = is_singular('post'); ?>
         <li role="menuitem">
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
-            <li role="menuitem"><a href="/noeud-n8n-edit">Edit</a></li>
-            <li role="menuitem"><a href="/noeud-n8n-if">If</a></li>
+            <li role="menuitem"><a href="/n8n/noeuds/noeud-n8n-edit/">Edit</a></li>
+            <li role="menuitem"><a href="/n8n/noeuds/noeud-n8n-if/">If</a></li>
           </ul>
         </li>
       </ul>
