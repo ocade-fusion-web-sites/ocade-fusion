@@ -53,10 +53,10 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
         <li role="menuitem">
           <button aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installer-n8n-sur-le-cloud/') ? 'current' : ''; ?>">
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installation/installer-n8n-sur-le-cloud/') ? 'current' : ''; ?>">
               <a href="/n8n/installer-n8n-sur-le-cloud/">Sur le Cloud</a>
             </li>
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installer-n8n-avec-docker-compose/') ? 'current' : ''; ?>">
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installation/installer-n8n-avec-docker-compose/') ? 'current' : ''; ?>">
               <a href="/n8n/installer-n8n-avec-docker-compose/">Avec Docker Compose</a>
             </li>
           </ul>
