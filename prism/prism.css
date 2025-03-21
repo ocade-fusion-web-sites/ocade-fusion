@@ -94,7 +94,7 @@ pre[class*=language-] {
 .token.inserted,
 .token.selector,
 .token.string {
-  color: #690
+  color: #406001
 }
 
 .language-css .token.string,
