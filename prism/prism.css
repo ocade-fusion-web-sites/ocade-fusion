@@ -120,7 +120,7 @@ pre[class*=language-] {
 .token.important,
 .token.regex,
 .token.variable {
-  color: #e90
+  color: #7a5000
 }
 
 .token.bold,
