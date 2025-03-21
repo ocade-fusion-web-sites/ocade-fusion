@@ -10,7 +10,7 @@ add_action('wp_enqueue_scripts', 'charger_prism');
 
 function personnalisation_gutenberg_colors() {
   add_theme_support('editor-color-palette', [
-    ['name'  => __('Orange', 'mon-theme'), 'slug'  => 'orange', 'color' => '#ef4e39'],
+    ['name'  => __('Orange', 'mon-theme'), 'slug'  => 'orange', 'color' => '#a22f20'],
     ['name'  => __('Bleu', 'mon-theme'), 'slug'  => 'bleu', 'color' => '#1D5670'],
     ['name'  => __('Gris', 'mon-theme'), 'slug'  => 'gris', 'color' => '#f2f2f2'],
     ['name'  => __('Gris Clair', 'mon-theme'), 'slug'  => 'gris-clair', 'color' => '#f4f4f4'],
