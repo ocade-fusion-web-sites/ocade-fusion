@@ -601,8 +601,7 @@ header li.entete.accueil a {
 }
 
 header li.entete.accueil a:focus,
-header li.entete.accueil a:focus-visible
- {
+header li.entete.accueil a:focus-visible {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-decoration-color: white;
@@ -734,7 +733,7 @@ header .sommaire[aria-expanded="true"] {
   height: 2rem;
   margin: auto .5rem auto;
   background-color: var(--wp--preset--color--gris-clair);
-  font-size: 1rem; 
+  font-size: 1rem;
   border: none;
   cursor: pointer;
 }
@@ -854,6 +853,13 @@ body>.wp-block-group {
 .wp-element-button:hover {
   background-color: var(--wp--preset--color--orange);
   text-decoration: none;
+}
+
+/** MEDIA & TEXT **/
+@media (max-width: 600px) {
+  .wp-block-media-text+.wp-block-media-text {
+    margin-top: 4rem !important;
+  }
 }
 
 /** YOAST BREADCRUMBS **/
