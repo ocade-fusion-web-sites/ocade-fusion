@@ -10,7 +10,6 @@ get_header(); ?>
   <?php // Vérifier si l'objet catégorie existe et récupérer son slug
   if ($categorie && isset($categorie->slug)) {
     $slug = $categorie->slug;
-    add_filter('ocade_h1', fn($title) => "Catégorie: " . $categorie->name); // Modifier le titre de la page
 
     // Requête pour vérifier si un CPT 'categorie-articles' a le même slug
     $category_articles_query = new WP_Query(array(
