@@ -31,8 +31,8 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
   <header role="banner" class="alignfull">
     <a href="https://www.ocadefusion.fr/" class="custom-logo-link" rel="home">
       <img
-        width="100"
-        height="100"
+        width="80"
+        height="80"
         src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svgs/logo.svg"
         class="custom-logo lazy loaded"
         alt="OCADE Fusion est un outil d'automatisation des processus d'intégration de données qui permet aux entreprises de rationaliser leurs opérations et d'améliorer leur efficacité."
