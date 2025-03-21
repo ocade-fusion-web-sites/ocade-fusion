@@ -83,6 +83,11 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
             </li>
           </ul>
         </li>
+
+
+        <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/author/ocade-fusion/') ? 'current' : ''; ?>">
+          <a href="/author/ocade-fusion/">Qui est Valentin Charrier ?</a>
+        </li>
       </ul>
     </nav>
     <?php if ($_IS_ARTICLE) : ?>
