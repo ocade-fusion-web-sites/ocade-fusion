@@ -29,7 +29,17 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
   </nav>
 
   <header role="banner" class="alignfull">
-    <?php if (has_custom_logo()) the_custom_logo(); ?>
+    <a href="https://www.ocadefusion.fr/" class="custom-logo-link" rel="home">
+      <img
+        width="200"
+        height="200"
+        src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svgs/logo.svg"
+        class="custom-logo lazy loaded"
+        alt="OCADE Fusion est un outil d'automatisation des processus d'intégration de données qui permet aux entreprises de rationaliser leurs opérations et d'améliorer leur efficacité."
+        decoding="async"
+        fetchpriority="high">
+    </a>
+
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
     <nav role="navigation" aria-label="Menu principal">
       <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="list-menu-principal">
