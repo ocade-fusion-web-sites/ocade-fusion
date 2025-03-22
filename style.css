@@ -588,22 +588,23 @@ header li span {
 }
 
 header li.entete.accueil span {
-  padding-left: 3rem;
+  padding-left: 3.5rem;
+  font-weight: 600;
   background-color: var(--wp--preset--color--orange);
 }
 
 header li.entete.accueil a::before {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  height: auto;
-  width: 41.6px;
+  top: 50%;
+  left: 1rem;
+  height: 1.7rem;
+  width: 1.7rem;
   background-image: url(./assets/svgs/logo-transparent.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  transform: translateY(-50%);
 }
 
 header li a {
