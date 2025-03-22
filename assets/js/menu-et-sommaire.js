@@ -1,5 +1,6 @@
 // Ferme le panneau de sommaire
-const sommaireClose = () => document.getElementById("sommaire").setAttribute("aria-expanded", "false");
+const sommaireClose = () =>
+  document.getElementById("sommaire").setAttribute("aria-expanded", "false");
 
 /************************************************************************************** */
 /*************** Ajouter la classe panel-expanded au <html> ******************/
@@ -54,7 +55,7 @@ document.addEventListener("scroll", () => {
 /*************************** Gestion du menu *********************************/
 /************************************************************************************** */
 document.addEventListener("DOMContentLoaded", function () {
-  const menuButtons = document.querySelectorAll('button[aria-controls]'); 
+  const menuButtons = document.querySelectorAll("button[aria-controls]");
 
   // Gestion du clic sur chaque bouton (ouvrir/fermer)
   menuButtons.forEach((button) => {
@@ -75,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (
         isExpanded &&
         !button.contains(event.target) &&
-        menu && !menu.contains(event.target)
+        menu &&
+        !menu.contains(event.target)
       ) {
         button.setAttribute("aria-expanded", "false");
       }
@@ -86,7 +88,30 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
       console.log("Escape key pressed");
-      document.querySelectorAll('[aria-expanded="true"]').forEach((element) => element.setAttribute("aria-expanded", "false"));
+      document
+        .querySelectorAll('[aria-expanded="true"]')
+        .forEach((element) => element.setAttribute("aria-expanded", "false"));
+    }
+    // Alt + M pour le menu
+    if (e.altKey && e.key.toLowerCase() === "m") {
+      const menuButton = document.getElementById("menu-principal");
+      menuButton.setAttribute(
+        "aria-expanded",
+        menuButton.getAttribute("aria-expanded") === "true" ? "false" : "true"
+      );
+      e.preventDefault();
+    }
+
+    // Alt + S pour le sommaire
+    if (e.altKey && e.key.toLowerCase() === "s") {
+      const sommaire = document.getElementById("sommaire");
+      if (sommaire) {
+        sommaire.setAttribute(
+          "aria-expanded",
+          sommaire.getAttribute("aria-expanded") === "true" ? "false" : "true"
+        );
+        e.preventDefault();
+      }
     }
   });
 });
@@ -114,8 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     link.onclick = () => {
       // Si écran plus petit que 1024px, fermer le sommaire
       if (window.innerWidth < 1024) sommaireClose();
-    }
-
+    };
 
     listItem.appendChild(link);
     sommaireList.appendChild(listItem);
