@@ -46,7 +46,6 @@ $footer_query = new WP_Query(array(
   </nav>
 <?php endif; ?>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
-
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 
 </body>
