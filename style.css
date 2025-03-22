@@ -113,7 +113,9 @@ html.panel-expanded body {
 }
 
 html main {
+  width: 100%;
   padding: 1rem;
+  transition: 0.3s;
 
   @media(min-width: 768px) {
     padding: 2rem;
@@ -492,6 +494,10 @@ header nav {
   }
 }
 
+header #menu-principal-nav {
+  z-index: 1001;
+}
+
 header button[aria-controls="list-menu-principal"] {
   display: flex;
   background-color: transparent;
@@ -678,6 +684,10 @@ header ul button[aria-expanded="true"]::before {
 }
 
 /********** SOMMAIRE PAGE **********/
+#sommaire {
+  z-index: 1000;
+}
+
 .sommaire {
   --height: calc(100vh - 124px);
   position: absolute;
@@ -788,6 +798,12 @@ footer .wp-block-columns {
   list-style-type: none;
 }
 
+@media (min-width: 1280px) {
+  #mobile-footer-menu ul {
+    justify-content: center;
+  }
+}
+
 #mobile-footer-menu ul li {
   display: flex;
   align-content: center;
@@ -843,6 +859,12 @@ body>.wp-block-group {
   @media (max-width: 1280px) {
     display: none;
   }
+}
+
+/** BOUTTONS **/
+.wp-block-buttons {
+  
+  margin-top: .5rem;
 }
 
 /** BOUTON **/

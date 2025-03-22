@@ -1,6 +1,6 @@
 <?php
 
-global $_HAS_GO_TO_TOP, $_IS_ARTICLE;
+global $_HAS_GO_TO_TOP, $_IS_SOMMARY;
 
 /** Récupération du CPT footer. */
 $footer_query = new WP_Query(array(
@@ -21,15 +21,16 @@ $footer_query = new WP_Query(array(
   <?php endif; ?>
 </footer>
 
-<?php if ($_IS_ARTICLE) : ?>
+<?php if ($_IS_SOMMARY) : ?>
   <nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
     <ul role="menu">
-      <?php if ($_IS_ARTICLE) : ?>
+      <?php if ($_IS_SOMMARY) : ?>
         <li role="menuitem" class="sommaire-item">
           <button
             id="sommaire-button" title="Sommaire de la page"
             onclick="(() => {
               const sommaire = document.getElementById('sommaire');
+              document.getElementById('menu-principal').setAttribute('aria-expanded', false);
               const expanded = sommaire.getAttribute('aria-expanded') === 'true';
               sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
               if (!expanded) document.getElementById('sommaire-title-link').focus();

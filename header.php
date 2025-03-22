@@ -1,10 +1,12 @@
 <?php
 
 // Variables globales pour les templates 
-global $_HAS_GO_TO_TOP, $_IS_ARTICLE;
+global $_HAS_GO_TO_TOP, $_IS_ARTICLE, $_IS_SOMMARY;
 $_HAS_GO_TO_TOP = true;
-$_IS_ARTICLE = is_singular('post');
 $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
+$_IS_ARTICLE = is_singular('post');
+$_IS_AUTHOR = is_author();
+$_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
 ?>
 
@@ -22,8 +24,8 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
 
   <nav role="navigation" aria-label="Accès rapide">
     <button onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus();" class="skiplink">Menu Principal</button>
-    <?php if ($_IS_ARTICLE) : ?>
-      <button class="skiplink" onclick="document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
+    <?php if ($_IS_SOMMARY) : ?>
+      <button class="skiplink" onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', false); document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
     <?php endif; ?>
     <button onclick="document.getElementById('footer').scrollIntoView({ behavior: 'smooth' })" class="skiplink">Pied de page</button>
   </nav>
@@ -41,7 +43,7 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
     </a>
 
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
-    <nav role="navigation" aria-label="Menu principal">
+    <nav id="menu-principal-nav" role="navigation" aria-label="Menu principal">
       <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="list-menu-principal">
         <svg class="burger" width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -90,7 +92,7 @@ $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
         </li>
       </ul>
     </nav>
-    <?php if ($_IS_ARTICLE) : ?>
+    <?php if ($_IS_SOMMARY) : ?>
       <nav class="sommaire" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
         <p class="sommaire-title">
           <a href="#body" id="sommaire-title-link" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
