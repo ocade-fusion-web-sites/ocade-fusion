@@ -16,6 +16,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
   <?php wp_head(); ?>
 </head>
 
