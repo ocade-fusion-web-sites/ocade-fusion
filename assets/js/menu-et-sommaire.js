@@ -1,3 +1,6 @@
+// Ferme le panneau de sommaire
+const sommaireClose = () => document.getElementById("sommaire").setAttribute("aria-expanded", "false");
+
 /************************************************************************************** */
 /*************** Ajouter la classe panel-expanded au <html> ******************/
 /************************************************************************************** */
@@ -51,21 +54,38 @@ document.addEventListener("scroll", () => {
 /*************************** Gestion du menu *********************************/
 /************************************************************************************** */
 document.addEventListener("DOMContentLoaded", function () {
-  const menuButtons = document.querySelectorAll("button[aria-controls]");
+  const menuButtons = document.querySelectorAll('button[aria-controls]'); 
 
+  // Gestion du clic sur chaque bouton (ouvrir/fermer)
   menuButtons.forEach((button) => {
-    // Gestion du clic pour ouvrir/fermer le menu
-    button.addEventListener("click", function () {
-      this.setAttribute(
-        "aria-expanded",
-        this.getAttribute("aria-expanded") === "true" ? "false" : "true"
-      );
+    button.addEventListener("click", function (event) {
+      const isExpanded = this.getAttribute("aria-expanded") === "true";
+      this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
+      event.stopPropagation(); // Empêche le document click de le fermer tout de suite
     });
   });
 
-  // Gestion de la touche Échap pour fermer le menu correspondant
+  // Gestion du clic global pour fermer les menus ouverts si clic en dehors
+  document.addEventListener("click", function (event) {
+    menuButtons.forEach((button) => {
+      const menuId = button.getAttribute("aria-controls");
+      const menu = document.getElementById(menuId);
+      const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+      if (
+        isExpanded &&
+        !button.contains(event.target) &&
+        menu && !menu.contains(event.target)
+      ) {
+        button.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // Fermeture des menus via la touche Échap
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
+      console.log("Escape key pressed");
       document.querySelectorAll('[aria-expanded="true"]').forEach((element) => element.setAttribute("aria-expanded", "false"));
     }
   });
@@ -91,7 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const link = document.createElement("a");
     link.href = "#" + header.id;
     link.textContent = header.textContent;
-    link.onclick = () => sommaireClose({ keepOpen: true });
+    link.onclick = () => {
+      // Si écran plus petit que 1024px, fermer le sommaire
+      if (window.innerWidth < 1024) sommaireClose();
+    }
+
 
     listItem.appendChild(link);
     sommaireList.appendChild(listItem);

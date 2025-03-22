@@ -692,7 +692,7 @@ header ul button[aria-expanded="true"]::before {
   --height: calc(100vh - 124px);
   position: absolute;
   top: 100%;
-  right: -500px;
+  right: -768px;
   width: 100%;
   height: var(--height);
   margin-left: 0;
