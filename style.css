@@ -85,6 +85,11 @@
   background-color: var(--wp--preset--color--violet--clair) !important;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body,
 html {
