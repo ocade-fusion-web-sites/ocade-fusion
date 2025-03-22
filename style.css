@@ -694,6 +694,7 @@ header ul button[aria-expanded="true"]::before {
 
 .sommaire {
   --height: calc(100vh - 124px);
+  display: none;
   position: absolute;
   top: 100%;
   right: -768px;
@@ -702,10 +703,11 @@ header ul button[aria-expanded="true"]::before {
   margin-left: 0;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: 0.3s ease-in-out;
+  transition: right 0.3s ease-in-out;
 }
 
 header .sommaire[aria-expanded="true"] {
+  display: block;
   right: 0;
   transition: 0s;
 }
