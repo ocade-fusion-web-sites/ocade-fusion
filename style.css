@@ -432,32 +432,29 @@ p+p {
 
 
 /********** HEADER **********/
+h1 {
+  order: 3;
+}
+
 @media (max-width: 1280px) {
-  .hide-logo header {
+  header {
     padding-left: .25rem;
     padding-right: .25rem;
   }
 
   .custom-logo-link {
-    top: 0;
-    opacity: 1;
-    transition: 0.5s;
-  }
-
-  .hide-logo .custom-logo-link {
     top: -100px;
     opacity: 0;
     position: absolute !important;
     transition: 0.1s;
   }
 
-  .hide-logo h1 {
+  h1 {
     order: 1;
     width: calc(100% - 3rem);
     margin: 0 auto;
     text-align: center;
   }
-
 }
 
 header {
@@ -475,16 +472,6 @@ header {
 header a.custom-logo-link {
   display: inline-flex;
   order: 1;
-}
-
-header h1 {
-  order: 3;
-}
-
-@media (min-width: 1280px) {
-  header h1 {
-    order: 2;
-  }
 }
 
 header nav {

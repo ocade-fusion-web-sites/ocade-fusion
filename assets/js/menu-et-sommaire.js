@@ -22,34 +22,7 @@ if (sommaire) observer.observe(sommaire, { attributes: true });
 /********** Fin de l'ajout de la classe panel-expanded au <html> *************/
 /************************************************************************************** */
 
-/************************************************************************************** */
-/***************************** Sticky Logo ***********************************/
-/************************************************************************************** */
-let lastScrollY = window.scrollY,
-  ticking = false;
-const handleScroll = () => {
-  let currentScrollY = window.scrollY;
-  let isAtBottom =
-    window.innerHeight + currentScrollY >=
-    document.documentElement.scrollHeight - 10;
-  let isAtTop = currentScrollY <= 10;
-  if (!isAtBottom && !isAtTop)
-    document.documentElement.classList.toggle(
-      "hide-logo",
-      currentScrollY > lastScrollY
-    );
-  lastScrollY = window.scrollY;
-  ticking = false;
-};
 
-document.addEventListener("scroll", () => {
-  if (!ticking) {
-    requestAnimationFrame(handleScroll);
-    ticking = true;
-  }
-});
-/********************** Fin de la cachage du logo sur mobile *************************/
-/************************************************************************************** */
 
 /************************************************************************************** */
 /*************************** Gestion du menu *********************************/
