@@ -1,0 +1,22 @@
+{
+  "name": "Ocade Fusion",
+  "short_name": "Ocade Fusion",
+  "description": "Ocade Fusion est un site d'apprentissage de la programmation sans code",
+  "lang": "fr",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#303579",
+  "icons": [
+    {
+      "src": "/wp-content/themes/no-code-tools/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/wp-content/themes/no-code-tools/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
