@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Gestion du clic global pour fermer les menus ouverts si clic en dehors
+  // Gestion du clic global pour fermer les menus ouverts si clic en dehors 
   document.addEventListener("click", function (event) {
     menuButtons.forEach((button) => {
       const menuId = button.getAttribute("aria-controls");
