@@ -1,10 +1,7 @@
 <?php
 
 $author = get_queried_object();
-if ( $author instanceof WP_User ) $authorName = $author->display_name;
-else $authorName = $author->name;
-
-add_filter('ocade_h1', fn($title) => $author->name); // Modifier le titre de la page
+add_filter('ocade_h1', fn($title) => $author->nickname); // Modifier le titre de la page
 
 get_header(); ?>
 
