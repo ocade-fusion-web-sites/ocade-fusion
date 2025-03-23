@@ -46,6 +46,25 @@ $footer_query = new WP_Query(array(
   </nav>
 <?php endif; ?>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"
+  onerror="this.onerror=null;this.src='<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/webcomponents-loader.js'"
+  defer async>
+</script>
+
+<script
+  src="https://unpkg.com/lit@2.0.0-rc.2/polyfill-support.js"
+  onerror="this.onerror=null;this.src='<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/polyfill-support.js'"
+  defer async>
+</script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js"
+  onerror="this.onerror=null;this.src='<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/n8n-demo.bundled.js'"
+  defer type="module" async>
+</script>
+
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 
 </body>
