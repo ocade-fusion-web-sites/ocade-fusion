@@ -44,26 +44,64 @@ $footer_query = new WP_Query(array(
       <?php endif; ?>
     </ul>
   </nav>
+  <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 <?php endif; ?>
-<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
-<script
-  src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/webcomponents-loader.js"
-  onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js'"
-  defer async>
+<script>
+  // Utilitaire pour charger un script avec fallback
+  function loadScriptWithFallback(primarySrc, fallbackSrc, isModule = false) {
+    const script = document.createElement('script');
+    script.src = primarySrc;
+    script.defer = true;
+    script.async = true;
+    if (isModule) script.type = 'module';
+    script.onerror = () => {
+      const fallback = document.createElement('script');
+      fallback.src = fallbackSrc;
+      fallback.defer = true;
+      fallback.async = true;
+      if (isModule) fallback.type = 'module';
+      document.head.appendChild(fallback);
+    };
+    document.head.appendChild(script);
+  }
+
+  // Charger les scripts de la librairie n8n-demo
+  function loadN8nDemoLibrary() {
+    loadScriptWithFallback(
+      '<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/webcomponents-loader.js',
+      'https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js'
+    );
+    loadScriptWithFallback(
+      '<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/polyfill-support.js',
+      'https://unpkg.com/lit@2.0.0-rc.2/polyfill-support.js'
+    );
+    loadScriptWithFallback(
+      '<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/n8n-demo.bundled.js',
+      'https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js',
+      true
+    );
+  }
+
+  // Observer la présence de <n8n-demo> dans le viewport
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.querySelector('n8n-demo');
+    if (!el) return;
+
+    // IntersectionObserver pour ne charger que si l’élément est visible
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadN8nDemoLibrary();
+          observer.disconnect(); // Arrêter l’observation
+        }
+      });
+    });
+
+    observer.observe(el);
+  });
 </script>
 
-<script
-  src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/polyfill-support.js"
-  onerror="this.onerror=null;this.src='https://unpkg.com/lit@2.0.0-rc.2/polyfill-support.js'"
-  defer async>
-</script>
-
-<script
-  src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/n8n-demo.bundled.js"
-  onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js'"
-  defer type="module" async>
-</script>
 
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 
