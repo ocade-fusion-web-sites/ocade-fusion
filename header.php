@@ -29,7 +29,8 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <?php wp_body_open(); ?>
 
   <nav role="navigation" aria-label="Accès rapide">
-    <button onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus();" class="skiplink">Menu Principal</button>
+    <button onclick="(function(event){ event.stopPropagation(); document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus(); })(event)" class="skiplink">Menu Principal</button>
+
     <?php if ($_IS_SOMMARY) : ?>
       <button class="skiplink" onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', false); document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
     <?php endif; ?>
