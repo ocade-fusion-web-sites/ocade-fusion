@@ -44,8 +44,8 @@ $footer_query = new WP_Query(array(
       <?php endif; ?>
     </ul>
   </nav>
+  <?php endif; ?>
   <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
-<?php endif; ?>
 
 <script>
   // Utilitaire pour charger un script avec fallback
