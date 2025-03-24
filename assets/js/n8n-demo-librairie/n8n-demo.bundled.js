@@ -12,6 +12,7 @@ var et=function(t,e,i,o){for(var s,r=arguments.length,n=r<3?e:null===o?o=Object.
       allow="${i?T:"clipboard-write"}"
       src=${e}
       id="int_iframe"
+      title="n8n workflow"
     ></iframe>`;let s="";return i?s=N`<div
         class="overlay"
         ?hidden="${!(this.insideIframe||this.isMobileView)}"

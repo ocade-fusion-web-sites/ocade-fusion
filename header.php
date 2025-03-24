@@ -17,11 +17,6 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
-
-  <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
-  <script src="https://www.unpkg.com/lit@2.0.0-rc.2/polyfill-support.js"></script>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js"></script>
-
   <?php wp_head(); ?>
 </head>
 
