@@ -44,8 +44,8 @@ $footer_query = new WP_Query(array(
       <?php endif; ?>
     </ul>
   </nav>
-  <?php endif; ?>
-  <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
+<?php endif; ?>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
 <script>
   // Utilitaire pour charger un script avec fallback
@@ -99,6 +99,47 @@ $footer_query = new WP_Query(array(
     });
 
     observer.observe(el);
+  });
+
+
+
+
+  /** Vidéo Youtube */
+  document.querySelectorAll(".wp-block-ocade-blocks-youtube-lite").forEach((el) => {
+    const videoId = el.dataset.videoId;
+    const valueLazy = el.dataset.lazyloading;
+
+    const loadIframe = () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+      iframe.title = "Lecture vidéo YouTube";
+      iframe.name = `youtube-video-${videoId}`;
+      iframe.loading = valueLazy;
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.frameBorder = "0";
+      iframe.referrerPolicy = "no-referrer";
+      iframe.sandbox = "allow-scripts allow-same-origin allow-presentation";
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+      iframe.style.border = "none";
+
+      el.innerHTML = ""; // Supprime le fond (background-image)
+      el.classList.add("is-playing");
+      el.appendChild(iframe);
+    };
+
+    // Click souris
+    el.addEventListener("click", loadIframe);
+
+    // Accessibilité clavier (Enter ou barre espace)
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        loadIframe();
+      }
+    });
   });
 </script>
 
