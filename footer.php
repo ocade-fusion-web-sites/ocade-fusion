@@ -47,8 +47,9 @@ $footer_query = new WP_Query(array(
 <?php endif; ?>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
+
 <script>
-  // Utilitaire pour charger un script avec fallback
+  // CHARGEMENT DES SCRIPTS DE LA LIBRAIRIE N8N-DEMO
   function loadScriptWithFallback(primarySrc, fallbackSrc, isModule = false) {
     const script = document.createElement('script');
     script.src = primarySrc;
@@ -65,8 +66,6 @@ $footer_query = new WP_Query(array(
     };
     document.head.appendChild(script);
   }
-
-  // Charger les scripts de la librairie n8n-demo
   function loadN8nDemoLibrary() {
     loadScriptWithFallback(
       '<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/webcomponents-loader.js',
@@ -82,12 +81,10 @@ $footer_query = new WP_Query(array(
       true
     );
   }
-
   // Observer la présence de <n8n-demo> dans le viewport
   document.addEventListener('DOMContentLoaded', () => {
     const el = document.querySelector('n8n-demo');
     if (!el) return;
-
     // IntersectionObserver pour ne charger que si l’élément est visible
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -97,18 +94,14 @@ $footer_query = new WP_Query(array(
         }
       });
     });
-
     observer.observe(el);
   });
 
 
-
-
-  /** Vidéo Youtube */
+  /** AU CLICK SUR LE BLOCK YOUTUBE LITE, CHARGEMENT DE L'IFRAME YOUTUBE */
   document.querySelectorAll(".wp-block-ocade-blocks-youtube-lite").forEach((el) => {
     const videoId = el.dataset.videoId;
     const valueLazy = el.dataset.lazyloading;
-
     const loadIframe = () => {
       const iframe = document.createElement("iframe");
       iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
@@ -124,15 +117,12 @@ $footer_query = new WP_Query(array(
       iframe.style.width = "100%";
       iframe.style.height = "100%";
       iframe.style.border = "none";
-
       el.innerHTML = ""; // Supprime le fond (background-image)
       el.classList.add("is-playing");
       el.appendChild(iframe);
     };
-
     // Click souris
     el.addEventListener("click", loadIframe);
-
     // Accessibilité clavier (Enter ou barre espace)
     el.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -142,7 +132,6 @@ $footer_query = new WP_Query(array(
     });
   });
 </script>
-
 
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 
