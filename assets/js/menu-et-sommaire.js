@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let keyCount = 0;
     let lastTime = 0;
     const threshold = 600;
-    let suppressNextKey = false;
+
+    let suppressUntil = 0; // délai jusqu'à lequel on bloque les frappes
 
     const dialog = document.getElementById("ocade-search-dialog");
     const searchInput = document.getElementById("ocade-search-input");
@@ -82,12 +83,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       },
       r: () => {
+        // Bloque les frappes pendant 300ms
+        suppressUntil = Date.now() + 300;
+
         setTimeout(() => {
           if (dialog && typeof dialog.showModal === "function") {
             dialog.showModal();
             document.body.classList.add("modal-open");
             searchInput?.focus();
-            suppressNextKey = true;
           }
         }, 100);
       },
@@ -97,28 +100,25 @@ document.addEventListener("DOMContentLoaded", function () {
       const key = e.key.toLowerCase();
       const now = Date.now();
 
-      // Escape : fermer tout ce qui est aria-expanded
-      if (key === "escape") {
-        document
-          .querySelectorAll('[aria-expanded="true"]')
-          .forEach((el) => el.setAttribute("aria-expanded", "false"));
-
-        if (dialog?.open) {
-          dialog.close();
-          document.body.classList.remove("modal-open");
-        }
-
-        return;
-      }
-
-      // Si on vient d’ouvrir la recherche, empêche l’injection de la lettre dans l’input
-      if (suppressNextKey) {
-        suppressNextKey = false;
+      // ⛔️ Si on est encore dans la fenêtre de blocage
+      if (now < suppressUntil) {
         e.preventDefault();
         return;
       }
 
-      // Détection des 3 frappes rapides
+      // 🔁 Échappe : fermeture de tout
+      if (key === "escape") {
+        document
+          .querySelectorAll('[aria-expanded="true"]')
+          .forEach((el) => el.setAttribute("aria-expanded", "false"));
+        if (dialog?.open) {
+          dialog.close();
+          document.body.classList.remove("modal-open");
+        }
+        return;
+      }
+
+      // ⌨️ Détection des 3 frappes rapides
       if (key === lastKey && now - lastTime < threshold) {
         keyCount++;
       } else {
