@@ -1,8 +1,7 @@
 <?php
 
 // Variables globales pour les templates 
-global $_HAS_GO_TO_TOP, $_IS_ARTICLE, $_IS_SOMMARY;
-$_HAS_GO_TO_TOP = true;
+global $_IS_SOMMARY;
 $_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
 $_IS_ARTICLE = is_singular('post');
 $_IS_AUTHOR = is_author();
@@ -22,8 +21,11 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
 <body id="body" <?php body_class(); ?>>
   <?php wp_body_open(); ?>
-
+  <?php do_action('ocade_search_form'); ?>
   <nav role="navigation" aria-label="Accès rapide">
+
+    <button onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();" class="skiplink">Recherche Articles</button>
+
     <button onclick="(function(event){ event.stopPropagation(); document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus(); })(event)" class="skiplink">Menu Principal</button>
 
     <?php if ($_IS_SOMMARY) : ?>

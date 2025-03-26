@@ -1,6 +1,6 @@
 <?php
 
-global $_HAS_GO_TO_TOP, $_IS_SOMMARY;
+global $_IS_SOMMARY;
 
 /** Récupération du CPT footer. */
 $footer_query = new WP_Query(array(
@@ -21,30 +21,27 @@ $footer_query = new WP_Query(array(
   <?php endif; ?>
 </footer>
 
-<?php if ($_IS_SOMMARY) : ?>
-  <nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
-    <ul role="menu">
-      <?php if ($_IS_SOMMARY) : ?>
-        <li role="menuitem" class="sommaire-item">
-          <button
-            id="sommaire-button" title="Sommaire de la page"
-            onclick="(() => {
+<nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
+  <ul role="menu">
+    <li role="menuitem" class="ocade-search-button"><button id="open-search-modal" title="Effectuer une recherche d'article" onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();"><span class="skiplink">Effectuer une recherche d'article</span></button></li>
+    <?php if ($_IS_SOMMARY) : ?>
+      <li role="menuitem" class="sommaire-item">
+        <button
+          id="sommaire-button" title="Sommaire de la page"
+          onclick="(() => {
               const sommaire = document.getElementById('sommaire');
               document.getElementById('menu-principal').setAttribute('aria-expanded', false);
               const expanded = sommaire.getAttribute('aria-expanded') === 'true';
               sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
               if (!expanded) document.getElementById('sommaire-title-link').focus();
             })();">
-            <span class="skiplink">Sommaire</span>
-          </button>
-        </li>
-      <?php endif; ?>
-      <?php if ($_HAS_GO_TO_TOP) : ?>
-        <li role="menuitem" class="go-to-top"><button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="skiplink">Retour haut de page</span></button></li>
-      <?php endif; ?>
-    </ul>
-  </nav>
-<?php endif; ?>
+          <span class="skiplink">Sommaire</span>
+        </button>
+      </li>
+    <?php endif; ?>
+    <li role="menuitem" class="go-to-top"><button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="skiplink">Retour haut de page</span></button></li>
+  </ul>
+</nav>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
 
@@ -66,6 +63,7 @@ $footer_query = new WP_Query(array(
     };
     document.head.appendChild(script);
   }
+
   function loadN8nDemoLibrary() {
     loadScriptWithFallback(
       '<?php echo get_stylesheet_directory_uri(); ?>/assets/js/n8n-demo-librairie/webcomponents-loader.js',
