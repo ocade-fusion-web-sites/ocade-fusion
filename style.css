@@ -122,6 +122,10 @@ body {
   line-height: 1.6;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 html.panel-expanded,
 html.panel-expanded body {
   @media(min-width: 1280px) {
@@ -834,7 +838,7 @@ header .sommaire[aria-expanded="true"] {
 }
 
 #ocade-search-dialog #ocade-search-results img {
-  width: 3.5rem;
+  width: auto;
   height: 3.5rem;
   border-radius: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;

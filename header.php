@@ -24,7 +24,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <?php do_action('ocade_search_form'); ?>
   <nav role="navigation" aria-label="Accès rapide">
 
-    <button onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();" class="skiplink">Recherche Articles</button>
+    <button onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');" class="skiplink">Recherche Articles</button>
 
     <button onclick="(function(event){ event.stopPropagation(); document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus(); })(event)" class="skiplink">Menu Principal</button>
 
