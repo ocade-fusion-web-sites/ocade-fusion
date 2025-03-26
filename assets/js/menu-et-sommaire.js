@@ -22,8 +22,6 @@ if (sommaire) observer.observe(sommaire, { attributes: true });
 /********** Fin de l'ajout de la classe panel-expanded au <html> *************/
 /************************************************************************************** */
 
-
-
 /************************************************************************************** */
 /*************************** Gestion du menu *********************************/
 /************************************************************************************** */
@@ -39,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Gestion du clic global pour fermer les menus ouverts si clic en dehors 
+  // Gestion du clic global pour fermer les menus ouverts si clic en dehors
   document.addEventListener("click", function (event) {
     menuButtons.forEach((button) => {
       const menuId = button.getAttribute("aria-controls");
@@ -58,35 +56,85 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Fermeture des menus via la touche Échap
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      console.log("Escape key pressed");
-      document
-        .querySelectorAll('[aria-expanded="true"]')
-        .forEach((element) => element.setAttribute("aria-expanded", "false"));
-    }
-    // Alt + M pour le menu
-    if (e.altKey && e.key.toLowerCase() === "m") {
-      const menuButton = document.getElementById("menu-principal");
-      menuButton.setAttribute(
-        "aria-expanded",
-        menuButton.getAttribute("aria-expanded") === "true" ? "false" : "true"
-      );
-      e.preventDefault();
-    }
+  (function () {
+    let lastKey = null;
+    let keyCount = 0;
+    let lastTime = 0;
+    const threshold = 600;
+    let suppressNextKey = false;
 
-    // Alt + S pour le sommaire
-    if (e.altKey && e.key.toLowerCase() === "s") {
-      const sommaire = document.getElementById("sommaire");
-      if (sommaire) {
-        sommaire.setAttribute(
-          "aria-expanded",
-          sommaire.getAttribute("aria-expanded") === "true" ? "false" : "true"
-        );
-        e.preventDefault();
+    const dialog = document.getElementById("ocade-search-dialog");
+    const searchInput = document.getElementById("ocade-search-input");
+    const menuButton = document.getElementById("menu-principal");
+    const sommaire = document.getElementById("sommaire");
+
+    const actions = {
+      m: () => {
+        if (menuButton) {
+          const expanded = menuButton.getAttribute("aria-expanded") === "true";
+          menuButton.setAttribute("aria-expanded", expanded ? "false" : "true");
+        }
+      },
+      s: () => {
+        if (sommaire) {
+          const expanded = sommaire.getAttribute("aria-expanded") === "true";
+          sommaire.setAttribute("aria-expanded", expanded ? "false" : "true");
+        }
+      },
+      r: () => {
+        setTimeout(() => {
+          if (dialog && typeof dialog.showModal === "function") {
+            dialog.showModal();
+            document.body.classList.add("modal-open");
+            searchInput?.focus();
+            suppressNextKey = true;
+          }
+        }, 100);
+      },
+    };
+
+    document.addEventListener("keydown", (e) => {
+      const key = e.key.toLowerCase();
+      const now = Date.now();
+
+      // Escape : fermer tout ce qui est aria-expanded
+      if (key === "escape") {
+        document
+          .querySelectorAll('[aria-expanded="true"]')
+          .forEach((el) => el.setAttribute("aria-expanded", "false"));
+
+        if (dialog?.open) {
+          dialog.close();
+          document.body.classList.remove("modal-open");
+        }
+
+        return;
       }
-    }
-  });
+
+      // Si on vient d’ouvrir la recherche, empêche l’injection de la lettre dans l’input
+      if (suppressNextKey) {
+        suppressNextKey = false;
+        e.preventDefault();
+        return;
+      }
+
+      // Détection des 3 frappes rapides
+      if (key === lastKey && now - lastTime < threshold) {
+        keyCount++;
+      } else {
+        keyCount = 1;
+        lastKey = key;
+      }
+
+      lastTime = now;
+
+      if (keyCount === 3 && actions[key]) {
+        e.preventDefault();
+        actions[key]();
+        keyCount = 0;
+      }
+    });
+  })();
 });
 /************************* Fin de la gestion du menu *************************/
 /************************************************************************************** */
