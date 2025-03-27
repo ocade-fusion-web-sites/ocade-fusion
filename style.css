@@ -339,6 +339,34 @@ p+p {
 }
 
 /** CLASSES **/
+.notice {
+  position: relative;
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  border-left: 4px solid #46b450;
+  background-color: #ecf7ed;
+  color: #2f6e37;
+  font-size: 1em;
+}
+.notice-success {
+  border-left-color: #46b450;
+  background-color: #ecf7ed;
+  color: #2f6e37;
+}
+.notice .notice-dismiss {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  text-decoration: none;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  line-height: 1;
+  color: inherit;
+}
+
 .alignfull {
   max-width: 100vw;
   margin-left: calc(50% - 50vw);

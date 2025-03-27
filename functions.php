@@ -1,6 +1,7 @@
 <?php
 
 require_once get_stylesheet_directory() . '/ocade-updater.php';
+require_once get_stylesheet_directory() . '/hooks/notices.php';
 
 function charger_prism() {
   wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
