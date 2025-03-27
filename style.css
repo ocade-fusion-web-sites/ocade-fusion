@@ -850,6 +850,10 @@ footer .wp-block-columns {
   background-image: url(./assets/svgs/search.svg);
 }
 
+#mobile-footer-menu li.formulaire-contact button:after {
+  background-image: url(./assets/svgs/formulaire.svg);
+}
+
 /********** BLOCKS **********/
 /** GROUP **/
 body>.wp-block-group {
