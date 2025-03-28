@@ -866,6 +866,9 @@ body>.wp-block-group {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.wp-block-columns h2 {
+  margin-top: 0;
+}
 
 /** ESPACEMENT **/
 .wp-block-spacer {
