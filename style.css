@@ -889,6 +889,11 @@ body>.wp-block-group {
   text-decoration: none;
 }
 
+/** IMAGE **/
+.wp-block-image {
+  margin-bottom: 0;
+}
+
 /** MEDIA & TEXT **/
 @media (max-width: 600px) {
   .wp-block-media-text+.wp-block-media-text {
