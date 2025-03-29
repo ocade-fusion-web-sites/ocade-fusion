@@ -923,7 +923,7 @@ body>.wp-block-group {
   }
 }
 
-.wp-block-buttons>.wp-block-button:nth-child(1) {
+.wp-block-buttons>.wp-block-button:nth-child(2) {
   display: none;
 
   @media (min-width: 1280px) {
