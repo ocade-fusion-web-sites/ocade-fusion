@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de No Code Tools
- * Version: 1.0.142
+ * Version: 1.0.141
  * Text Domain: no-code-tools
  */
 
@@ -901,7 +901,6 @@ body>.wp-block-group {
 .wp-block-buttons.btns-sous-youtube .wp-element-button {
 	width: 300px;
 	border-radius: 10px;
-	font-size: 1rem;
 }
 
 /** IMAGE **/
