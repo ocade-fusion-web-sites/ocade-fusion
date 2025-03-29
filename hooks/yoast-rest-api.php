@@ -75,7 +75,11 @@ function exposer_meta_yoast_wpseo() {
 
     // Indique si c’est un contenu “cornerstone” (important/fondamental)
     // Exemple JSON : "meta": { "_yoast_wpseo_cornerstone": "1" }
-    '_yoast_wpseo_cornerstone'
+    '_yoast_wpseo_cornerstone',
+
+    // Indique si c'est un contenu coché comme "cornerstone"
+    // Exemple JSON : "meta": { "_yoast_wpseo_is_cornerstone": "1" }
+    '_yoast_wpseo_is_cornerstone',
   ];
 
   // Enregistrement de chaque clé avec exposition dans l’API REST
