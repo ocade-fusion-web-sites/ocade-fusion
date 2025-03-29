@@ -2,6 +2,7 @@
 
 require_once get_stylesheet_directory() . '/ocade-updater.php';
 require_once get_stylesheet_directory() . '/hooks/notices.php';
+require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
 
 function charger_prism() {
   wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
@@ -22,3 +23,4 @@ function personnalisation_gutenberg_colors() {
   add_theme_support('disable-custom-colors');
 }
 add_action('after_setup_theme', 'personnalisation_gutenberg_colors');
+
