@@ -861,6 +861,10 @@ footer .wp-block-columns {
   background-image: url(./assets/svgs/formulaire.svg);
 }
 
+#mobile-footer-menu li.formulaire-tel button:after {
+  background-image: url(./assets/svgs/telephone.svg);
+}
+
 /********** BLOCKS **********/
 /** GROUP **/
 body>.wp-block-group {

@@ -39,6 +39,7 @@ $footer_query = new WP_Query(array(
       </li>
     <?php endif; ?>
     <li role="menuitem" class="formulaire-contact"><button title="Remplir une demande de contact" onclick="window.location.href='/contact'"></button></li>
+    <li role="menuitem" class="formulaire-tel"><button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button></li>
     <li role="menuitem" class="go-to-top"><button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"></button></li>
   </ul>
 </nav>
