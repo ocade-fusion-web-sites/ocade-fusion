@@ -31,7 +31,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
     <?php if ($_IS_SOMMARY) : ?>
       <button class="skiplink" onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', false); document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
     <?php endif; ?>
-    <button onclick="document.getElementById('footer-contact-link').scrollIntoView({ behavior: 'smooth' })" class="skiplink">Pied de page</button>
+    <button onclick="document.getElementById('footer').scrollIntoView({ behavior: 'smooth' })" class="skiplink">Pied de page</button>
   </nav>
 
   <header role="banner" class="alignfull">
