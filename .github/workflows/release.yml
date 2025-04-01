@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.run_number > 1 && !contains(github.event.head_commit.message, 'NORUN') # Workflow s'exécute uniquement si pas le premier commit et qu'il n'y a pas NORUN dans le message du commit.
+    if: github.run_number > 1 && !contains(github.event.head_commit.message, 'NORUN')
 
     steps:
       - name: Checkout Repository
@@ -36,6 +36,7 @@ jobs:
             NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           done
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "ZIP_NAME=no-code-tools-$NEW_VERSION.zip" >> $GITHUB_ENV
 
       - name: Update Version in style.css
         run: |
@@ -43,10 +44,10 @@ jobs:
 
       - name: Remove and Recreate version.txt to force GitHub cache refresh
         run: |
-          rm version.txt
+          rm -f version.txt
           echo $VERSION > version.txt
 
-      - name: Commit version.txt separately to force update
+      - name: Commit version.txt separately
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -54,9 +55,29 @@ jobs:
           git commit -m "Force update version.txt to $VERSION"
           git push origin master
 
+      - name: Cache NPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache
+
+      - name: Install minification tools
+        run: |
+          npm install -g uglify-js clean-css-cli
+
+      - name: Minify JS and CSS files
+        run: |
+          find . -name "*.js" -not -name "*.min.js" -exec bash -c 'uglifyjs "$0" -o "${0%.js}.min.js"' {} \;
+          find . -name "*.css" -not -name "*.min.css" -exec bash -c 'cleancss -o "${0%.css}.min.css" "$0"' {} \;
+
+      - name: Replace original JS and CSS with minified versions
+        run: |
+          find . -name "*.min.js" -exec bash -c 'mv "$0" "${0%.min.js}.js"' {} \;
+          find . -name "*.min.css" -exec bash -c 'mv "$0" "${0%.min.css}.css"' {} \;
+
       - name: Create Theme ZIP
         run: |
-          zip -r no-code-tools.zip * .[^.]* -x ".git/*" ".github/*" "README.md" "*.zip"
+          zip -r "$ZIP_NAME" * .[^.]* -x ".git/*" ".github/*" "README.md" "*.zip"
 
       - name: Commit Changes
         run: |
@@ -80,7 +101,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            no-code-tools.zip
+            ${{ env.ZIP_NAME }}
             version.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
