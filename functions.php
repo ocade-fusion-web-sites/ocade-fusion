@@ -9,6 +9,10 @@ function charger_prism() {
   wp_enqueue_script('prism-js', get_stylesheet_directory_uri() . '/prism/prism.js', [], null, true);
 }
 add_action('wp_enqueue_scripts', 'charger_prism');
+add_filter('script_loader_tag', function ($tag, $handle) {
+  if ($handle === 'prism-js') return str_replace('<script ', '<script async ', $tag);
+  return $tag;
+}, 10, 2);
 
 function personnalisation_gutenberg_colors() {
   add_theme_support('editor-color-palette', [
@@ -23,4 +27,3 @@ function personnalisation_gutenberg_colors() {
   add_theme_support('disable-custom-colors');
 }
 add_action('after_setup_theme', 'personnalisation_gutenberg_colors');
-

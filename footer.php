@@ -24,7 +24,7 @@ $footer_query = new WP_Query(array(
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
 
-<script>
+<script defer >
   // CHARGEMENT DES SCRIPTS DE LA LIBRAIRIE N8N-DEMO
   function loadScriptWithFallback(primarySrc, fallbackSrc, isModule = false) {
     const script = document.createElement('script');

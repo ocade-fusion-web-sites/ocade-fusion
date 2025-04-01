@@ -48,8 +48,9 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svgs/logo.svg"
         class="custom-logo lazy loaded"
         alt="OCADE Fusion est un outil d'automatisation des processus d'intégration de données qui permet aux entreprises de rationaliser leurs opérations et d'améliorer leur efficacité."
-        decoding="async"
-        fetchpriority="high">
+        decoding="sync"
+        lazy="eager"
+        fetchpriority="auto">
     </a>
 
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
