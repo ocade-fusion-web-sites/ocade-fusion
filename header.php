@@ -119,7 +119,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
       <?php if ($_IS_SOMMARY) : ?>
         <li role="menuitem" class="sommaire-item">
           <button
-            id="sommaire-button" title="Sommaire de la page"
+            id="sommaire-button" title="Sommaire de la page" aria-label="Sommaire de la page"
             onclick="(() => {
               const sommaire = document.getElementById('sommaire');
               document.getElementById('menu-principal').setAttribute('aria-expanded', false);
