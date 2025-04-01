@@ -21,28 +21,6 @@ $footer_query = new WP_Query(array(
   <?php endif; ?>
 </footer>
 
-<nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
-  <ul role="menu">
-    <li role="menuitem" class="ocade-search-button"><button id="open-search-modal" title="Effectuer une recherche d'article" onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');"></button></li>
-    <?php if ($_IS_SOMMARY) : ?>
-      <li role="menuitem" class="sommaire-item">
-        <button
-          id="sommaire-button" title="Sommaire de la page"
-          onclick="(() => {
-              const sommaire = document.getElementById('sommaire');
-              document.getElementById('menu-principal').setAttribute('aria-expanded', false);
-              const expanded = sommaire.getAttribute('aria-expanded') === 'true';
-              sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-              if (!expanded) document.getElementById('sommaire-title-link').focus();
-            })();">
-        </button>
-      </li>
-    <?php endif; ?>
-    <li role="menuitem" class="formulaire-contact"><button title="Remplir une demande de contact" onclick="window.location.href='/contact/'"></button></li>
-    <li role="menuitem" class="formulaire-tel"><button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button></li>
-    <li role="menuitem" class="go-to-top"><button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"></button></li>
-  </ul>
-</nav>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 
 
