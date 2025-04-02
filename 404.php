@@ -1,5 +1,7 @@
 <?php
 
+add_filter('ocade_h1', "Page Error 404"); // Modifier le titre de la page
+
 get_header(); ?>
 
 <main role="main">
