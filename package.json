@@ -1,0 +1,8 @@
+{
+  "name": "ocade-release-tools",
+  "private": true,
+  "dependencies": {
+    "clean-css-cli": "^5.5.0",
+    "terser": "^5.20.0"
+  }
+}

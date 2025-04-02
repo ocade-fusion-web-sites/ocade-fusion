@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.run_number > 1 && !contains(github.event.head_commit.message, 'NORUN') # Workflow s'exécute uniquement si pas le premier commit et qu'il n'y a pas NORUN dans le message du commit.
+    if: github.run_number > 1 && !contains(github.event.head_commit.message, 'NORUN')
 
     steps:
       - name: Checkout Repository
@@ -43,7 +43,7 @@ jobs:
 
       - name: Remove and Recreate version.txt to force GitHub cache refresh
         run: |
-          rm version.txt
+          rm -f version.txt
           echo $VERSION > version.txt
 
       - name: Commit version.txt separately to force update
@@ -54,9 +54,45 @@ jobs:
           git commit -m "Force update version.txt to $VERSION"
           git push origin master
 
+      - name: Setup Node.js with npm cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare release build folder
+        run: |
+          mkdir release-build
+          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
+
+      - name: Minify all JS and CSS (except style.css header)
+        run: |
+          find release-build -type f -name "*.js" -exec ./node_modules/.bin/terser "{}" -o "{}" \;
+          find release-build -type f -name "*.css" ! -name "style.css" -exec ./node_modules/.bin/cleancss -o "{}" "{}" \;
+
+      - name: Minify style.css and preserve WordPress header
+        run: |
+          STYLE_SRC="style.css"
+          STYLE_DEST="release-build/style.css"
+
+          HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
+          START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
+          BODY_START=$((START_LINE + 1))
+          tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
+
+          ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
+
+          echo "$HEADER" > "$STYLE_DEST"
+          echo "" >> "$STYLE_DEST"
+          cat tmp-body.min.css >> "$STYLE_DEST"
+
       - name: Create Theme ZIP
         run: |
-          zip -r no-code-tools.zip * .[^.]* -x ".git/*" ".github/*" "README.md" "*.zip"
+          cd release-build
+          zip -r ../no-code-tools.zip * .[^.]*
 
       - name: Commit Changes
         run: |
