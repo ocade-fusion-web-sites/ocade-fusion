@@ -68,27 +68,30 @@ jobs:
           mkdir build-release
           rsync -a --exclude=".git*" --exclude=".github" --exclude="*.zip" --exclude="README.md" ./ ./build-release/
 
-      - name: Minify JS and CSS (preserving style.css header)
+            - name: Minify JS and CSS (preserving style.css header)
         run: |
           STYLE_CSS_ORIGINAL="build-release/style.css"
           STYLE_CSS_HEADER="build-release/style-header.css"
 
-          # Sauvegarder l'en-tête
+          # Sauvegarder l'en-tête de style.css (jusqu'à la première ligne vide)
           awk 'BEGIN{found=0} /^\s*$/{if(found==0){print; found=1; exit}} {print}' "$STYLE_CSS_ORIGINAL" > "$STYLE_CSS_HEADER"
 
-          # Minifier tous les JS/CSS sauf .min.*
-          find build-release -name "*.js" -not -name "*.min.js" -exec bash -c 'uglifyjs "$0" -o "${0%.js}.min.js"' {} \;
-          find build-release -name "*.css" -not -name "*.min.css" -exec bash -c 'cleancss -o "${0%.css}.min.css" "$0"' {} \;
-
-          # Remplacer tous sauf style.css
-          find build-release -name "*.min.js" -exec bash -c 'mv "$0" "${0%.min.js}.js"' {} \;
-          find build-release -name "*.min.css" ! -name "style.min.css" -exec bash -c 'mv "$0" "${0%.min.css}.css"' {} \;
-
-          # Remplacer style.css en gardant son en-tête
+          # Récupérer le reste du fichier (corps CSS)
           tail -n +$(($(grep -n -m1 "^\s*$" "$STYLE_CSS_ORIGINAL" | cut -d: -f1)+1)) "$STYLE_CSS_ORIGINAL" > style-body.css
+
+          # Minifier le corps CSS
           cleancss -o style-body.min.css style-body.css
+
+          # Fusionner l'en-tête et le CSS minifié
           cat "$STYLE_CSS_HEADER" style-body.min.css > "$STYLE_CSS_ORIGINAL"
+
+          # Nettoyage
           rm style-body.css style-body.min.css "$STYLE_CSS_HEADER"
+
+          # Minifier tous les autres .js et .css (sauf .min.* et style.css)
+          find build-release -name "*.js" -not -name "*.min.js" -exec uglifyjs "{}" -o "{}" \;
+          find build-release -name "*.css" -not -name "*.min.css" ! -name "style.css" -exec cleancss -o "{}" "{}" \;
+
 
       - name: Create Theme ZIP from build-release
         run: |
