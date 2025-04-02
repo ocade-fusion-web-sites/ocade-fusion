@@ -2,6 +2,9 @@
 
 namespace OcadeChildMinimal;
 
+// Ne charger ce code que sur la page de mise à jour
+if (!(is_admin() && isset($_GET['page']) && $_GET['page'] === 'update-core')) return;
+
 // Définition des variables globales
 $ORGANISATION_GITHUB = 'ocade-fusion-web-sites';
 $DEPOT_GITHUB = 'no-code-tools';
