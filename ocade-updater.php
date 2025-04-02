@@ -80,13 +80,11 @@ if (is_admin() && isset($_SERVER['PHP_SELF']) && strpos($_SERVER['PHP_SELF'], 'u
         if (!empty($remote_version) && version_compare($remote_version, $current_version, '>')) {
             if (!isset($transient->response)) $transient->response = [];
 
-            $PACKAGE_URL = str_replace('.zip', '-' . $remote_version . '.zip', $OCADE_ZIP_URL);
-
             $transient->response[$theme_slug] = [
                 'theme'       => $theme_slug,
                 'new_version' => $remote_version,
                 'url'         => $OCADE_THEME_REPO,
-                'package'     => $PACKAGE_URL,
+                'package'     => $OCADE_ZIP_URL,
                 'icons'       => $OCADE_ICONS,
             ];
         }
