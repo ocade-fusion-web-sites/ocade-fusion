@@ -68,7 +68,7 @@ jobs:
           mkdir build-release
           rsync -a --exclude=".git*" --exclude=".github" --exclude="*.zip" --exclude="README.md" ./ ./build-release/
 
-            - name: Minify JS and CSS (preserving style.css header)
+      - name: Minify JS and CSS (preserving style.css header)
         run: |
           STYLE_CSS_ORIGINAL="build-release/style.css"
           STYLE_CSS_HEADER="build-release/style-header.css"
