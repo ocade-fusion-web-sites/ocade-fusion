@@ -63,12 +63,12 @@ jobs:
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
-          # Extraire l'en-tête WordPress
-          HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
+          # Extraire l'en-tête WordPress proprement (uniquement entre /* et */)
+          HEADER=$(sed -n '/^\/\*/,/\*\//p' "$STYLE_SRC" | sed '/\*\//! s/^\s*[*]\?//')
 
-          # Trouver la ligne de fin de l'en-tête
-          START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
-          BODY_START=$((START_LINE + 1))
+          # Trouver la fin de l’en-tête
+          HEADER_END_LINE=$(awk '/\*\// { print NR; exit }' "$STYLE_SRC")
+          BODY_START=$((HEADER_END_LINE + 1))
 
           # Extraire le corps CSS
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
@@ -76,9 +76,11 @@ jobs:
           # Minifier le corps
           ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
 
-          # Réassembler proprement le fichier minifié
+          # Écrire le fichier final (en-tête + minifié) dans le dossier release
           {
+            echo "/*"
             echo "$HEADER"
+            echo "*/"
             echo ""
             echo "/* === Fichier CSS minifié automatiquement === */"
             cat tmp-body.min.css
