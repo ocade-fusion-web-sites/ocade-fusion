@@ -58,33 +58,26 @@ jobs:
           mkdir release-build
           rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
 
-      - name: Minify style.css and preserve WP header
+      - name: Build minified style.css with header
         run: |
           STYLE_SRC="style.css"
-          STYLE_DEST="release-build/style.css"
+          STYLE_TMP_MIN="style.min.css"
+          STYLE_MIN="release-build/style.css.min"
+          STYLE_FINAL="release-build/style.css"
 
-          # Extraire l'en-tête WordPress proprement (uniquement entre /* et */)
-          HEADER=$(sed -n '/^\/\*/,/\*\//p' "$STYLE_SRC" | sed '/\*\//! s/^\s*[*]\?//')
+          # Étape 1 à 4 : entête + saut de ligne
+          sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC" > "$STYLE_MIN"
+          echo "" >> "$STYLE_MIN"
 
-          # Trouver la fin de l’en-tête
-          HEADER_END_LINE=$(awk '/\*\// { print NR; exit }' "$STYLE_SRC")
-          BODY_START=$((HEADER_END_LINE + 1))
+          # Étape 5 : minifier tout le fichier style.css
+          ./node_modules/.bin/cleancss "$STYLE_SRC" -o "$STYLE_TMP_MIN"
 
-          # Extraire le corps CSS
-          tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
+          # Étape 6 : ajouter le contenu minifié à la suite
+          cat "$STYLE_TMP_MIN" >> "$STYLE_MIN"
 
-          # Minifier le corps
-          ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
-
-          # Écrire le fichier final (en-tête + minifié) dans le dossier release
-          {
-            echo "/*"
-            echo "$HEADER"
-            echo "*/"
-            echo ""
-            echo "/* === Fichier CSS minifié automatiquement === */"
-            cat tmp-body.min.css
-          } > "$STYLE_DEST"
+          # Étape 7 : supprimer style.css original et remplacer
+          rm release-build/style.css
+          mv "$STYLE_MIN" "$STYLE_FINAL"
 
       - name: Create Child Theme ZIP
         run: |
