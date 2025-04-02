@@ -44,42 +44,12 @@ jobs:
       - name: Create version.txt
         run: echo $VERSION > version.txt
 
-      - name: Setup Node.js with cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install clean-css-cli only
-        run: npm ci --omit=dev
-
       - name: Prepare release folder
         run: |
           mkdir release-build
           rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
 
-      - name: Build minified style.css with header
-        run: |
-          STYLE_SRC="style.css"
-          STYLE_TMP_MIN="style.min.css"
-          STYLE_MIN="release-build/style.css.min"
-          STYLE_FINAL="release-build/style.css"
-
-          # Étape 1 à 4 : entête + saut de ligne
-          sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC" > "$STYLE_MIN"
-          echo "" >> "$STYLE_MIN"
-
-          # Étape 5 : minifier tout le fichier style.css
-          ./node_modules/.bin/cleancss "$STYLE_SRC" -o "$STYLE_TMP_MIN"
-
-          # Étape 6 : ajouter le contenu minifié à la suite
-          cat "$STYLE_TMP_MIN" >> "$STYLE_MIN"
-
-          # Étape 7 : supprimer style.css original et remplacer
-          rm release-build/style.css
-          mv "$STYLE_MIN" "$STYLE_FINAL"
-
-      - name: Create Child Theme ZIP
+      - name: Create ZIP archive
         run: |
           cd release-build
           zip -r ../ocade-fusion.zip * .[^.]*
