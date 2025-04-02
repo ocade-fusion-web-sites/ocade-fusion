@@ -38,7 +38,7 @@ if (is_admin() && isset($_SERVER['PHP_SELF']) && strpos($_SERVER['PHP_SELF'], 'u
             // Récupération des assets de la dernière release via l'API GitHub
             $headers = ['User-Agent' => 'WordPress'];
             if (defined('GITHUB_API_TOKEN')) $headers['Authorization'] = 'token ' . GITHUB_API_TOKEN;
-            $response = wp_remote_get(GITHUB_API_TOKEN, ['headers' => $headers]);
+            $response = wp_remote_get($OCADE_GITHUB_API_URL, ['headers' => $headers]);
 
             if (is_wp_error($response)) {
                 error_log('Erreur lors de la récupération de la release GitHub : ' . $response->get_error_message());
