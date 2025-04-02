@@ -53,30 +53,23 @@ jobs:
       - name: Install clean-css-cli
         run: npm ci --omit=dev
 
-      - name: Prepare release folder
+      - name: Prepare release folder (excluding unminified style.css)
         run: |
           mkdir release-build
-          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
+          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" --exclude="style.css" ./ release-build/
 
-      - name: Minify style.css and preserve WP header
+      - name: Rebuild and minify style.css with preserved header
         run: |
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
-          # Extraire uniquement le header (entre /** et */)
           HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
-
-          # Trouver la ligne de fin du header (la ligne contenant uniquement '*/')
           START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
           BODY_START=$((START_LINE + 1))
-
-          # Extraire le corps du CSS (sans le header)
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
 
-          # Minifier le corps
           ./node_modules/.bin/cleancss -O2 tmp-body.css -o tmp-body.min.css
 
-          # Réassembler en conservant le header + ligne explicative
           echo "$HEADER" > "$STYLE_DEST"
           echo "" >> "$STYLE_DEST"
           echo "/* === Fichier CSS minifié automatiquement === */" >> "$STYLE_DEST"
