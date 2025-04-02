@@ -498,7 +498,21 @@ p+p {
   padding-left: 0 !important;
 }
 
+.radius-4 {
+  border-radius: 4px !important;
+}
 
+.radius-10 {
+  border-radius: 10px !important;
+}
+
+.radius-20 {
+  border-radius: 20px !important;
+}
+
+.radius-30 {
+  border-radius: 30px !important;
+}
 
 /********** HEADER **********/
 header {
