@@ -63,24 +63,26 @@ jobs:
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
-          # Extraire l'en-tête WordPress (/* ... */)
+          # Extraire l'en-tête WordPress
           HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
 
           # Trouver la ligne de fin de l'en-tête
           START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
           BODY_START=$((START_LINE + 1))
 
-          # Extraire le corps (sans l’en-tête)
+          # Extraire le corps CSS
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
 
           # Minifier le corps
           ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
 
-          # Réassembler avec l’en-tête
-          echo "$HEADER" > "$STYLE_DEST"
-          echo "" >> "$STYLE_DEST"
-          echo "/* === Fichier CSS minifié automatiquement === */" >> "$STYLE_DEST"
-          cat tmp-body.min.css >> "$STYLE_DEST"
+          # Réassembler proprement le fichier minifié
+          {
+            echo "$HEADER"
+            echo ""
+            echo "/* === Fichier CSS minifié automatiquement === */"
+            cat tmp-body.min.css
+          } > "$STYLE_DEST"
 
       - name: Create Child Theme ZIP
         run: |
