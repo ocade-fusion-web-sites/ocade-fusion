@@ -1,4 +1,4 @@
-name: Create Release with Minified Files
+name: Create Release with Minified Files...
 
 on:
   push:
