@@ -63,20 +63,23 @@ jobs:
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
-          # Extraire l'en-tête WordPress
+          # Extraire uniquement le header (entre /** et */)
           HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
 
-          # Trouver la fin du header (première ligne avec '*/')
+          # Trouver la ligne de fin du header (la ligne contenant uniquement '*/')
           START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
           BODY_START=$((START_LINE + 1))
 
-          # Extraire et minifier le corps CSS
+          # Extraire le corps du CSS (sans le header)
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
-          ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
 
-          # Réassembler
+          # Minifier le corps
+          ./node_modules/.bin/cleancss -O2 tmp-body.css -o tmp-body.min.css
+
+          # Réassembler en conservant le header + ligne explicative
           echo "$HEADER" > "$STYLE_DEST"
           echo "" >> "$STYLE_DEST"
+          echo "/* === Fichier CSS minifié automatiquement === */" >> "$STYLE_DEST"
           cat tmp-body.min.css >> "$STYLE_DEST"
 
       - name: Minify prism/prism.css
