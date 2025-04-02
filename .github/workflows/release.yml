@@ -43,7 +43,8 @@ jobs:
       - name: Create release ZIP
         run: |
           mkdir release
-          cp -r * release/
+          shopt -s extglob
+          cp -r !(release) release/
           cp release-style.css release/style.css
           rm release/style-body.css release/style.min.css release-style.css wp-header.txt || true
           cd release
