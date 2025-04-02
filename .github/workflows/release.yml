@@ -53,29 +53,34 @@ jobs:
       - name: Install clean-css-cli
         run: npm ci --omit=dev
 
-      - name: Prepare release folder (excluding unminified style.css)
+      - name: Prepare release folder
         run: |
           mkdir release-build
-          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" --exclude="style.css" ./ release-build/
+          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
 
-      - name: Rebuild and minify style.css with preserved header
+      - name: Minify style.css for release
         run: |
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
+          # Extraire le header (entre /** et */)
           HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
-          START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
-          BODY_START=$((START_LINE + 1))
-          tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
 
+          # Trouver la ligne de fin du header
+          START_LINE=$(grep -n '^\*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
+          BODY_START=$((START_LINE + 1))
+
+          # Extraire et minifier le corps
+          tail -n +$BODY_START "$STYLE_SRC" > tmp-body.css
           ./node_modules/.bin/cleancss -O2 tmp-body.css -o tmp-body.min.css
 
+          # Réassembler
           echo "$HEADER" > "$STYLE_DEST"
           echo "" >> "$STYLE_DEST"
           echo "/* === Fichier CSS minifié automatiquement === */" >> "$STYLE_DEST"
           cat tmp-body.min.css >> "$STYLE_DEST"
 
-      - name: Minify prism/prism.css
+      - name: Minify prism/prism.css if exists
         run: |
           PRISM_SRC="prism/prism.css"
           PRISM_DEST="release-build/prism/prism.css"
