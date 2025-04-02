@@ -11,7 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.run_number > 1 && !contains(github.event.head_commit.message, 'NORUN')
 
     steps:
       - name: Checkout Repository
@@ -40,40 +39,26 @@ jobs:
       - name: Update Version in style.css
         run: |
           sed -i "s/\(Version:\s*\)[0-9.]*/\1$VERSION/" style.css
+          cat style.css
 
-      - name: Remove and Recreate version.txt to force GitHub cache refresh
-        run: |
-          rm -f version.txt
-          echo $VERSION > version.txt
+      - name: Create version.txt
+        run: echo $VERSION > version.txt
 
-      - name: Commit version.txt separately to force update
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add version.txt
-          git commit -m "Force update version.txt to $VERSION"
-          git push origin master
-
-      - name: Setup Node.js with npm cache
+      - name: Setup Node.js with cache
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install clean-css-cli
+        run: npm ci --omit=dev
 
-      - name: Prepare release build folder
+      - name: Prepare release folder
         run: |
           mkdir release-build
           rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
 
-      - name: Minify all JS and CSS (except style.css header)
-        run: |
-          find release-build -type f -name "*.js" -exec ./node_modules/.bin/terser "{}" -o "{}" \;
-          find release-build -type f -name "*.css" ! -name "style.css" -exec ./node_modules/.bin/cleancss -o "{}" "{}" \;
-
-      - name: Minify style.css and preserve WordPress header
+      - name: Minify style.css with WP header
         run: |
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
@@ -82,17 +67,23 @@ jobs:
           START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
           BODY_START=$((START_LINE + 1))
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
-
           ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
-
           echo "$HEADER" > "$STYLE_DEST"
           echo "" >> "$STYLE_DEST"
           cat tmp-body.min.css >> "$STYLE_DEST"
 
+      - name: Minify prism/prism.css
+        run: |
+          PRISM_SRC="prism/prism.css"
+          PRISM_DEST="release-build/prism/prism.css"
+          if [ -f "$PRISM_SRC" ]; then
+            ./node_modules/.bin/cleancss "$PRISM_SRC" -o "$PRISM_DEST"
+          fi
+
       - name: Create Theme ZIP
         run: |
           cd release-build
-          zip -r ../no-code-tools.zip * .[^.]*
+          zip -r ../ocade-fusion.zip * .[^.]*
 
       - name: Commit Changes
         run: |
@@ -116,7 +107,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            no-code-tools.zip
+            ocade-fusion.zip
             version.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
