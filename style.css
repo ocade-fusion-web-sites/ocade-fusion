@@ -498,7 +498,21 @@ p+p {
   padding-left: 0 !important;
 }
 
+.radius-0 {
+  border-radius: 0 !important;
+}
 
+.radius-4 {
+  border-radius: 4px !important;
+}
+
+.radius-10 {
+  border-radius: 10px !important;
+}
+
+.radius-30 {
+  border-radius: 30px !important;
+}
 
 /********** HEADER **********/
 header {
@@ -1011,6 +1025,12 @@ body>.wp-block-group {
 .wp-block-image {
   margin-bottom: 0;
 }
+
+/** VIDEO **/
+video {
+  object-fit: contain;
+}
+
 
 /** MEDIA & TEXT **/
 @media (max-width: 600px) {
