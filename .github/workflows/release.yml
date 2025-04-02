@@ -58,16 +58,25 @@ jobs:
           mkdir release-build
           rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
 
-      - name: Minify style.css with WP header
+      - name: Minify style.css and preserve WP header
         run: |
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
+          # Extraire l'en-tête WordPress (entre le premier /** et la fermeture */)
           HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
+
+          # Trouver la fin de l'en-tête (première ligne avec juste '*/')
           START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
           BODY_START=$((START_LINE + 1))
+
+          # Extraire le corps CSS (hors commentaires)
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
-          ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
+
+          # Minifier le corps
+          npx cleancss tmp-body.css -o tmp-body.min.css
+
+          # Réassembler proprement
           echo "$HEADER" > "$STYLE_DEST"
           echo "" >> "$STYLE_DEST"
           cat tmp-body.min.css >> "$STYLE_DEST"
