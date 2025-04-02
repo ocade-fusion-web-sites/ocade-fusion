@@ -63,20 +63,18 @@ jobs:
           STYLE_SRC="style.css"
           STYLE_DEST="release-build/style.css"
 
-          # Extraire l'en-tête WordPress (entre le premier /** et la fermeture */)
+          # Extraire l'en-tête WordPress
           HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
 
-          # Trouver la fin de l'en-tête (première ligne avec juste '*/')
+          # Trouver la fin du header (première ligne avec '*/')
           START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
           BODY_START=$((START_LINE + 1))
 
-          # Extraire le corps CSS (hors commentaires)
+          # Extraire et minifier le corps CSS
           tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
+          ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
 
-          # Minifier le corps
-          npx cleancss tmp-body.css -o tmp-body.min.css
-
-          # Réassembler proprement
+          # Réassembler
           echo "$HEADER" > "$STYLE_DEST"
           echo "" >> "$STYLE_DEST"
           cat tmp-body.min.css >> "$STYLE_DEST"
