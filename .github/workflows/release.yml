@@ -1,121 +1,57 @@
-name: Build and Release Theme
+name: Create Release with Minified Files
 
 on:
   push:
-    branches:
-      - master
-
-permissions:
-  contents: write
+    tags:
+      - 'v*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-
-      - name: Fetch Tags
-        run: |
-          git fetch --tags
-          git tag
-
-      - name: Get and Increment Version
-        id: get_version
-        run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "1.0.0")
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$LAST_TAG"
-          PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          while git rev-parse "refs/tags/$NEW_VERSION" >/dev/null 2>&1; do
-            PATCH=$((PATCH + 1))
-            NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          done
-          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      - name: Update Version in style.css
-        run: |
-          sed -i "s/\(Version:\s*\)[0-9.]*/\1$VERSION/" style.css
-          cat style.css
-
-      - name: Create version.txt
-        run: echo $VERSION > version.txt
-
-      - name: Setup Node.js with cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '20'
 
       - name: Install clean-css-cli
-        run: npm ci --omit=dev
+        run: npm install -g clean-css-cli
 
-      - name: Prepare release folder
+      - name: Extract WordPress comment header from style.css
+        id: extract_header
         run: |
-          mkdir release-build
-          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
+          sed -n '/^\/\*\*/,/\*\//p' style.css > wp-header.txt
 
-      - name: Minify style.css for release
+      - name: Remove WordPress header from style.css to prepare for minification
         run: |
-          STYLE_SRC="style.css"
-          STYLE_DEST="release-build/style.css"
+          sed '1,/^\*\//d' style.css > style-body.css
 
-          # Extraire le header (entre /** et */)
-          HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
+      - name: Minify CSS
+        run: cleancss -o style.min.css style-body.css
 
-          # Trouver la ligne de fin du header
-          START_LINE=$(grep -n '^\*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
-          BODY_START=$((START_LINE + 1))
-
-          # Extraire et minifier le corps
-          tail -n +$BODY_START "$STYLE_SRC" > tmp-body.css
-          ./node_modules/.bin/cleancss -O2 tmp-body.css -o tmp-body.min.css
-
-          # Réassembler
-          echo "$HEADER" > "$STYLE_DEST"
-          echo "" >> "$STYLE_DEST"
-          echo "/* === Fichier CSS minifié automatiquement === */" >> "$STYLE_DEST"
-          cat tmp-body.min.css >> "$STYLE_DEST"
-
-      - name: Minify prism/prism.css if exists
+      - name: Assemble final minified style.css with header
         run: |
-          PRISM_SRC="prism/prism.css"
-          PRISM_DEST="release-build/prism/prism.css"
-          if [ -f "$PRISM_SRC" ]; then
-            ./node_modules/.bin/cleancss "$PRISM_SRC" -o "$PRISM_DEST"
-          fi
+          cat wp-header.txt > release-style.css
+          echo "" >> release-style.css
+          echo "/* === Fichier CSS minifié automatiquement === */" >> release-style.css
+          cat style.min.css >> release-style.css
 
-      - name: Create Theme ZIP
+      - name: Create release ZIP
         run: |
-          cd release-build
-          zip -r ../ocade-fusion.zip * .[^.]*
-
-      - name: Commit Changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add style.css version.txt
-          git commit -m "Update version to $VERSION" || echo "No changes to commit"
-          git push origin master
-
-      - name: Create Git Tag
-        run: |
-          git tag $VERSION
-          git push origin $VERSION
+          mkdir release
+          cp -r * release/
+          cp release-style.css release/style.css
+          rm release/style-body.css release/style.min.css release-style.css wp-header.txt || true
+          cd release
+          zip -r ../release.zip .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.VERSION }}
-          name: "Release ${{ env.VERSION }}"
-          body: "Nouvelle version : ${{ env.VERSION }}"
-          draft: false
-          prerelease: false
-          files: |
-            ocade-fusion.zip
-            version.txt
+          files: release.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
