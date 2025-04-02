@@ -1,9 +1,11 @@
-name: Minify WordPress Theme CSS
+name: Create Release with Minified Files
 
 on:
   push:
     branches:
       - master
+    tags:
+      - 'v*' # Déclenche une release uniquement si un tag v1.0.0 est poussé
 
 jobs:
   build:
@@ -21,21 +23,41 @@ jobs:
       - name: Install clean-css-cli
         run: npm install -g clean-css-cli
 
-      - name: Extract WordPress comment header from style.css
-        run: sed -n '/^\/\*/,/\*\//p' style.css > wp-header.txt
+      - name: Extraire l'en-tête WordPress de style.css
+        run: sed -n '/^\/\*\*/,/\*\//p' style.css > wp-header.txt
 
-      - name: Remove WordPress header from style.css to prepare for minification
+      - name: Supprimer l'en-tête WordPress pour préparer la minification
         run: sed '1,/^\*\//d' style.css > style-body.css
 
-      - name: Minify CSS body
+      - name: Minifier le CSS (hors en-tête)
         run: cleancss -o style.min.css style-body.css
 
-      - name: Assemble final minified style.css with header
+      - name: Reconstituer un style.css minifié avec l'en-tête
         run: |
-          cat wp-header.txt > style.css
-          echo "" >> style.css
-          echo "/* === Fichier CSS minifié automatiquement === */" >> style.css
-          cat style.min.css >> style.css
+          cat wp-header.txt > release-style.css
+          echo "" >> release-style.css
+          echo "/* === Fichier CSS minifié automatiquement === */" >> release-style.css
+          cat style.min.css >> release-style.css
 
-      - name: Clean up
-        run: rm -f style-body.css style.min.css wp-header.txt
+      - name: Créer le dossier release avec tous les fichiers du thème
+        run: |
+          mkdir release
+          shopt -s extglob
+          cp -r !(release) release/
+          cp release-style.css release/style.css
+
+      - name: Nettoyer les fichiers temporaires
+        run: rm -f style-body.css style.min.css release-style.css wp-header.txt
+
+      - name: Créer l’archive ZIP
+        run: |
+          cd release
+          zip -r ../release.zip .
+
+      - name: Publier la Release GitHub (uniquement si un tag est poussé)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
