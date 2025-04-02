@@ -53,7 +53,7 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
                     break;
                 }
             }
-        }
+        } else var_dump("Aucun asset trouvé dans la dernière release Ocade Search Plugin.");
 
         if (!empty($version_file_url)) {
             $version_response = wp_remote_get($version_file_url);
