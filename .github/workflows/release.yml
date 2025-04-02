@@ -1,63 +1,115 @@
-name: Create Release with Minified Files
+name: Build and Release Child Theme
 
 on:
   push:
     branches:
       - master
-    tags:
-      - 'v*' # Déclenche une release uniquement si un tag v1.0.0 est poussé
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
         with:
-          node-version: '20'
+          fetch-depth: 0
 
-      - name: Install clean-css-cli
-        run: npm install -g clean-css-cli
-
-      - name: Extraire l'en-tête WordPress de style.css
-        run: sed -n '/^\/\*\*/,/\*\//p' style.css > wp-header.txt
-
-      - name: Supprimer l'en-tête WordPress pour préparer la minification
-        run: sed '1,/^\*\//d' style.css > style-body.css
-
-      - name: Minifier le CSS (hors en-tête)
-        run: cleancss -o style.min.css style-body.css
-
-      - name: Reconstituer un style.css minifié avec l'en-tête
+      - name: Fetch Tags
         run: |
-          cat wp-header.txt > release-style.css
-          echo "" >> release-style.css
-          echo "/* === Fichier CSS minifié automatiquement === */" >> release-style.css
-          cat style.min.css >> release-style.css
+          git fetch --tags
+          git tag
 
-      - name: Créer le dossier release avec tous les fichiers du thème
+      - name: Get and Increment Version
+        id: get_version
         run: |
-          mkdir release
-          shopt -s extglob
-          cp -r !(release) release/
-          cp release-style.css release/style.css
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "1.0.0")
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$LAST_TAG"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          while git rev-parse "refs/tags/$NEW_VERSION" >/dev/null 2>&1; do
+            PATCH=$((PATCH + 1))
+            NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          done
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Nettoyer les fichiers temporaires
-        run: rm -f style-body.css style.min.css release-style.css wp-header.txt
-
-      - name: Créer l’archive ZIP
+      - name: Update Version in style.css (child theme)
         run: |
-          cd release
-          zip -r ../release.zip .
+          sed -i "s/\(Version:\s*\)[0-9.]*/\1$VERSION/" style.css
+          cat style.css
 
-      - name: Publier la Release GitHub (uniquement si un tag est poussé)
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Create version.txt
+        run: echo $VERSION > version.txt
+
+      - name: Setup Node.js with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install clean-css-cli only
+        run: npm ci --omit=dev
+
+      - name: Prepare release folder
+        run: |
+          mkdir release-build
+          rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
+
+      - name: Minify style.css and preserve WP header
+        run: |
+          STYLE_SRC="style.css"
+          STYLE_DEST="release-build/style.css"
+
+          # Extraire l'en-tête WordPress (/* ... */)
+          HEADER=$(sed -n '/^\/\*\*/,/\*\//p' "$STYLE_SRC")
+
+          # Trouver la ligne de fin de l'en-tête
+          START_LINE=$(grep -n '*/' "$STYLE_SRC" | head -n1 | cut -d: -f1)
+          BODY_START=$((START_LINE + 1))
+
+          # Extraire le corps (sans l’en-tête)
+          tail -n +"$BODY_START" "$STYLE_SRC" > tmp-body.css
+
+          # Minifier le corps
+          ./node_modules/.bin/cleancss tmp-body.css -o tmp-body.min.css
+
+          # Réassembler avec l’en-tête
+          echo "$HEADER" > "$STYLE_DEST"
+          echo "" >> "$STYLE_DEST"
+          echo "/* === Fichier CSS minifié automatiquement === */" >> "$STYLE_DEST"
+          cat tmp-body.min.css >> "$STYLE_DEST"
+
+      - name: Create Child Theme ZIP
+        run: |
+          cd release-build
+          zip -r ../ocade-fusion.zip * .[^.]*
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add style.css version.txt
+          git commit -m "Update version to $VERSION" || echo "No changes to commit"
+          git push origin master
+
+      - name: Create Git Tag
+        run: |
+          git tag $VERSION
+          git push origin $VERSION
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: release.zip
+          tag_name: ${{ env.VERSION }}
+          name: "Release ${{ env.VERSION }}"
+          body: "Nouvelle version du thème enfant : ${{ env.VERSION }}"
+          draft: false
+          prerelease: false
+          files: |
+            ocade-fusion.zip
+            version.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
