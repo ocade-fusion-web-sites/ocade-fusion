@@ -1,5 +1,7 @@
 <?php
 
+add_filter('ocade_h1', fn($title) => "Page introuvable..."); // Modifier le titre de la page
+
 get_header(); ?>
 
 <main role="main">
