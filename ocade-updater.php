@@ -35,12 +35,10 @@ if (is_admin() && isset($_SERVER['PHP_SELF']) && strpos($_SERVER['PHP_SELF'], 'u
         $remote_version = get_transient($OCADE_REMOTE_VERSION);
         if (!$remote_version) {
 
-            // Récupérer la dernière release depuis l'API GitHub
-            $response = wp_remote_get($OCADE_GITHUB_API_URL, [
-                'headers' => [
-                    'User-Agent' => 'WordPress' // GitHub requiert un User-Agent personnalisé
-                ]
-            ]);
+            // Récupération des assets de la dernière release via l'API GitHub
+            $headers = ['User-Agent' => 'WordPress'];
+            if (defined('GITHUB_API_TOKEN')) $headers['Authorization'] = 'token ' . GITHUB_API_TOKEN;
+            $response = wp_remote_get(GITHUB_API_TOKEN, ['headers' => $headers]);
 
             if (is_wp_error($response)) {
                 error_log('Erreur lors de la récupération de la release GitHub : ' . $response->get_error_message());
