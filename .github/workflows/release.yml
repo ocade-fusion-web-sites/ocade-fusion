@@ -2,8 +2,8 @@ name: Create Release with Minified Files...
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - master
 
 jobs:
   build:
