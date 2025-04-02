@@ -33,7 +33,9 @@ add_filter('site_transient_update_themes', function ($transient) use ($OCADE_THE
         // Récupérer la dernière release depuis l'API GitHub
         $response = wp_remote_get($OCADE_GITHUB_API_URL, [
             'headers' => [
-                'User-Agent' => 'WordPress' // GitHub requiert un User-Agent personnalisé
+                'User-Agent'    => 'WordPress',
+                'Authorization' => 'token ' . GITHUB_API_TOKEN,
+                'Accept'        => 'application/vnd.github+json'
             ]
         ]);
 
