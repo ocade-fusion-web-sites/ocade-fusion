@@ -1,6 +1,6 @@
 <?php
 
-require_once get_stylesheet_directory() . '/ocade-updater.php';
+if ($pagenow === 'update-core.php')  require_once get_stylesheet_directory() . '/ocade-updater.php'; // Mettre à jour le thème depuis un dépôt Git
 require_once get_stylesheet_directory() . '/hooks/notices.php';
 require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
 
