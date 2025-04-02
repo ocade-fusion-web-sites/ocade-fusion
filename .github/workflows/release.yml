@@ -1,4 +1,4 @@
-name: Create Release with Minified Files...
+name: Minify WordPress Theme CSS
 
 on:
   push:
@@ -22,37 +22,20 @@ jobs:
         run: npm install -g clean-css-cli
 
       - name: Extract WordPress comment header from style.css
-        id: extract_header
-        run: |
-          sed -n '/^\/\*\*/,/\*\//p' style.css > wp-header.txt
+        run: sed -n '/^\/\*/,/\*\//p' style.css > wp-header.txt
 
       - name: Remove WordPress header from style.css to prepare for minification
-        run: |
-          sed '1,/^\*\//d' style.css > style-body.css
+        run: sed '1,/^\*\//d' style.css > style-body.css
 
-      - name: Minify CSS
+      - name: Minify CSS body
         run: cleancss -o style.min.css style-body.css
 
       - name: Assemble final minified style.css with header
         run: |
-          cat wp-header.txt > release-style.css
-          echo "" >> release-style.css
-          echo "/* === Fichier CSS minifié automatiquement === */" >> release-style.css
-          cat style.min.css >> release-style.css
+          cat wp-header.txt > style.css
+          echo "" >> style.css
+          echo "/* === Fichier CSS minifié automatiquement === */" >> style.css
+          cat style.min.css >> style.css
 
-      - name: Create release ZIP
-        run: |
-          mkdir release
-          shopt -s extglob
-          cp -r !(release) release/
-          cp release-style.css release/style.css
-          rm release/style-body.css release/style.min.css release-style.css wp-header.txt || true
-          cd release
-          zip -r ../release.zip .
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: release.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clean up
+        run: rm -f style-body.css style.min.css wp-header.txt
