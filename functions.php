@@ -27,3 +27,19 @@ function personnalisation_gutenberg_colors() {
   add_theme_support('disable-custom-colors');
 }
 add_action('after_setup_theme', 'personnalisation_gutenberg_colors');
+
+
+/** Modifier le titre de l'auteur Ocade Fusion dans Yoast SEO */
+function custom_author_title_ocadefusion($title) {
+  if (is_author('ocade-fusion')) return 'Tutoriels n8n par Ocade Fusion – Automatisation & No Code';
+  return $title;
+}
+add_filter('wpseo_title', 'custom_author_title_ocadefusion');
+
+/** Modifier la description de l'auteur Ocade Fusion dans Yoast SEO */
+function custom_author_metadesc_ocadefusion($desc) {
+  if (is_author('ocade-fusion')) return 'Retrouvez tous les tutoriels, guides et astuces sur n8n publiés par Ocade Fusion, spécialiste de l’automatisation.';
+  return $desc;
+}
+add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
+
