@@ -2,22 +2,6 @@
 
 $categorie = get_queried_object();
 
-/** Ajouter les meta title et description ACF pour les catégories, tags et taxonomies personnalisées */
-add_action('wp_head', 'insert_acf_meta');
-function insert_acf_meta() {
-  if (is_category() || is_tag() || is_tax()) {
-    $queried_object = get_queried_object();
-    $taxonomy = $queried_object->taxonomy;
-    $term_id = $queried_object->term_id;
-
-    $meta_title = get_field('meta_title', $taxonomy . '_' . $term_id);
-    $meta_description = get_field('meta_description', $taxonomy . '_' . $term_id);
-
-    if ($meta_title) echo '<title>' . esc_html($meta_title) . '</title>' . PHP_EOL;
-    if ($meta_description) echo '<meta name="description" content="' . esc_attr($meta_description) . '">' . PHP_EOL;
-  }
-}
-
 add_filter('ocade_h1', fn($title) => $categorie->name); // Modifier le titre de la page
 get_header(); ?>
 
