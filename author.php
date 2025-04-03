@@ -5,7 +5,7 @@ $author = get_queried_object();
 /** Ajouter les meta title et description ACF pour les catégories, tags et taxonomies personnalisées */
 add_action('wp_head', 'insert_acf_meta');
 function insert_acf_meta() {
-  if (is_category() || is_tag() || is_tax()) {
+  if (is_author()) {
     $queried_object = get_queried_object();
     $taxonomy = $queried_object->taxonomy;
     $term_id = $queried_object->term_id;
