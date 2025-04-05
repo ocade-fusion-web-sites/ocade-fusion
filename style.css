@@ -956,6 +956,19 @@ body>.wp-block-group {
   margin-bottom: 2rem;
 }
 
+/** GROUP - QCM **/
+.wp-block-group.image--qcm {
+  justify-content: space-evenly;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1280px) {
+  .wp-block-group.image--qcm img {
+    display: none;
+  }
+}
+
 /** COLONNES **/
 .wp-block-columns .wp-block-column {
   padding-left: 1rem;
