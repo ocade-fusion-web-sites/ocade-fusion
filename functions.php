@@ -1,8 +1,6 @@
 <?php
 
-add_action('admin_init', function () {
-  if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'update-core.php') !== false) require_once get_stylesheet_directory() . '/ocade-updater.php';
-});
+if (is_admin())  require_once get_stylesheet_directory() . '/ocade-updater.php'; // Mettre à jour le thème depuis un dépôt Git
 
 require_once get_stylesheet_directory() . '/hooks/notices.php';
 require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
