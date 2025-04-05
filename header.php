@@ -94,6 +94,9 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/noeud-n8n-if/') ? 'current' : ''; ?>">
               <a href="/n8n/noeuds/noeud-n8n-if/">If</a>
             </li>
+            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/switch/') ? 'current' : ''; ?>">
+              <a href="/n8n/noeuds/switch/">Switch</a>
+            </li>
           </ul>
         </li>
 
