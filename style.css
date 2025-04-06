@@ -988,6 +988,7 @@ body>.wp-block-group {
 /** GROUP - QCM **/
 .wp-block-group.image--qcm {
   justify-content: space-evenly;
+  column-gap: 3rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
