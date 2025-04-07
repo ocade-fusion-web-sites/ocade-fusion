@@ -43,4 +43,3 @@ function custom_author_metadesc_ocadefusion($desc) {
   return $desc;
 }
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
-
