@@ -1,13 +1,20 @@
 <?php
+// Fonction utilitaire pour générer un lien dans un <li>
+function Ocade_Link($text, $href, $extra_class = '', $id = '') {
+  $current_url = $_SERVER['REQUEST_URI'];
+  $is_active = ($current_url === $href) ? 'current' : '';
+  $classes = trim("$extra_class $is_active");
+  $class_attr = $classes ? ' class="' . esc_attr($classes) . '"' : '';
+  $id_attr = $id ? ' id="' . esc_attr($id) . '"' : '';
+  echo '<li role="menuitem"' . $class_attr . '><a href="' . esc_url($href) . '"' . $id_attr . '>' . esc_html($text) . '</a></li>';
+}
 
 // Variables globales pour les templates 
 global $_IS_SOMMARY;
-$_URL_CURRENT =  $_SERVER['REQUEST_URI']; // Récupère l'URL actuelle
+$_URL_CURRENT = $_SERVER['REQUEST_URI'];
 $_IS_ARTICLE = is_singular('post');
 $_IS_AUTHOR = is_author();
 $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
-
-
 ?>
 
 <!DOCTYPE html>
@@ -23,22 +30,14 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 <body id="body" <?php body_class(); ?>>
   <?php wp_body_open(); ?>
   <?php do_action('ocade_search_form'); ?>
+
   <nav role="navigation" aria-label="Accès rapide">
-
     <button onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');" class="skiplink">Recherche Articles</button>
-
     <button onclick="(function(event){ event.stopPropagation(); document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus(); })(event)" class="skiplink">Menu Principal</button>
-
     <?php if ($_IS_SOMMARY) : ?>
       <button class="skiplink" onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', false); document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
     <?php endif; ?>
-    <button
-      onclick="
-        const footer = document.getElementById('footer');
-        footer.scrollIntoView({ behavior: 'smooth' });
-        footer.focus();
-      "
-      class="skiplink">Pied de page</button>
+    <button onclick="const footer = document.getElementById('footer'); footer.scrollIntoView({ behavior: 'smooth' }); footer.focus();" class="skiplink">Pied de page</button>
   </nav>
 
   <header role="banner" class="alignfull">
@@ -50,17 +49,18 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         class="custom-logo lazy loaded"
         alt="OCADE Fusion est un outil d'automatisation des processus d'intégration de données qui permet aux entreprises de rationaliser leurs opérations et d'améliorer leur efficacité."
         decoding="sync"
-        lazy="eager"
+        loading="eager"
         fetchpriority="auto">
     </a>
 
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
+
     <nav id="menu-principal-nav" role="navigation" aria-label="Menu principal">
       <button id="menu-principal" title="Menu principal" aria-expanded="false" aria-controls="list-menu-principal">
-        <svg class="burger" width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="burger" width="34" height="34" viewBox="0 0 24 24" fill="none">
           <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-        <svg class="cross" style="display:none" width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="cross" style="display:none" width="34" height="34" viewBox="0 0 24 24" fill="none">
           <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
       </button>
@@ -71,45 +71,36 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             <span role="presentation">Ocade Fusion</span>
           </a>
         </li>
-
         <li class="entete"><span role="presentation">N8N</span></li>
 
         <li role="menuitem">
           <button aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installation/installer-n8n-sur-le-cloud/') ? 'current' : ''; ?>">
-              <a href="/n8n/installation/installer-n8n-sur-le-cloud/">Sur le Cloud</a>
-            </li>
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installation/installer-n8n-avec-docker-compose/') ? 'current' : ''; ?>">
-              <a href="/n8n/installation/installer-n8n-avec-docker-compose/">Avec Docker Compose</a>
-            </li>
+            <?php
+            Ocade_Link('Sur le Cloud', '/n8n/installation/installer-n8n-sur-le-cloud/');
+            Ocade_Link('Avec Docker Compose', '/n8n/installation/installer-n8n-avec-docker-compose/');
+            ?>
           </ul>
         </li>
 
         <li role="menuitem">
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/noeud-n8n-edit/') ? 'current' : ''; ?>">
-              <a href="/n8n/noeuds/noeud-n8n-edit/">Edit</a>
-            </li>
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/noeud-n8n-if/') ? 'current' : ''; ?>">
-              <a href="/n8n/noeuds/noeud-n8n-if/">If</a>
-            </li>
-            <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/noeuds/switch/') ? 'current' : ''; ?>">
-              <a href="/n8n/noeuds/switch/">Switch</a>
-            </li>
+            <?php
+            Ocade_Link('Edit', '/n8n/noeuds/noeud-n8n-edit/');
+            Ocade_Link('If', '/n8n/noeuds/noeud-n8n-if/');
+            Ocade_Link('Switch', '/n8n/noeuds/switch/');
+            ?>
           </ul>
         </li>
 
-
-        <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/certificat-opquast/') ? 'current' : ''; ?>">
-          <a href="/certificat-opquast/">Qualité Web Opquast</a>
-        </li>
-        <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/author/ocade-fusion/') ? 'current' : ''; ?>">
-          <a href="/author/ocade-fusion/">Qui est Valentin Charrier ?</a>
-        </li>
+        <?php
+        Ocade_Link('Qualité Web Opquast', '/certificat-opquast/');
+        Ocade_Link('Qui est Valentin Charrier ?', '/author/ocade-fusion/');
+        ?>
       </ul>
     </nav>
+
     <?php if ($_IS_SOMMARY) : ?>
       <nav class="sommaire" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
         <p class="sommaire-title">
@@ -123,23 +114,33 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
   <nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
     <ul role="menu">
-      <li role="menuitem" class="ocade-search-button"><button id="open-search-modal" title="Effectuer une recherche d'article" onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');"></button></li>
+      <li role="menuitem" class="ocade-search-button">
+        <button id="open-search-modal" title="Effectuer une recherche d'article" onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');"></button>
+      </li>
       <?php if ($_IS_SOMMARY) : ?>
         <li role="menuitem" class="sommaire-item">
           <button
-            id="sommaire-button" title="Sommaire de la page" aria-label="Sommaire de la page"
+            id="sommaire-button"
+            title="Sommaire de la page"
+            aria-label="Sommaire de la page"
             onclick="(() => {
-              const sommaire = document.getElementById('sommaire');
-              document.getElementById('menu-principal').setAttribute('aria-expanded', false);
-              const expanded = sommaire.getAttribute('aria-expanded') === 'true';
-              sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-              if (!expanded) document.getElementById('sommaire-title-link').focus();
-            })();">
+            const sommaire = document.getElementById('sommaire');
+            document.getElementById('menu-principal').setAttribute('aria-expanded', false);
+            const expanded = sommaire.getAttribute('aria-expanded') === 'true';
+            sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            if (!expanded) document.getElementById('sommaire-title-link').focus();
+          })();">
           </button>
         </li>
       <?php endif; ?>
-      <li role="menuitem" class="formulaire-contact"><button title="Remplir une demande de contact" onclick="window.location.href='/contact/'"></button></li>
-      <li role="menuitem" class="formulaire-tel"><button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button></li>
-      <li role="menuitem" class="go-to-top"><button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"></button></li>
+      <li role="menuitem" class="formulaire-contact">
+        <button title="Remplir une demande de contact" onclick="window.location.href='/contact/'"></button>
+      </li>
+      <li role="menuitem" class="formulaire-tel">
+        <button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button>
+      </li>
+      <li role="menuitem" class="go-to-top">
+        <button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"></button>
+      </li>
     </ul>
   </nav>
