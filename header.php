@@ -104,6 +104,9 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/author/ocade-fusion/') ? 'current' : ''; ?>">
           <a href="/author/ocade-fusion/">Qui est Valentin Charrier ?</a>
         </li>
+        <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/certificat-opquast/') ? 'current' : ''; ?>">
+          <a href="/certificat-opquast/">Qualité Web Opquast</a>
+        </li>
       </ul>
     </nav>
     <?php if ($_IS_SOMMARY) : ?>
