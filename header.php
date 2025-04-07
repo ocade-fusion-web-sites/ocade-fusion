@@ -7,6 +7,7 @@ $_IS_ARTICLE = is_singular('post');
 $_IS_AUTHOR = is_author();
 $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
+
 ?>
 
 <!DOCTYPE html>
@@ -77,10 +78,10 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <button aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
             <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installation/installer-n8n-sur-le-cloud/') ? 'current' : ''; ?>">
-              <a href="/n8n/installer-n8n-sur-le-cloud/">Sur le Cloud</a>
+              <a href="/n8n/installation/installer-n8n-sur-le-cloud/">Sur le Cloud</a>
             </li>
             <li role="menuitem" class="<?php echo ($_URL_CURRENT == '/n8n/installation/installer-n8n-avec-docker-compose/') ? 'current' : ''; ?>">
-              <a href="/n8n/installer-n8n-avec-docker-compose/">Avec Docker Compose</a>
+              <a href="/n8n/installation/installer-n8n-avec-docker-compose/">Avec Docker Compose</a>
             </li>
           </ul>
         </li>
