@@ -110,6 +110,17 @@ $footer_query = new WP_Query(array(
   });
 </script>
 
+<!-- Script Plausible chargé après 2s -->
+<script>
+  setTimeout(function() {
+    var s = document.createElement("script");
+    s.defer = true;
+    s.setAttribute("data-domain", "ocadefusion.fr");
+    s.src = "https://plausible.ocadefusion.fr/js/script.js";
+    document.head.appendChild(s);
+  }, 2000);
+</script>
+
 <?php /** Implémentation des scripts */ wp_footer(); ?>
 
 </body>
