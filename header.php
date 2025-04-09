@@ -87,8 +87,9 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
             <?php
-            Ocade_Link('Edit', '/n8n/noeuds/noeud-n8n-edit/');
-            Ocade_Link('If', '/n8n/noeuds/noeud-n8n-if/');
+            Ocade_Link('Edit', '/n8n/noeuds/edit-fields/');
+            Ocade_Link('Form', '/n8n/noeuds/form/');
+            Ocade_Link('If', '/n8n/noeuds/if/');
             Ocade_Link('Switch', '/n8n/noeuds/switch/');
             ?>
           </ul>
