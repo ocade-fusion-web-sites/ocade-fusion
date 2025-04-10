@@ -992,15 +992,23 @@ body>.wp-block-group {
 
 /** GROUP - QCM **/
 .wp-block-group.image--qcm {
-  justify-content: space-evenly;
-  column-gap: 3rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+ column-gap: 0;
+ margin-top: 2rem;
+ margin-bottom: 2rem;
 }
 
-@media (max-width: 1280px) {
+.wp-block-group.image--qcm img {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .wp-block-group.image--qcm {
+    justify-content: space-evenly;
+    column-gap: 3rem;
+  }
+
   .wp-block-group.image--qcm img {
-    display: none;
+    display: inline;
   }
 }
 
