@@ -9,12 +9,12 @@
   "theme_color": "#303579",
   "icons": [
     {
-      "src": "/wp-content/themes/no-code-tools/assets/icons/icon-192.png",
+      "src": "/wp-content/themes/ocade-fusion/assets/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/wp-content/themes/no-code-tools/assets/icons/icon-512.png",
+      "src": "/wp-content/themes/ocade-fusion/assets/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
