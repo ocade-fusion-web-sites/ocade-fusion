@@ -6,12 +6,8 @@ function Ocade_Link($text, $href, $extra_class = '', $id = '') {
   $classes = trim("$extra_class " . ($is_active ? 'current' : ''));
   $class_attr = $classes ? ' class="' . esc_attr($classes) . '"' : '';
   $id_attr = $id ? ' id="' . esc_attr($id) . '"' : '';
-
-  // Ajout du préfixe si c’est la page active
-  if ($is_active) $text = 'Page active : ' . $text;
-
   $text_attr = ' title="' . esc_attr($text) . '"';
-
+  
   echo '<li role="menuitem"' . $class_attr . '>';
   echo '<a href="' . esc_url($href) . '"' . $id_attr . $text_attr . '>' . esc_html($text) . '</a>';
   echo '</li>';
