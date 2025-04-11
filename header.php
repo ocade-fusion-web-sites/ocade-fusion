@@ -7,7 +7,8 @@ function Ocade_Link($text, $href, $extra_class = '', $id = '') {
   $class_attr = $classes ? ' class="' . esc_attr($classes) . '"' : '';
   $id_attr = $id ? ' id="' . esc_attr($id) . '"' : '';
   $text_attr = ' title="' . esc_attr($text) . '"';
-  
+  if ($is_active) $text_attr .= ' aria-current="page"';
+
   echo '<li role="menuitem"' . $class_attr . '>';
   echo '<a href="' . esc_url($href) . '"' . $id_attr . $text_attr . '>' . esc_html($text) . '</a>';
   echo '</li>';
