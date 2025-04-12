@@ -1274,6 +1274,7 @@ footer .wp-block-columns {
 .n8n-footer {
   display: flex;
   column-gap: 3rem;
+  row-gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 1rem;
