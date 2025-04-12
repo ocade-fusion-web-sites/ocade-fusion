@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           if (dialog && typeof dialog.showModal === "function") {
             dialog.showModal();
-            document.body.classList.add("modal-open");
+            document.body.classList.add("no-scroll", "modal-open");
             searchInput?.focus();
           }
         }, 100);
@@ -108,12 +108,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 🔁 Échappe : fermeture de tout
       if (key === "escape") {
+        document.body.classList.remove("no-scroll", "modal-open");
         document
           .querySelectorAll('[aria-expanded="true"]')
           .forEach((el) => el.setAttribute("aria-expanded", "false"));
         if (dialog?.open) {
           dialog.close();
-          document.body.classList.remove("modal-open");
         }
         return;
       }

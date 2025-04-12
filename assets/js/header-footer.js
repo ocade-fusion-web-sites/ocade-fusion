@@ -1,3 +1,9 @@
+const safeIdleCallback =
+  window.requestIdleCallback ||
+  function (cb) {
+    return setTimeout(cb, 1);
+  };
+
 window.addEventListener("DOMContentLoaded", () => {
   const click = (selector, callback) => {
     document.querySelector(selector)?.addEventListener("click", callback);
@@ -8,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const dialog = document.getElementById("ocade-search-dialog");
     dialog?.showModal();
     document.getElementById("ocade-search-input")?.focus();
-    document.body.classList.add("modal-open");
+    document.body.classList.add("no-scroll", "modal-open");
   });
 
   click('[data-action="open-menu"]', (e) => {
@@ -38,7 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 window.addEventListener("load", () => {
   // Insertion différée du footer mobile et des événements associés
-  requestIdleCallback(() => {
+  safeIdleCallback(() => {
     setTimeout(() => {
       const sommaireExists = !!document.getElementById("sommaire");
 
@@ -73,8 +79,6 @@ window.addEventListener("load", () => {
       `;
 
       const placeholder = document.getElementById("mobile-footer-placeholder");
-      if (!placeholder) return;
-
       placeholder.innerHTML = mobileFooterHTML;
       const insertedMenu = document.getElementById("mobile-footer-menu");
 
@@ -88,7 +92,7 @@ window.addEventListener("load", () => {
           const dialog = document.getElementById(dialogId);
           dialog?.showModal();
           if (focusId) document.getElementById(focusId)?.focus();
-          document.body.classList.add("modal-open");
+          document.body.classList.add("no-scroll", "modal-open");
         };
 
         document
@@ -100,7 +104,6 @@ window.addEventListener("load", () => {
         document
           .getElementById("open-chatbot-modal")
           ?.addEventListener("click", () => {
-            console.log("open-chatbot-modal clicked");
             openDialog("chatbot-dialog");
           });
 
@@ -136,7 +139,7 @@ window.addEventListener("load", () => {
   }, 2000);
 
   // Lazy-load du composant n8n-demo si présent
-  requestIdleCallback(() => {
+  safeIdleCallback(() => {
     const el = document.querySelector("n8n-demo");
     if (!el) return;
 
@@ -181,7 +184,7 @@ window.addEventListener("load", () => {
     );
     loadScriptWithFallback(
       `${base}/assets/js/n8n-demo-librairie/n8n-demo.bundled.js`,
-      "https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js",
+      `https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js`,
       true
     );
   }

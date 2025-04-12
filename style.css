@@ -53,6 +53,10 @@
   top: 1rem;
 }
 
+.no-scroll {
+  position: fixed;
+}
+
 /********** GENERAL **********/
 :root {
   --wp--preset--color--orange: #a22f20;
@@ -282,12 +286,14 @@ a[target="_blank"]:after {
 
 /* Icône pour les liens externes */
 a[href^="http"]:not([href*="ocadefusion.fr"]):after {
-  content: '🔗'; /* lien classique */
+  content: '🔗';
+  /* lien classique */
 }
 
 /* Icône pour les liens ouvrant dans une nouvelle fenêtre */
 a[target="_blank"]:after {
-  content: '🡽'; /* flèche diagonale pour "nouvel onglet" */
+  content: '🚀';
+  /* flèche diagonale pour "nouvel onglet" */
   position: relative;
   top: -0.3rem;
   font-size: 0.8rem;
@@ -1060,39 +1066,75 @@ footer .wp-block-columns {
 }
 
 .chatbot-modal {
-  display: flex;
+  display: none;
   flex-direction: column;
-  width: 100vw;
+  width: calc(100vw - 1rem);
   max-width: 1280px;
-  height: 100vh;
+  height: calc(100vh - 1rem);
   padding: 0;
   margin: auto;
   background: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 30px 30px 10px 10px;
+}
+
+.chatbot-modal[open] {
+  display: flex;
+  position: fixed;
+  z-index: 10000;
 }
 
 .chatbot-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 4rem;
   padding: 0.5rem 2rem;
-  background: #ececfe;
   color: white;
+  background: var(--wp--preset--color--violet);
 }
 
 .chatbot-header h2 {
-  margin: 0;
-  color: #303579;
-  font-size: 1.5rem;
+  width: 100%;
+  margin: auto;
+  color: white;
+  background: var(--wp--preset--color--violet);
+  font-size: .9rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .chatbot-header h2 {
+    width: calc(100% - 8rem);
+    font-size: 1.5rem;
+  }
+}
+
+.chatbot-header h2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4rem;
+  height: 4rem;
+  background-image: url(./assets/svgs/chatbot.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 30px 0 0 0;
 }
 
 .chatbot-close {
-  width: 3rem;
-  height: 3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(4rem - 2px);
+  height: calc(4rem - 2px);
   color: white;
   background: #303579;
   border: none;
+  border-radius: 0 30px 0 0;
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -1101,9 +1143,15 @@ footer .wp-block-columns {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 1rem;
+  padding: 1rem .5rem;
   background-color: #f9f9fb;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .chatbot-content {
+    padding: 2rem 4rem 3rem 4rem;
+  }
 }
 
 .chatbot-input-wrapper {
@@ -1125,14 +1173,25 @@ footer .wp-block-columns {
 }
 
 .chatbot-input-wrapper button {
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   color: #fff;
   background-color: #303579;
+  background-image: url(./assets/svgs/ia.svg);
+  background-size: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
   border: none;
   border-radius: 0 10px 10px 0;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  filter: brightness(0.92);
+
+}
+
+.chatbot-input-wrapper button:hover {
+  outline: none;
+  filter: brightness(1);
 }
 
 .chatbot-input-wrapper button svg {
@@ -1144,7 +1203,7 @@ footer .wp-block-columns {
 
 .chatbot-response-area {
   flex: 1;
-  margin-top: 1rem;
+  margin-top: 2rem;
   padding: 0;
   background-color: #fff;
   border-radius: 12px;
@@ -1156,7 +1215,7 @@ footer .wp-block-columns {
   display: flex;
   justify-content: center;
   gap: 8px;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .chatbot-loader .dot {
@@ -1206,7 +1265,7 @@ footer .wp-block-columns {
   padding: 20px;
 }
 
-.n8n-content > ul {
+.n8n-content>ul {
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
@@ -1232,13 +1291,13 @@ footer .wp-block-columns {
   width: max-content;
   min-width: 300px;
   margin: 0;
-  border: 2px solid var(--wp--preset--color--orange);
+  border: 2px solid var(--wp--preset--color--violet);
   border-radius: 6px;
 }
 
 .n8n-footer-article-1:hover,
 .n8n-footer-article-2:hover {
-  border: 2px solid var(--wp--preset--color--violet);
+  border: 2px solid var(--wp--preset--color--violet--clair);
 }
 
 .n8n-footer-article-1-lien,
@@ -1249,12 +1308,17 @@ footer .wp-block-columns {
   text-decoration: none !important;
 }
 
+.n8n-footer-article-1-lien::after,
+.n8n-footer-article-2-lien::after {
+  display: none !important;
+}
+
 .n8n-footer-article-1-lien-paragraphe,
 .n8n-footer-article-2-lien-paragraphe {
   margin: 0;
   padding: 8px 8px 8px 1rem;
   color: white;
-  background-color: var(--wp--preset--color--orange);
+  background-color: var(--wp--preset--color--violet);
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   font-weight: bold;
@@ -1263,7 +1327,7 @@ footer .wp-block-columns {
 
 .n8n-footer-article-1:hover .n8n-footer-article-1-lien-paragraphe,
 .n8n-footer-article-2:hover .n8n-footer-article-2-lien-paragraphe {
-  background-color: var(--wp--preset--color--violet);
+  background-color: var(--wp--preset--color--violet--clair);
 }
 
 .n8n-footer-article-1-lien-span,
@@ -1272,7 +1336,7 @@ footer .wp-block-columns {
   justify-content: center;
   align-items: center;
   width: 300px;
-  min-height: 75px;
+  min-height: 3rem;
   padding: 0.5rem 1rem;
   text-align: center;
   font-size: 1rem;
