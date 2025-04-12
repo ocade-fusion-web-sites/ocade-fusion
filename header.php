@@ -1,5 +1,5 @@
 <?php
-// Fonction utilitaire pour générer un lien dans un <li>
+// Header
 function Ocade_Link($text, $href, $extra_class = '', $id = '') {
   $current_url = $_SERVER['REQUEST_URI'];
   $is_active = ($current_url === $href);
@@ -14,14 +14,12 @@ function Ocade_Link($text, $href, $extra_class = '', $id = '') {
   echo '</li>';
 }
 
-// Variables globales pour les templates 
 global $_IS_SOMMARY;
 $_URL_CURRENT = $_SERVER['REQUEST_URI'];
 $_IS_ARTICLE = is_singular('post');
 $_IS_AUTHOR = is_author();
 $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 ?>
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
@@ -32,30 +30,28 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <?php wp_head(); ?>
 </head>
 
-<body id="body" <?php body_class(); ?>>
+<body id="body" data-theme-uri="<?php echo get_stylesheet_directory_uri(); ?>" <?php body_class(); ?>>
   <?php wp_body_open(); ?>
   <?php do_action('ocade_search_form'); ?>
 
   <nav role="navigation" aria-label="Accès rapide">
-    <button onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');" class="skiplink">Recherche Articles</button>
-    <button onclick="(function(event){ event.stopPropagation(); document.getElementById('menu-principal').setAttribute('aria-expanded', true); document.getElementById('entete-accueil-link').focus(); })(event)" class="skiplink">Menu Principal</button>
+    <button data-action="open-search" class="skiplink">Recherche Articles</button>
+    <button data-action="open-menu" class="skiplink">Menu Principal</button>
     <?php if ($_IS_SOMMARY) : ?>
-      <button class="skiplink" onclick="document.getElementById('menu-principal').setAttribute('aria-expanded', false); document.getElementById('sommaire').setAttribute('aria-expanded', true); document.getElementById('sommaire-title-link').focus();">Sommaire</button>
+      <button data-action="open-sommaire" class="skiplink">Sommaire</button>
     <?php endif; ?>
-    <button onclick="const footer = document.getElementById('footer'); footer.scrollIntoView({ behavior: 'smooth' }); footer.focus();" class="skiplink">Pied de page</button>
+    <button data-action="scroll-footer" class="skiplink">Pied de page</button>
   </nav>
 
   <header role="banner" class="alignfull">
     <a href="https://www.ocadefusion.fr/" class="custom-logo-link" rel="home">
-      <img
-        width="60"
-        height="60"
+      <img width="60" height="60"
         src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svgs/logo.svg"
-        class="custom-logo lazy loaded"
-        alt="OCADE Fusion est un outil d'automatisation des processus d'intégration de données qui permet aux entreprises de rationaliser leurs opérations et d'améliorer leur efficacité."
-        decoding="sync"
-        loading="eager"
-        fetchpriority="auto">
+        class="custom-logo lazy"
+        alt="Logo Ocade Fusion"
+        decoding="async"
+        loading="lazy"
+        fetchpriority="low">
     </a>
 
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
@@ -72,22 +68,16 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
       <ul role="menu" id="list-menu-principal">
         <li class="entete accueil <?php echo ($_URL_CURRENT == '/') ? 'current' : ''; ?>">
-          <a href="/" id="entete-accueil-link">
-            <span role="presentation">Ocade Fusion</span>
-          </a>
+          <a href="/" id="entete-accueil-link"><span>Ocade Fusion</span></a>
         </li>
-        <li class="entete"><span role="presentation">N8N</span></li>
-
+        <li class="entete"><span>N8N</span></li>
         <li role="menuitem">
           <button aria-controls="menu-installation-n8n">Installation</button>
           <ul id="menu-installation-n8n" role="menu">
-            <?php
-            Ocade_Link('Sur le Cloud', '/n8n/installation/installer-n8n-sur-le-cloud/');
-            Ocade_Link('Avec Docker Compose', '/n8n/installation/installer-n8n-avec-docker-compose/');
-            ?>
+            <?php Ocade_Link('Sur le Cloud', '/n8n/installation/installer-n8n-sur-le-cloud/'); ?>
+            <?php Ocade_Link('Avec Docker Compose', '/n8n/installation/installer-n8n-avec-docker-compose/'); ?>
           </ul>
         </li>
-
         <li role="menuitem">
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
@@ -99,7 +89,6 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             ?>
           </ul>
         </li>
-
         <?php
         Ocade_Link('Qualité Web Opquast', '/certificat-opquast/');
         Ocade_Link('Qui est Valentin Charrier ?', '/author/ocade-fusion/');
@@ -116,37 +105,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         <ul class="sommaire-list"></ul>
       </nav>
     <?php endif; ?>
+
   </header>
 
-  <nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
-    <ul role="menu">
-      <li role="menuitem" class="ocade-search-button">
-        <button id="open-search-modal" title="Effectuer une recherche d'article" onclick="document.getElementById('ocade-search-dialog').showModal();document.getElementById('ocade-search-input').focus();document.body.classList.add('modal-open');"></button>
-      </li>
-      <?php if ($_IS_SOMMARY) : ?>
-        <li role="menuitem" class="sommaire-item">
-          <button
-            id="sommaire-button"
-            title="Sommaire de la page"
-            aria-label="Sommaire de la page"
-            onclick="(() => {
-            const sommaire = document.getElementById('sommaire');
-            document.getElementById('menu-principal').setAttribute('aria-expanded', false);
-            const expanded = sommaire.getAttribute('aria-expanded') === 'true';
-            sommaire.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-            if (!expanded) document.getElementById('sommaire-title-link').focus();
-          })();">
-          </button>
-        </li>
-      <?php endif; ?>
-      <li role="menuitem" class="formulaire-contact">
-        <button title="Remplir une demande de contact" onclick="window.location.href='/contact/'"></button>
-      </li>
-      <li role="menuitem" class="formulaire-tel">
-        <button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button>
-      </li>
-      <li role="menuitem" class="go-to-top">
-        <button title="Retour en haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})"></button>
-      </li>
-    </ul>
-  </nav>
+  <div id="mobile-footer-placeholder"></div>

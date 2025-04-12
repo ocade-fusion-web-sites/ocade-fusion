@@ -915,6 +915,13 @@ footer .wp-block-columns {
   width: 100%;
   min-height: 4rem;
   background-color: var(--wp--preset--color--violet-clair);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: opacity;
+}
+
+#mobile-footer-menu.visible {
+  opacity: 1;
 }
 
 #mobile-footer-menu ul {

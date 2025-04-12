@@ -6,10 +6,20 @@ require_once get_stylesheet_directory() . '/hooks/notices.php';
 require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
 
 function charger_prism() {
-  wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
-  wp_enqueue_script('prism-js', get_stylesheet_directory_uri() . '/prism/prism.js', [], null, true);
+  if (is_singular() && has_block('core/code')) {
+    wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
+    wp_enqueue_script('prism-js', get_stylesheet_directory_uri() . '/prism/prism.js', [], null, true);
+  }
 }
+
 add_action('wp_enqueue_scripts', 'charger_prism');
+
+// Supprime les scripts et styles emojis de WordPress
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
 add_filter('script_loader_tag', function ($tag, $handle) {
   if ($handle === 'prism-js') return str_replace('<script ', '<script async ', $tag);
   return $tag;
