@@ -1,4 +1,8 @@
 <?php
+
+
+// delete_transient('cached_footer_html');
+
 $footer_html = get_transient('cached_footer_html');
 if (!$footer_html) {
   ob_start();
