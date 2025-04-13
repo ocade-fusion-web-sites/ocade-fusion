@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/ocade-fusion-web-sites/no-code-tools
  * Author: Ocade Fusion
  * Description: Thème enfant de Ocade Minimal.
- * Version: 1.0.235
+ * Version: 1.0.234
  * Text Domain: ocade-fusion
  */
 
@@ -1185,13 +1185,13 @@ footer .wp-block-columns {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  filter: brightness(0.92);
+  filter: brightness(1);
 
 }
 
 .chatbot-input-wrapper button:hover {
   outline: none;
-  filter: brightness(1);
+  filter: brightness(0.97);
 }
 
 .chatbot-input-wrapper button svg {

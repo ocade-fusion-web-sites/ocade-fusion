@@ -21,18 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showLoader();
 
+    const context = responseDiv.innerHTML; // récupération du contenu précédent
+
     try {
       const res = await fetch("https://n8n.ocade-v2.fr/webhook/recherche-n8n", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, context }), // ajout du contexte ici
       });
 
       if (!res.ok) throw new Error("Réponse non valide");
 
       const data = await res.json();
 
-      // Si le champ dans n8n est `reponse_a_la_question`, change ici
+      // Mise à jour du contenu HTML
       responseDiv.innerHTML =
         data[0]?.reponse_a_la_question || "<p>Aucune réponse trouvée.</p>";
     } catch (error) {
