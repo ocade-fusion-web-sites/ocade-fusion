@@ -1325,6 +1325,14 @@ footer .wp-block-columns {
   background-color: var(--wp--preset--color--violet--clair);
 }
 
+.n8n-footer-article-lien-image {
+  width: 2rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.25rem;
+  border-radius: 10px;
+}
+
 .n8n-footer-article-lien-span {
   display: flex;
   justify-content: center;
