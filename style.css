@@ -1287,8 +1287,7 @@ footer .wp-block-columns {
   }
 }
 
-.n8n-footer-article-1,
-.n8n-footer-article-2 {
+.n8n-footer-article {
   width: max-content;
   min-width: 300px;
   margin: 0;
@@ -1296,26 +1295,22 @@ footer .wp-block-columns {
   border-radius: 6px;
 }
 
-.n8n-footer-article-1:hover,
-.n8n-footer-article-2:hover {
+.n8n-footer-article:hover {
   border: 2px solid var(--wp--preset--color--violet--clair);
 }
 
-.n8n-footer-article-1-lien,
-.n8n-footer-article-2-lien {
+.n8n-footer-article-lien {
   display: flex;
   flex-direction: column;
   color: #32373c;
   text-decoration: none !important;
 }
 
-.n8n-footer-article-1-lien::after,
-.n8n-footer-article-2-lien::after {
+.n8n-footer-article-lien::after {
   display: none !important;
 }
 
-.n8n-footer-article-1-lien-paragraphe,
-.n8n-footer-article-2-lien-paragraphe {
+.n8n-footer-article-lien-paragraphe {
   margin: 0;
   padding: 8px 8px 8px 1rem;
   color: white;
@@ -1326,13 +1321,11 @@ footer .wp-block-columns {
   font-size: 1.1rem;
 }
 
-.n8n-footer-article-1:hover .n8n-footer-article-1-lien-paragraphe,
-.n8n-footer-article-2:hover .n8n-footer-article-2-lien-paragraphe {
+.n8n-footer-article-1:hover .n8n-footer-article-lien-paragraphe {
   background-color: var(--wp--preset--color--violet--clair);
 }
 
-.n8n-footer-article-1-lien-span,
-.n8n-footer-article-2-lien-span {
+.n8n-footer-article-lien-span {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1343,8 +1336,6 @@ footer .wp-block-columns {
   font-size: 1rem;
   font-weight: 600;
 }
-
-
 
 /********** BLOCKS **********/
 /** GROUP **/
