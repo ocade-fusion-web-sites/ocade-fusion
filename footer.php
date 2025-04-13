@@ -36,7 +36,7 @@ if (!$footer_html) {
 <dialog id="chatbot-dialog" class="chatbot-modal" aria-labelledby="chatbot-title">
   <div class="chatbot-header">
     <h2 id="chatbot-title"><?php esc_html_e('Que voulez-vous savoir ?', 'ocade'); ?></h2>
-    <button aria-label="<?php esc_attr_e('Fermer le chatbot', 'ocade'); ?>" class="chatbot-close" onclick="document.getElementById('chatbot-dialog').close(); document.body.classList.remove('no-scroll');">
+    <button aria-label="<?php esc_attr_e('Fermer le chatbot', 'ocade'); ?>" class="chatbot-close" onclick="document.getElementById('chatbot-dialog').close(); document.body.classList.remove('no-scroll', 'modal-open');">
       ✕
     </button>
   </div>
