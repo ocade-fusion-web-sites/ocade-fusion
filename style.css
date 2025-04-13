@@ -213,8 +213,7 @@ html main>.video {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 6rem;
-
+  margin-bottom: 10rem;
 }
 
 @media (min-width: 768px) {
