@@ -1268,7 +1268,6 @@ footer .wp-block-columns {
 .n8n-content>ul {
   display: flex;
   flex-direction: column;
-  row-gap: 1.5rem;
 }
 
 .n8n-footer {
