@@ -470,6 +470,10 @@ p+p {
   color: inherit;
 }
 
+.blank_none::after, .blank_none a::after {
+  display: none !important;
+}
+
 .alignfull {
   max-width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -521,7 +525,7 @@ p+p {
   }
 }
 
-.justify-content-flex-center {
+.justify-content-center {
   justify-content: center !important;
 }
 
@@ -1431,17 +1435,6 @@ body>.wp-block-group {
   .wp-block-buttons.btns-sous-youtube .wp-element-button {
 
     font-size: 1.2rem;
-  }
-}
-
-.wp-block-buttons>.wp-block-button:nth-child(2) {
-  display: none;
-}
-
-@media (min-width: 1280px) {
-  .wp-block-buttons>.wp-block-button:nth-child(2) {
-
-    display: inline-block;
   }
 }
 
