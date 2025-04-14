@@ -21,13 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showLoader();
 
-    const context = responseDiv.innerHTML; // récupération du contenu précédent
-
     try {
       const res = await fetch("https://n8n.ocade-v2.fr/webhook/recherche-n8n", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question, context }), // ajout du contexte ici
+        body: JSON.stringify({ question }),
       });
 
       if (!res.ok) throw new Error("Réponse non valide");
