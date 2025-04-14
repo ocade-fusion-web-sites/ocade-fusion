@@ -27,6 +27,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
+  <script>document.documentElement.classList.add(window.innerWidth < 768 ? 'is-mobile' : 'is-desktop'); // Script ultra légé et util pour charger des async/sync en fonction mobile/desktop</script>
   <?php wp_head(); ?>
 </head>
 
