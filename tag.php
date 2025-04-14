@@ -5,7 +5,7 @@ add_filter('ocade_h1', fn($title) => $tag->name); // Modifier le titre de la pag
 
 get_header(); ?>
 
-<main role="main">
+<main role="main" aria-label="Contenu principal du site">
 
   <?php
   // Vérifier si l'objet tag existe et récupérer son slug

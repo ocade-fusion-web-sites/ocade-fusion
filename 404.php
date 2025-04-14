@@ -4,7 +4,7 @@ add_filter('ocade_h1', fn($title) => "Page introuvable..."); // Modifier le titr
 
 get_header(); ?>
 
-<main role="main">
+<main role="main" aria-label="Contenu principal du site"> 
 
   <?php
   /** Récupération du CPT 404. */

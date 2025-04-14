@@ -1,7 +1,7 @@
 <?php add_filter('ocade_h1', fn($title) => 'Actualités Ocade Fusion'); ?>
 <?php get_header(); ?>
 
-<main role="main">
+<main role="main" aria-label="Contenu principal du site">
 
   <?php
   /** Récupération du CPT Actualités. */

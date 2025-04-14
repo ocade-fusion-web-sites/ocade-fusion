@@ -43,7 +43,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
     <button data-action="scroll-footer" class="skiplink">Pied de page</button>
   </nav>
 
-  <header role="banner" class="alignfull">
+  <header role="banner" aria-label="En-tête du site" class="alignfull">
     <a href="https://www.ocadefusion.fr/" class="custom-logo-link" rel="home">
       <img width="60" height="60"
         src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svgs/logo.svg"

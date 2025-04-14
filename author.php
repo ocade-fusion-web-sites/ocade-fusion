@@ -5,7 +5,7 @@ $author = get_queried_object();
 add_filter('ocade_h1', fn($title) => $author->nickname); // Modifier le titre de la page
 get_header(); ?>
 
-<main role="main">
+<main role="main" aria-label="Contenu principal du site">
 
   <?php // Vérifier si l'objet catégorie existe et récupérer son slug
   if ($author) {
