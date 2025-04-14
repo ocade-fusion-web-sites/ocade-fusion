@@ -41,6 +41,11 @@ if (!$footer_html) {
     </button>
   </div>
   <div class="chatbot-content">
+    <p style="font-size: 0.9em; color: #555; margin-bottom: 0.5rem;">
+      💡 Utilisez le champ de recherche ci-dessus pour poser une question ou entrer un mot-clé.
+      Exemple : <em>comment créer un formulaire dans n8n</em>
+    </p>
+
     <div class="chatbot-input-wrapper">
       <input
         type="text"
