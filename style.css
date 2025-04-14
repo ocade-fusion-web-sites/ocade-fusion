@@ -305,18 +305,10 @@ a[target="_blank"]:after {
 }
 
 /* Icône pour les liens externes */
-a[href^="http"]:not([href*="ocadefusion.fr"]):after {
+a[href^="http"]:not([href*="ocadefusion.fr"]):after,
+a[target="_blank"]::after {
   content: '🔗';
   /* lien classique */
-}
-
-/* Icône pour les liens ouvrant dans une nouvelle fenêtre */
-a[target="_blank"]:after {
-  content: '🚀';
-  /* flèche diagonale pour "nouvel onglet" */
-  position: relative;
-  top: -0.3rem;
-  font-size: 0.8rem;
 }
 
 h1,
