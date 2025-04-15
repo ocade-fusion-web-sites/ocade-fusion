@@ -213,34 +213,7 @@ html main>.video {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-
-/* Avant 556px */
-@media (max-width: 555px) {
-  html main > .video {
-    margin-bottom: 10rem;
-  }
-}
-
-/* Entre 556px et 767px */
-@media (min-width: 556px) and (max-width: 767px) {
-  html main > .video {
-    margin-bottom: 7rem;
-  }
-}
-
-/* Entre 768px et 887px */
-@media (min-width: 768px) and (max-width: 887px) {
-  html main > .video {
-    margin-bottom: 10rem;
-  }
-}
-
-/* À partir de 888px */
-@media (min-width: 888px) {
-  html main > .video {
-    margin-bottom: 7rem;
-  }
+  margin-bottom: 10rem;
 }
 
 .wp-block-heading+.video {
