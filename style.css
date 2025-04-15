@@ -218,7 +218,7 @@ html main>.video {
 
 .wp-block-heading+.video {
   margin-top: .5rem;
-  margin-bottom: .5rem;
+  margin-bottom: .5rem; 
 }
 
 .video .wp-block-group__inner-container {
