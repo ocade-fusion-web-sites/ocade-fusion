@@ -4,7 +4,7 @@
 }
 
 #wp-admin-bar-declencher-webhook-n8n a span {
-	margin-right: 0;
+	margin-right: 0 !important;
 }
 
 #wp-admin-bar-declencher-webhook-n8n a span::before {
