@@ -1,0 +1,12 @@
+#wp-admin-bar-declencher-webhook-n8n a {
+	display: flex;
+	align-items: center;
+}
+
+#wp-admin-bar-declencher-webhook-n8n a span {
+	margin-right: 0;
+}
+
+#wp-admin-bar-declencher-webhook-n8n a span::before {
+	top: 2px;
+}

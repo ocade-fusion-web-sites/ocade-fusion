@@ -5,20 +5,43 @@ if (is_admin())  require_once get_stylesheet_directory() . '/ocade-updater.php';
 require_once get_stylesheet_directory() . '/hooks/notices.php';
 require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
 
+// Supprime les scripts et styles emojis de WordPress
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+function newsletter_bouton_webhook_n8n($admin_bar) {
+    $url_webhook = 'https://n8n.ocadefusion.fr/webhook/newsletter';
+    $admin_bar->add_node(array(
+        'id'    => 'declencher-webhook-n8n',
+        'title' => '<span class="ab-icon dashicons dashicons-email"></span>',
+        'href'  => '#',
+        'meta'  => array(
+            'title' => 'Send Newsletter',
+            'onclick' => "fetch('$url_webhook', { method: 'POST' }).then(r => alert('Webhook déclenché !')); return false;",
+        )
+    ));
+}
+add_action('admin_bar_menu', 'newsletter_bouton_webhook_n8n', 100);
+
+function add_editor_style_file() {
+  wp_enqueue_style(
+    'mon-editor-css-global',
+    get_stylesheet_directory_uri() . '/editor.css',
+    [],
+    filemtime(get_stylesheet_directory() . '/editor.css')
+  );
+}
+add_action('admin_enqueue_scripts', 'add_editor_style_file');
+
 function charger_prism() {
   if (is_singular() && has_block('core/code')) {
     wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
     wp_enqueue_script('prism-js', get_stylesheet_directory_uri() . '/prism/prism.js', [], null, true);
   }
 }
-
 add_action('wp_enqueue_scripts', 'charger_prism');
-
-// Supprime les scripts et styles emojis de WordPress
-remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
 add_filter('script_loader_tag', function ($tag, $handle) {
   if ($handle === 'prism-js') return str_replace('<script ', '<script async ', $tag);
