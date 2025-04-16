@@ -5,7 +5,7 @@ if (is_admin())  require_once get_stylesheet_directory() . '/ocade-updater.php';
 require_once get_stylesheet_directory() . '/hooks/notices.php';
 require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
 
-// Supprime les scripts et styles emojis de WordPress
+// Supprime les scripts et styles emojis de WordPress 
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
