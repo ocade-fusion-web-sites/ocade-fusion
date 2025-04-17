@@ -30,6 +30,7 @@ if (!$footer_html) {
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/header-footer.js"></script>
 <script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/chatbot.js"></script>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/newsletter.js"></script>
 <?php wp_footer(); ?>
 
 <!-- Chabtot Modal -->
@@ -58,7 +59,45 @@ if (!$footer_html) {
   </div>
 </dialog>
 <!-- Fin du Chatbot Modal -->
- 
+
+<!-- Newsletter n8n Modal -->
+<dialog id="newsletter-dialog" class="newsletter-modal" aria-labelledby="newsletter-title">
+  <div class="newsletter-wrapper">
+    <div class="newsletter-image">
+      <img src="/wp-content/themes/ocade-fusion/assets/svgs/newsletter-modal.svg" alt="Inscription à la newsletter n8n">
+    </div>
+    <div class="newsletter-content">
+      <h3 id="newsletter-title">🧠 Automatisez comme un pro !</h3>
+
+      <ul>
+        <li>🎯 Recevez les <strong>tutos N8N</strong> avant les autres !</li>
+        <li>📩 Des <strong>astuces</strong> et <strong>conseils</strong> pour automatiser votre quotidien.</li>
+        <li>🔒 Vos <strong>données sont en sécurité</strong> avec nous.</li>
+        <li>📅 <strong>Un email par semaine</strong>, pas plus !</li>
+        <li>🆓 <strong>Se désinscrire à tout moment</strong>.</li>
+      </ul>
+
+      <form id="newsletter-form" method="POST" action="/chemin-vers-handler" novalidate>
+        <label for="newsletter-email">Mon Email</label>
+        <span id="email-hint" class="hint">ex : nom@exemple.com</span>
+        <input
+          type="email"
+          id="newsletter-email"
+          name="email"
+          placeholder="Email pour la newsletter"
+          aria-label="Email pour la newsletter"
+          required
+          aria-describedby="email-hint"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+        <button type="submit" id="newsletter-submit">Inscription à la newsletter</button>
+      </form>
+    </div>
+  </div>
+  <button class="newsletter-close" aria-label="Fermer la modale" onclick="document.getElementById('newsletter-dialog').close(); document.body.classList.remove('no-scroll', 'modal-open');">✕</button>
+</dialog>
+<div id="newsletter-feedback">✅ Demande d'inscription en cours...</div>
+<!-- Fin Newsletter Modal -->
+
 </body>
 
 </html>

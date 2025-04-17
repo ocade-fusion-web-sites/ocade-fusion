@@ -1012,7 +1012,7 @@ footer .wp-block-columns {
 
 @media (min-width: 768px) {
   #mobile-footer-menu ul li {
-    width: 70px;
+    width: 90px;
   }
 }
 
@@ -1039,17 +1039,19 @@ footer .wp-block-columns {
 @media (min-width: 768px) {
   #mobile-footer-menu button:after {
     content: "";
-    width: 70px;
+    width: 90px;
     height: .5rem;
     display: block;
     margin: auto;
+    font-weight: 600;
+    color: var(--wp--preset--color--violet);
   }
 
   #mobile-footer-menu ul li button::after {
     position: relative;
     top: 2px;
-    width: 70px;
-    transform: translateX(-0.6875rem);
+    width: 90px;
+    transform: translateX(-1.3125rem);
     text-align: center;
   }
 }
@@ -1226,7 +1228,8 @@ footer .wp-block-columns {
   border-radius: 30px 0 0 0;
 }
 
-.chatbot-close {
+.chatbot-close,
+.newsletter-close {
   position: absolute;
   top: 0;
   right: 0;
@@ -1443,6 +1446,133 @@ footer .wp-block-columns {
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
+}
+
+/********** NEWSLETTER **********/
+#newsletter-dialog {
+  overflow: hidden;
+  max-width: 460px;
+  padding: 0;
+  background-color: var(--wp--preset--color--violet--clair);
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+}
+
+#newsletter-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#newsletter-dialog img {
+  width: 100%;
+  height: auto;
+}
+
+#newsletter-dialog .newsletter-close {
+  border-radius: 0 0 0 50px;
+}
+
+#newsletter-dialog .newsletter-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  #newsletter-dialog .newsletter-content {
+    padding: 1rem 2rem;
+  }
+}
+
+#newsletter-dialog .newsletter-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  #newsletter-dialog .newsletter-content h3 {
+    font-size: 1.125rem;
+  }
+}
+
+#newsletter-dialog .newsletter-content ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+#newsletter-dialog .newsletter-content ul li,
+#newsletter-dialog .newsletter-content ul li strong {
+  font-size: .8rem;
+}
+
+@media (min-width: 768px) {
+
+  #newsletter-dialog .newsletter-content ul li,
+  #newsletter-dialog .newsletter-content ul li strong {
+    font-size: .9rem;
+  }
+}
+
+#newsletter-dialog .newsletter-content form {
+  margin-top: 1rem
+}
+
+#newsletter-dialog .newsletter-content input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+#newsletter-dialog .newsletter-content button {
+  width: 100%;
+  height: 48px;
+  background-color: var(--wp--preset--color--violet);
+  color: white;
+  margin-top: .5rem;
+  text-transform: uppercase;
+}
+
+#newsletter-dialog .hint {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 0.3em;
+  display: block;
+}
+
+#newsletter-dialog input[type="email"] {
+  border: 2px solid #ccc;
+  padding: 1em;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* État invalide après blur */
+#newsletter-dialog input[type="email"]:invalid:not(:focus):not(:placeholder-shown) {
+  border-color: red;
+}
+
+/* État valide après blur */
+#newsletter-dialog input[type="email"]:valid:not(:focus):not(:placeholder-shown) {
+  border-color: green;
+}
+
+#newsletter-feedback {
+  display: none;
+  z-index: 999999999999;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  color: white;
+  background-color: var(--wp--preset--color--gris-clair);
+  border-radius: 4px;
+  font-weight: 400;
+}
+
+#newsletter-dialog .newsletter-wrapper {
+  max-height: 95vh;
+  overflow-y: auto;
 }
 
 /********** BLOCKS **********/

@@ -140,12 +140,33 @@ window.addEventListener("load", () => {
           });
 
         document
+          .getElementById("open-newsletter-modal")
+          ?.addEventListener("click", () => {
+            openDialog("newsletter-dialog");
+          });
+
+        document
           .querySelector(".go-to-top button")
           ?.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           });
       };
       attachFooterEvents();
+
+      if (window.location.hash === "#inscription-newsletter") {
+        const openNewsletterDialog = () => {
+          const dialog = document.getElementById("newsletter-dialog");
+          if (dialog) {
+            dialog.showModal();
+            document.body.classList.add("no-scroll", "modal-open");
+          } else {
+            // Si le footer et le bouton ne sont pas encore chargés, retenter plus tard
+            setTimeout(openNewsletterDialog, 500);
+          }
+        };
+
+        openNewsletterDialog();
+      }
 
       // Charger AccessConfig dynamiquement après l'insertion du bouton
       const loadAccessConfig = () => {
