@@ -75,37 +75,3 @@ function custom_author_metadesc_ocadefusion($desc) {
   return $desc;
 }
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
-
-
-// Ajouter le bouton dans la barre d’admin.
-function newsletter_bouton_webhook_n8n($admin_bar) {
-  $admin_bar->add_node(array(
-    'id'    => 'declencher-webhook-n8n',
-    'title' => '<span class="ab-icon dashicons dashicons-email"></span>',
-    'href'  => '#',
-    'meta'  => array('title' => 'Envoyer la newsletter', 'class' => 'newsletter-n8n-trigger')
-  ));
-}
-add_action('admin_bar_menu', 'newsletter_bouton_webhook_n8n', 100);
-
-// Charger le JavaScript uniquement dans l’admin pour gérer le clic sur Newsletter
-function click_newsletter_button() { ?>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const bouton = document.querySelector('#wp-admin-bar-declencher-webhook-n8n > .ab-item');
-      if (bouton) {
-        bouton.addEventListener('click', function(e) {
-          e.preventDefault();
-          fetch('https://n8n.ocadefusion.fr/webhook/newsletter', {
-              method: 'POST'
-            })
-            .then(r => {
-              if (r.ok) alert('✅ Newsletter envoyée avec succès !');
-              else alert('❌ Échec lors du déclenchement du webhook.');
-            }).catch(() => alert('❌ Erreur réseau. Impossible de contacter le webhook.'));
-        });
-      }
-    });
-  </script>
-<?php }
-add_action('admin_footer', 'click_newsletter_button');
