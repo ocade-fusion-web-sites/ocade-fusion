@@ -218,7 +218,7 @@ html main>.video {
 
 .wp-block-heading+.video {
   margin-top: .5rem;
-  margin-bottom: .5rem; 
+  margin-bottom: .5rem;
 }
 
 .video .wp-block-group__inner-container {
@@ -455,7 +455,8 @@ p+p {
   color: inherit;
 }
 
-.blank_none::after, .blank_none a::after {
+.blank_none::after,
+.blank_none a::after {
   display: none !important;
 }
 
@@ -968,11 +969,18 @@ footer .wp-block-columns {
   bottom: 0;
   align-content: center;
   width: 100%;
-  min-height: 4rem;
+  min-height: 4.4rem;
+  padding: 0.2rem;
   background-color: var(--wp--preset--color--violet-clair);
   opacity: 0;
   transition: opacity 0.6s ease;
   will-change: opacity;
+}
+
+@media (min-width: 768px) {
+  #mobile-footer-menu {
+    align-content: flex-start;
+  }
 }
 
 #mobile-footer-menu.visible {
@@ -999,6 +1007,13 @@ footer .wp-block-columns {
 #mobile-footer-menu ul li {
   display: flex;
   align-content: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  #mobile-footer-menu ul li {
+    width: 70px;
+  }
 }
 
 #mobile-footer-menu button {
@@ -1010,7 +1025,7 @@ footer .wp-block-columns {
   cursor: pointer;
 }
 
-#mobile-footer-menu button:after {
+#mobile-footer-menu button:before {
   content: "";
   background-size: contain;
   background-repeat: no-repeat;
@@ -1019,6 +1034,24 @@ footer .wp-block-columns {
   display: block;
   margin: auto;
   border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  #mobile-footer-menu button:after {
+    content: "";
+    width: 70px;
+    height: .5rem;
+    display: block;
+    margin: auto;
+  }
+
+  #mobile-footer-menu ul li button::after {
+    position: relative;
+    top: 2px;
+    width: 70px;
+    transform: translateX(-0.6875rem);
+    text-align: center;
+  }
 }
 
 #mobile-footer-menu li.go-to-top,
@@ -1038,44 +1071,94 @@ footer .wp-block-columns {
   }
 }
 
-#mobile-footer-menu li.sommaire-item button:after {
+#mobile-footer-menu li.sommaire-item button:before {
   background-image: url(./assets/svgs/sommaire.svg);
 }
 
-#mobile-footer-menu li.sommaire-item button.expanded:after {
+@media (min-width: 768px) {
+  #mobile-footer-menu li.sommaire-item button:after {
+    content: "Sommaire";
+  }
+}
+
+#mobile-footer-menu li.sommaire-item button.expanded:before {
   background-image: url(./assets/svgs/close.svg);
 }
 
-#mobile-footer-menu li.go-to-top button:after {
+#mobile-footer-menu li.go-to-top button:before {
   background-image: url(./assets/svgs/go-to-top.svg);
 }
 
+@media (min-width: 768px) {
+  #mobile-footer-menu li.go-to-top button:after {
+    content: "Remonter";
+  }
+}
 
-#mobile-footer-menu li.ocade-search-button button:after {
+
+#mobile-footer-menu li.ocade-search-button button:before {
   background-image: url(./assets/svgs/search.svg);
 }
 
-#mobile-footer-menu li.open-chatbot button:after {
+@media (min-width: 768px) {
+  #mobile-footer-menu li.ocade-search-button button:after {
+    content: "Recherche";
+  }
+}
+
+#mobile-footer-menu li.open-chatbot button:before {
   background-image: url(./assets/svgs/chatbot.svg);
 }
 
-#mobile-footer-menu li.formulaire-contact button:after {
+@media (min-width: 768px) {
+  #mobile-footer-menu li.open-chatbot button:after {
+    content: "Chatbot";
+  }
+}
+
+#mobile-footer-menu li.formulaire-contact button:before {
   background-image: url(./assets/svgs/formulaire.svg);
 }
 
-#mobile-footer-menu li.formulaire-tel button:after {
+@media (min-width: 768px) {
+  #mobile-footer-menu li.formulaire-contact button:after {
+    content: "Contact";
+  }
+}
+
+#mobile-footer-menu li.formulaire-tel button:before {
   background-image: url(./assets/svgs/telephone.svg);
 }
 
-#mobile-footer-menu li#ocade-access button:after {
+@media (min-width: 768px) {
+  #mobile-footer-menu li.formulaire-tel button:after {
+    content: "Téléphone";
+  }
+}
+
+#mobile-footer-menu li#ocade-access button:before {
   background-image: url(./assets/svgs/accessibility.svg);
 }
+
+@media (min-width: 768px) {
+  #mobile-footer-menu li#ocade-access button:after {
+    content: "Accessibilité";
+  }
+}
+
+#accessconfig::before,
 #accessconfig::after {
   display: none !important;
 }
 
-#mobile-footer-menu li.open-newsletter > button:after {
+#mobile-footer-menu li.open-newsletter>button:before {
   background-image: url(./assets/svgs/newsletter.svg);
+}
+
+@media (min-width: 768px) {
+  #mobile-footer-menu li.open-newsletter>button:after {
+    content: "Newsletter";
+  }
 }
 
 /********** CHATBOT **********/
