@@ -1021,6 +1021,23 @@ footer .wp-block-columns {
   border-radius: 4px;
 }
 
+#mobile-footer-menu li.go-to-top,
+#mobile-footer-menu li.open-chatbot {
+  display: none;
+}
+
+@media (min-width: 400px) {
+  #mobile-footer-menu li.open-chatbot {
+    display: flex;
+  }
+}
+
+@media (min-width: 450px) {
+  #mobile-footer-menu li.go-to-top {
+    display: flex;
+  }
+}
+
 #mobile-footer-menu li.sommaire-item button:after {
   background-image: url(./assets/svgs/sommaire.svg);
 }
@@ -1032,6 +1049,7 @@ footer .wp-block-columns {
 #mobile-footer-menu li.go-to-top button:after {
   background-image: url(./assets/svgs/go-to-top.svg);
 }
+
 
 #mobile-footer-menu li.ocade-search-button button:after {
   background-image: url(./assets/svgs/search.svg);
