@@ -6,10 +6,10 @@ require_once get_stylesheet_directory() . '/hooks/notices.php';
 require_once get_stylesheet_directory() . '/hooks/yoast-rest-api.php';
 
 // Supprime les scripts et styles emojis de WordPress 
-remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_styles', 'print_emoji_styles');
 
 function add_editor_style_file() {
   wp_enqueue_style(
@@ -20,6 +20,19 @@ function add_editor_style_file() {
   );
 }
 add_action('admin_enqueue_scripts', 'add_editor_style_file');
+
+// ------------------------------------------------------------------------------------------------
+// Accessibilité : charger uniquement le CSS
+add_action('wp_enqueue_scripts', function () {
+  wp_enqueue_style(
+    'accessconfig',
+    content_url('accessconfig/css/accessconfig.min.css'),
+    ['ocade-minimal-child'],
+    filemtime(WP_CONTENT_DIR . '/accessconfig/css/accessconfig.min.css')
+  );
+});
+// ------------------------------------------------------------------------------------------------
+
 
 function charger_prism() {
   if (is_singular() && has_block('core/code')) {
@@ -66,31 +79,33 @@ add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
 
 // Ajouter le bouton dans la barre d’admin.
 function newsletter_bouton_webhook_n8n($admin_bar) {
-    $admin_bar->add_node(array(
-        'id'    => 'declencher-webhook-n8n',
-        'title' => '<span class="ab-icon dashicons dashicons-email"></span>',
-        'href'  => '#',
-        'meta'  => array('title' => 'Envoyer la newsletter', 'class' => 'newsletter-n8n-trigger')
-    ));
+  $admin_bar->add_node(array(
+    'id'    => 'declencher-webhook-n8n',
+    'title' => '<span class="ab-icon dashicons dashicons-email"></span>',
+    'href'  => '#',
+    'meta'  => array('title' => 'Envoyer la newsletter', 'class' => 'newsletter-n8n-trigger')
+  ));
 }
 add_action('admin_bar_menu', 'newsletter_bouton_webhook_n8n', 100);
 
 // Charger le JavaScript uniquement dans l’admin pour gérer le clic sur Newsletter
 function click_newsletter_button() { ?>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const bouton = document.querySelector('#wp-admin-bar-declencher-webhook-n8n > .ab-item');
-        if (bouton) {
-            bouton.addEventListener('click', function (e) {
-                e.preventDefault();
-				fetch('https://n8n.ocadefusion.fr/webhook/newsletter', {method: 'POST'})
-					.then(r => {
-					if (r.ok) alert('✅ Newsletter envoyée avec succès !');
-					else alert('❌ Échec lors du déclenchement du webhook.');
-				}).catch(() => alert('❌ Erreur réseau. Impossible de contacter le webhook.'));
-            });
-        }
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const bouton = document.querySelector('#wp-admin-bar-declencher-webhook-n8n > .ab-item');
+      if (bouton) {
+        bouton.addEventListener('click', function(e) {
+          e.preventDefault();
+          fetch('https://n8n.ocadefusion.fr/webhook/newsletter', {
+              method: 'POST'
+            })
+            .then(r => {
+              if (r.ok) alert('✅ Newsletter envoyée avec succès !');
+              else alert('❌ Échec lors du déclenchement du webhook.');
+            }).catch(() => alert('❌ Erreur réseau. Impossible de contacter le webhook.'));
+        });
+      }
     });
-    </script>
+  </script>
 <?php }
 add_action('admin_footer', 'click_newsletter_button');

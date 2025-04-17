@@ -58,7 +58,7 @@ if (!$footer_html) {
   </div>
 </dialog>
 <!-- Fin du Chatbot Modal -->
-
+ 
 </body>
 
 </html>

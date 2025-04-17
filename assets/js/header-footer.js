@@ -54,6 +54,24 @@ window.addEventListener("load", () => {
             <li role="menuitem" class="ocade-search-button">
               <button id="open-search-modal" title="Effectuer une recherche d'article"></button>
             </li>
+            <li role="menuitem" id="ocade-access">
+              <button
+                title="Panneau d'accessibilité"
+                id="accessconfig"
+                data-accessconfig-button="true"
+                data-accessconfig-buttonname=""
+                data-accessconfig-params='{
+                  "Prefix" : "a42-ac",
+                  "ContainerClass" : "",
+                  "ModalCloseButton" : "",
+                  "ModalTitle" : "",
+                  "FormFieldset" : "",
+                  "FormFieldsetLegend" : "",
+                  "FormRadio" : ""
+                }'
+              >
+              </button>
+            </li>
             <li role="menuitem" class="open-chatbot">
               <button id="open-chatbot-modal" title="Ouvrir le chatbot"></button>
             </li>
@@ -70,6 +88,9 @@ window.addEventListener("load", () => {
             </li>
             <li role="menuitem" class="formulaire-tel">
               <button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button>
+            </li>
+            <li role="menuitem" class="open-newsletter">
+              <button id="open-newsletter-modal" title="S'inscrire à la newsletter"></button>
             </li>
             <li role="menuitem" class="go-to-top">
               <button title="Retour en haut de page"></button>
@@ -124,8 +145,18 @@ window.addEventListener("load", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           });
       };
-
       attachFooterEvents();
+
+      // Charger AccessConfig dynamiquement après l'insertion du bouton
+      const loadAccessConfig = () => {
+        const s = document.createElement("script");
+        s.src = "/wp-content/accessconfig/js/accessconfig.min.js";
+        s.onload = () => {
+          if (typeof window.onload === "function") window.onload();
+        };
+        document.head.appendChild(s); // PAS de defer
+      };
+      loadAccessConfig();
     }, 3000);
   });
 

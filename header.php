@@ -106,7 +106,6 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         ?>
       </ul>
     </nav>
-
     <?php if ($_IS_SOMMARY) : ?>
       <nav class="sommaire" id="sommaire" aria-expanded="false" role="navigation" aria-label="Sommaire">
         <p class="sommaire-title">
@@ -116,7 +115,6 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         <ul class="sommaire-list"></ul>
       </nav>
     <?php endif; ?>
-
   </header>
 
   <div id="mobile-footer-placeholder"></div>

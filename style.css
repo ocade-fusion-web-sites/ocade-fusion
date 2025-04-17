@@ -1049,6 +1049,17 @@ footer .wp-block-columns {
   background-image: url(./assets/svgs/telephone.svg);
 }
 
+#mobile-footer-menu li#ocade-access button:after {
+  background-image: url(./assets/svgs/accessibility.svg);
+}
+#accessconfig::after {
+  display: none !important;
+}
+
+#mobile-footer-menu li.open-newsletter > button:after {
+  background-image: url(./assets/svgs/newsletter.svg);
+}
+
 /********** CHATBOT **********/
 .chatbot-modal::backdrop {
   background: rgba(0, 0, 0, 0.5);
