@@ -428,11 +428,17 @@ p+p {
 .notice {
   position: relative;
   padding: 1em 1.5em;
-  margin: 1em 0;
+  margin: 1em auto;
+  max-width: calc(100vw - 5vw);
   border-left: 4px solid #46b450;
   background-color: #ecf7ed;
   color: #2f6e37;
   font-size: 1em;
+}
+
+.notice * {
+  margin: 0;
+  padding: 0;
 }
 
 .notice-success {

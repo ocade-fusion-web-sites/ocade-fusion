@@ -40,8 +40,16 @@ document
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ email }),
+          redirect: "follow", // permet au fetch de suivre une redirection
         }
       );
+      
+      // Si le serveur redirige avec un code 3xx
+      if (response.redirected) {
+        window.location.href = response.url;
+        return;
+      }
+      
 
       if (response.status === 200) {
         feedback.textContent = "✅ Inscription réussie ! Merci 🎉";
