@@ -55,7 +55,7 @@ window.addEventListener("load", () => {
               <button id="open-search-modal" title="Effectuer une recherche d'article"></button>
             </li>
             <li role="menuitem" id="ocade-access">
-              <button
+              <div style="display:flex;"
                 title="Panneau d'accessibilité"
                 id="accessconfig"
                 data-accessconfig-button="true"
@@ -67,10 +67,11 @@ window.addEventListener("load", () => {
                   "ModalTitle" : "",
                   "FormFieldset" : "",
                   "FormFieldsetLegend" : "",
-                  "FormRadio" : ""
+                  "FormRadio" : "",
+                  "ButtonTitle": "Ouvrir les paramètres d’accessibilité"
                 }'
               >
-              </button>
+              </div>
             </li>
             <li role="menuitem" class="open-chatbot">
               <button id="open-chatbot-modal" title="Ouvrir le chatbot"></button>
