@@ -6,7 +6,7 @@ function ocadefusion_afficher_notice_front() {
 ?>
     <div class="notice notice-success" role="alert" aria-live="polite">
       <button type="button" class="notice-dismiss" aria-label="Fermer cette notification" onclick="this.parentElement.style.display='none'">&times;</button>
-      <p><?php echo esc_html($message); ?></p>
+      <p><?php echo wp_kses_post($message); ?></p>
     </div>
 <?php
   }

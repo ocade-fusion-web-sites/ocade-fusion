@@ -88,7 +88,9 @@ if (!$footer_html) {
           aria-label="Email pour la newsletter"
           required
           aria-describedby="email-hint"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+          autocomplete="email"
+          />
         <button type="submit" id="newsletter-submit">Inscription à la newsletter</button>
       </form>
     </div>
