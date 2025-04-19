@@ -21,6 +21,25 @@ function add_editor_style_file() {
 }
 add_action('admin_enqueue_scripts', 'add_editor_style_file');
 
+/************** ACCESSIBILITY ***********************************/
+add_action('wp_head', function () {
+  ?>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "<?php echo content_url('accessconfig/css/accessconfig.min.css'); ?>";
+        link.type = "text/css";
+        link.media = "all";
+        document.head.appendChild(link);
+      }, 3000);
+    });
+  </script>
+  <?php
+}, 1); // priorité basse
+/***************************************************************/
+
 function charger_prism() {
   if (is_singular() && has_block('core/code')) {
     wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
