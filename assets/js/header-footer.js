@@ -51,10 +51,10 @@ window.addEventListener("load", () => {
       const mobileFooterHTML = `
         <nav id="mobile-footer-menu" aria-expanded="false" class="alignfull" role="navigation" aria-label="Mobile Footer Menu">
           <ul role="menu">
-            <li role="menuitem" class="ocade-search-button">
+            <li role="menuitem" class="ocade-search-button" aria-label="Effectuer une recherche d'article">
               <button id="open-search-modal" title="Effectuer une recherche d'article"></button>
             </li>
-            <li role="menuitem" id="ocade-access">
+            <li role="menuitem" id="ocade-access" aria-label="Panneau d'accessibilité">
               <div style="display:flex;"
                 title="Panneau d'accessibilité"
                 id="accessconfig"
@@ -73,27 +73,27 @@ window.addEventListener("load", () => {
               >
               </div>
             </li>
-            <li role="menuitem" class="open-chatbot">
+            <li role="menuitem" class="open-chatbot" aria-label="Ouvrir le chatbot">
               <button id="open-chatbot-modal" title="Ouvrir le chatbot"></button>
             </li>
             ${
               sommaireExists
                 ? `
-              <li role="menuitem" class="sommaire-item">
+              <li role="menuitem" class="sommaire-item" aria-label="Sommaire de la page">
                 <button id="sommaire-button" title="Sommaire de la page" aria-label="Sommaire de la page"></button>
               </li>`
                 : ""
             }
-            <li role="menuitem" class="formulaire-contact">
+            <li role="menuitem" class="formulaire-contact" aria-label="Remplir une demande de contact">
               <button title="Remplir une demande de contact" onclick="window.location.href='/contact/'"></button>
             </li>
-            <li role="menuitem" class="formulaire-tel">
+            <li role="menuitem" class="formulaire-tel" aria-label="Téléphone à OCade Fusion">
               <button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button>
             </li>
-            <li role="menuitem" class="open-newsletter">
+            <li role="menuitem" class="open-newsletter" aria-label="S'inscrire à la newsletter">
               <button id="open-newsletter-modal" title="S'inscrire à la newsletter"></button>
             </li>
-            <li role="menuitem" class="go-to-top">
+            <li role="menuitem" class="go-to-top" aria-label="Retour en haut de page">
               <button title="Retour en haut de page"></button>
             </li>
           </ul>
