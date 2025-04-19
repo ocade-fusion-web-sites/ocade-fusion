@@ -6060,8 +6060,8 @@ footer .wp-block-columns {
   margin: 0 !important;
 }
 
-#a42-ac-close button::after {
-  left: 50% !important;
+#a42-ac-close::after {
+  top: 50% !important;
   transform: translateY(-50%) !important;
 }
 
