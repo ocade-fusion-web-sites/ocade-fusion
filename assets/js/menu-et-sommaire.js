@@ -26,6 +26,16 @@ if (sommaire) observer.observe(sommaire, { attributes: true });
 /*************************** Gestion du menu *********************************/
 /************************************************************************************** */
 document.addEventListener("DOMContentLoaded", function () {
+  // ⏱️ Charge le CSS non critique après 3 secondes
+  setTimeout(function () {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/wp-content/accessconfig/css/accessconfig.min.css";
+    link.type = "text/css";
+    link.media = "all";
+    document.head.appendChild(link);
+  }, 3000);
+
   const menuButtons = document.querySelectorAll("button[aria-controls]");
 
   // Gestion du clic sur chaque bouton (ouvrir/fermer)

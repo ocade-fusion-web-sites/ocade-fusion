@@ -21,19 +21,6 @@ function add_editor_style_file() {
 }
 add_action('admin_enqueue_scripts', 'add_editor_style_file');
 
-// ------------------------------------------------------------------------------------------------
-// Accessibilité : charger uniquement le CSS
-add_action('wp_enqueue_scripts', function () {
-  wp_enqueue_style(
-    'accessconfig',
-    content_url('accessconfig/css/accessconfig.min.css'),
-    ['ocade-minimal-child'],
-    filemtime(WP_CONTENT_DIR . '/accessconfig/css/accessconfig.min.css')
-  );
-});
-// ------------------------------------------------------------------------------------------------
-
-
 function charger_prism() {
   if (is_singular() && has_block('core/code')) {
     wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
