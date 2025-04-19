@@ -6056,6 +6056,10 @@ footer .wp-block-columns {
   top: 0.5rem;
 }
 
+#a42-ac-close h1  {
+  margin: 0;
+}
+
 #a42-ac-close button::after {
   left: 50%;
   transform: translateY(-50%);
