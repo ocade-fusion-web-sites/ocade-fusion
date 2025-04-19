@@ -10,9 +10,11 @@ remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_styles', 'print_emoji_styles');
-add_action('wp_enqueue_scripts', function () { wp_dequeue_style('wp-block-library'); }, 100); // Supprime le CSS de Gutenberg
+add_action('wp_enqueue_scripts', function () {
+  wp_dequeue_style('wp-block-library');
+}, 100); // Supprime le CSS de Gutenberg
 
-
+/*************** CSS ADMIN ***********************************/
 function add_editor_style_file() {
   wp_enqueue_style(
     'mon-editor-css-global',
@@ -22,13 +24,29 @@ function add_editor_style_file() {
   );
 }
 add_action('admin_enqueue_scripts', 'add_editor_style_file');
+/***************************************************************/
+
+/************** CSS FRONT ***********************************/
+function ocadefusion_enqueue_front_css() {
+  $handle = 'front-css-global';
+  $dir = get_stylesheet_directory();
+  $uri = get_stylesheet_directory_uri();
+  // Chemins des fichiers CSS
+  $css_file = $dir . '/front.css';
+  $min_file = $dir . '/front.min.css';
+  // On sert front.min.css s’il existe, sinon front.css
+  if (file_exists($min_file)) wp_enqueue_style($handle, $uri . '/front.min.css', [], filemtime($min_file));
+  elseif (file_exists($css_file)) wp_enqueue_style($handle, $uri . '/front.css', [], filemtime($css_file));
+}
+add_action('wp_enqueue_scripts', 'ocadefusion_enqueue_front_css', 100);
+/***************************************************************/
 
 /************** ACCESSIBILITY ***********************************/
 add_action('wp_head', function () {
-  ?>
+?>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      setTimeout(function () {
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
         const link = document.createElement("link");
         link.rel = "stylesheet";
         link.href = "<?php echo content_url('accessconfig/css/accessconfig.min.css'); ?>";
@@ -38,7 +56,7 @@ add_action('wp_head', function () {
       }, 3000);
     });
   </script>
-  <?php
+<?php
 }, 1); // priorité basse
 /***************************************************************/
 

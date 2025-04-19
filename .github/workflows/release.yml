@@ -36,13 +36,25 @@ jobs:
           done
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Update Version in style.css (child theme)
+      - name: Update Version in style.css
         run: |
           sed -i "s/\(Version:\s*\)[0-9.]*/\1$VERSION/" style.css
           cat style.css
 
       - name: Create version.txt
         run: echo $VERSION > version.txt
+
+      - name: Install clean-css-cli
+        run: npm install -g clean-css-cli
+
+      - name: Minify front.css if exists
+        run: |
+          if [ -f front.css ]; then
+            echo "Minifying front.css..."
+            npx clean-css-cli -o front.min.css front.css
+          else
+            echo "front.css not found, skipping minification."
+          fi
 
       - name: Prepare release folder
         run: |
@@ -53,6 +65,7 @@ jobs:
         run: |
           cd release-build
           zip -r ../ocade-fusion.zip * .[^.]*
+          cd ..
 
       - name: Commit Changes
         run: |
