@@ -23,7 +23,7 @@ function add_editor_style_file() {
     filemtime(get_stylesheet_directory() . '/editor.css')
   );
 }
-add_action('admin_enqueue_scripts', 'add_editor_style_file');
+add_action('enqueue_block_editor_assets', 'add_editor_style_file');
 /***************************************************************/
 
 /************** CSS FRONT ***********************************/
@@ -31,42 +31,72 @@ function ocadefusion_enqueue_front_css() {
   $handle = 'front-css-global';
   $dir = get_stylesheet_directory();
   $uri = get_stylesheet_directory_uri();
-  // Chemins des fichiers CSS
-  $css_file = $dir . '/front.css';
-  $min_file = $dir . '/front.min.css';
-  // On sert front.min.css s’il existe, sinon front.css
-  if (file_exists($min_file)) wp_enqueue_style($handle, $uri . '/front.min.css', [], filemtime($min_file));
-  elseif (file_exists($css_file)) wp_enqueue_style($handle, $uri . '/front.css', [], filemtime($css_file));
+
+  $files = [
+    'front.min.css',
+    'front.css'
+  ];
+
+  foreach ($files as $file) {
+    $path = $dir . '/' . $file;
+    if (file_exists($path)) {
+      wp_enqueue_style($handle, $uri . '/' . $file, [], filemtime($path));
+      break;
+    }
+  }
 }
 add_action('wp_enqueue_scripts', 'ocadefusion_enqueue_front_css', 100);
 /***************************************************************/
 
 /************** ACCESSIBILITY ***********************************/
 add_action('wp_head', function () {
-?>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      setTimeout(function() {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "<?php echo content_url('accessconfig/css/accessconfig.min.css'); ?>";
-        link.type = "text/css";
-        link.media = "all";
-        document.head.appendChild(link);
-      }, 3000);
-    });
-  </script>
-<?php
+  $css_relative_path = 'accessconfig/css/accessconfig.min.css';
+  $css_full_path = WP_CONTENT_DIR . '/' . $css_relative_path;
+
+  // Vérifie que le fichier existe avant d'injecter le lien
+  if (file_exists($css_full_path)) {
+    $version = filemtime($css_full_path);
+    $css_url = content_url($css_relative_path) . '?ver=' . $version;
+    ?>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = "<?php echo esc_url($css_url); ?>";
+          link.type = "text/css";
+          link.media = "all";
+          document.head.appendChild(link);
+        }, 3000);
+      });
+    </script>
+    <?php
+  }
 }, 1); // priorité basse
+
 /***************************************************************/
 
 function charger_prism() {
   if (is_singular() && has_block('core/code')) {
-    wp_enqueue_style('prism-css', get_stylesheet_directory_uri() . '/prism/prism.css', [], null);
-    wp_enqueue_script('prism-js', get_stylesheet_directory_uri() . '/prism/prism.js', [], null, true);
+    $dir = get_stylesheet_directory();
+    $uri = get_stylesheet_directory_uri();
+
+    $css_file = '/prism/prism.css';
+    $js_file  = '/prism/prism.js';
+
+    // Version basée sur la date de modification du fichier
+    $css_path = $dir . $css_file;
+    $js_path  = $dir . $js_file;
+
+    $css_version = file_exists($css_path) ? filemtime($css_path) : null;
+    $js_version  = file_exists($js_path)  ? filemtime($js_path)  : null;
+
+    wp_enqueue_style('prism-css', $uri . $css_file, [], $css_version);
+    wp_enqueue_script('prism-js', $uri . $js_file, [], $js_version, true);
   }
 }
 add_action('wp_enqueue_scripts', 'charger_prism');
+
 
 add_filter('script_loader_tag', function ($tag, $handle) {
   if ($handle === 'prism-js') return str_replace('<script ', '<script async ', $tag);
