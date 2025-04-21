@@ -186,6 +186,7 @@ window.addEventListener("load", () => {
   // Script de suivi Matomo (déclenché après un court délai)
   setTimeout(() => {
     var _paq = (window._paq = window._paq || []);
+    _paq.push(['disableCookies']);
     _paq.push(["trackPageView"]);
     _paq.push(["enableLinkTracking"]);
     _paq.push(["setTrackerUrl", "https://matomo.ocadefusion.fr/matomo.php"]);
