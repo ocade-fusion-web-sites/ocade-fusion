@@ -182,22 +182,6 @@ window.addEventListener("load", () => {
     }, 3000);
   });
 
-  // Script de suivi Plausible (déclenché après un court délai)
-  // Script de suivi Matomo (déclenché après un court délai)
-  setTimeout(() => {
-    var _paq = (window._paq = window._paq || []);
-    _paq.push(['disableCookies']);
-    _paq.push(["trackPageView"]);
-    _paq.push(["enableLinkTracking"]);
-    _paq.push(["setTrackerUrl", "https://matomo.ocadefusion.fr/matomo.php"]);
-    _paq.push(["setSiteId", "1"]);
-
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = "https://matomo.ocadefusion.fr/matomo.js";
-    document.head.appendChild(s);
-  }, 2000);
-
   // Lazy-load du composant n8n-demo si présent
   safeIdleCallback(() => {
     const el = document.querySelector("n8n-demo");

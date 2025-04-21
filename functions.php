@@ -101,3 +101,36 @@ function custom_author_metadesc_ocadefusion($desc) {
   return $desc;
 }
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
+
+/************************ MATOMO ***********************************/
+function ocadefusion_matomo_script() {
+?>
+  <script>
+    (function() {
+      const _paq = (window._paq = window._paq || []);
+      _paq.push(['disableCookies']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      _paq.push(['setTrackerUrl', 'https://matomo.ocadefusion.fr/matomo.php']);
+      _paq.push(['setSiteId', '1']);
+
+      const loadMatomo = () => {
+        const g = document.createElement('script');
+        g.src = 'https://matomo.ocadefusion.fr/matomo.js';
+        g.async = true;
+        document.head.appendChild(g);
+      };
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadMatomo, {
+          timeout: 3000
+        });
+      } else {
+        setTimeout(loadMatomo, 3000);
+      }
+    })();
+  </script>
+<?php
+}
+add_action('wp_footer', 'ocadefusion_matomo_script', 100);
+/***************************************************************/
