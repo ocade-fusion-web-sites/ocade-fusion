@@ -103,6 +103,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         </li>
         <?php
         Ocade_Link('Qualité Web Opquast', '/certificat-opquast/');
+        Ocade_Link("A propos d'Ocade Fusion", '/a-propos-ocade-fusion/');
         Ocade_Link('Qui est Valentin Charrier ?', '/author/ocade-fusion/');
         Ocade_Link('Plan du site', '/plan-du-site/');
         ?>
