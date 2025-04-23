@@ -5608,12 +5608,12 @@ header li.current {
 header li.current::after {
   content: "";
   position: absolute;
-  top: -3.5rem;
   left: calc(100% - 3rem);
-  width: 6rem;
-  height: 6rem;
+  width: 2rem;
+  height: 2rem;
   background-color: var(--wp--preset--color--orange);
-  border-radius: 50%;
+  border-radius: 100%;
+  top: 0.3125rem;
 }
 
 header li.accueil.current::after {
