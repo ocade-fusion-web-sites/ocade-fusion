@@ -6063,7 +6063,7 @@ footer .wp-block-columns {
   top: 0.5rem !important;
 }
 
-#a42-ac-title  {
+#a42-ac-title {
   margin: 0 !important;
 }
 
@@ -6485,6 +6485,24 @@ footer .wp-block-columns {
 #newsletter-dialog .newsletter-wrapper {
   max-height: 95vh;
   overflow-y: auto;
+}
+
+/********** (Mobile + Footer Menu) Hidden **********/
+html.scroll-down body>header {
+  transform: translateY(-100%);
+}
+
+html.scroll-down #mobile-footer-placeholder>nav {
+  transform: translateY(100%);
+}
+
+html.scroll-up body>header {
+  transform: translateY(0);
+}
+
+body>header,
+#mobile-footer-placeholder>nav {
+  transition: transform 0.3s ease;
 }
 
 /********** BLOCKS **********/

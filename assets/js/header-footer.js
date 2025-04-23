@@ -179,6 +179,31 @@ window.addEventListener("load", () => {
         document.head.appendChild(s); // PAS de defer
       };
       loadAccessConfig();
+
+      // Logique de scroll mobile : ajout de classes scroll-up / scroll-down sur <html>
+      if (document.documentElement.classList.contains("is-mobile")) {
+        let lastScrollTop = 0;
+        let ticking = false;
+        const html = document.documentElement;
+        window.addEventListener("scroll", () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              const currentScroll =
+                window.pageYOffset || document.documentElement.scrollTop;
+              if (currentScroll > lastScrollTop + 10) {
+                html.classList.add("scroll-down");
+                html.classList.remove("scroll-up");
+              } else if (currentScroll < lastScrollTop - 10) {
+                html.classList.add("scroll-up");
+                html.classList.remove("scroll-down");
+              }
+              lastScrollTop = Math.max(currentScroll, 0);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+      }
     }, 3000);
   });
 
