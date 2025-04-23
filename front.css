@@ -5619,6 +5619,10 @@ header li.current::after {
   transform: rotate(-45deg);
 }
 
+header li.current a {
+  background-color: var(--wp--preset--color--violet-clair);
+}
+
 header li.accueil.current::after {
   background-color: white;
 }
