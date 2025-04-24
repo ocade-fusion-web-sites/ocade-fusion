@@ -121,4 +121,13 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
     <?php endif; ?>
   </header>
 
-  <div id="mobile-footer-placeholder"></div>
+  <div id="mobile-footer-placeholder">
+    <div id="mobile-footer-skeleton">
+    <div class="menu-item-placeholder"></div>
+    <div class="menu-item-placeholder"></div>
+    <div class="menu-item-placeholder"></div>
+    <div class="menu-item-placeholder"></div>
+    <div class="menu-item-placeholder"></div>
+    <div class="menu-item-placeholder media-query-visible-400"></div>
+    <div class="menu-item-placeholder media-query-visible-450"></div>
+  </div>
