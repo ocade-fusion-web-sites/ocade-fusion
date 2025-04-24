@@ -27,7 +27,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
-  
+
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
@@ -123,11 +123,12 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
   <div id="mobile-footer-placeholder">
     <div id="mobile-footer-skeleton">
-    <div class="menu-item-placeholder"></div>
-    <div class="menu-item-placeholder"></div>
-    <div class="menu-item-placeholder"></div>
-    <div class="menu-item-placeholder"></div>
-    <div class="menu-item-placeholder"></div>
-    <div class="menu-item-placeholder media-query-visible-400"></div>
-    <div class="menu-item-placeholder media-query-visible-450"></div>
+      <div class="menu-item-placeholder"></div>
+      <div class="menu-item-placeholder"></div>
+      <div class="menu-item-placeholder"></div>
+      <div class="menu-item-placeholder"></div>
+      <div class="menu-item-placeholder"></div>
+      <div class="menu-item-placeholder media-query-visible-400"></div>
+      <div class="menu-item-placeholder media-query-visible-450"></div>
+    </div>
   </div>
