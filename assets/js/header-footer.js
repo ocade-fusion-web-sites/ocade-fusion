@@ -204,7 +204,7 @@ window.addEventListener("load", () => {
           }
         });
       }
-    }, 2000);
+    }, 3000);
   });
 
   // Lazy-load du composant n8n-demo si présent
