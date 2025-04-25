@@ -28,10 +28,9 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
 
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <script>
     document.documentElement.classList.add(window.innerWidth < 768 ? 'is-mobile' : 'is-desktop'); // Script ultra légé et util pour charger des async/sync en fonction mobile/desktop
