@@ -6085,9 +6085,10 @@ footer .wp-block-columns {
   width: 3rem;
   height: 3rem;
   border-radius: 0.5rem;
-  background: linear-gradient(45deg, var(--wp--preset--color--violet) 40%, var(--wp--preset--color--violet--clair) 50%, var(--wp--preset--color--violet) 60%);
+  background: linear-gradient(45deg, var(--wp--preset--color--violet) 40%, var(--wp--preset--color--violet-clair) 50%, var(--wp--preset--color--violet) 60%);
   background-size: 200% 100%;
-  animation: shimmer 10s infinite;
+  animation: shimmer 2s infinite;
+	opacity: 0.1;
 }
 
 .menu-item-placeholder.media-query-visible-400,
