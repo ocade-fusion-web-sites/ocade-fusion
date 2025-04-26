@@ -167,33 +167,30 @@ add_action('wp_footer', 'ocadefusion_matomo_script', 100);
 
 /************************ HREFLANG ***********************************/
 function ocade_print_hreflang() {
-    // Langues disponibles
-    $languages = ['fr', 'en', 'de', 'es', 'hi', 'it', 'ja', 'pl', 'pt', 'th'];
+  $languages = ['fr', 'en', 'de', 'es', 'hi', 'it', 'ja', 'pl', 'pt', 'th'];
 
-    // URL actuelle
-    $current_path = trim($_SERVER['REQUEST_URI'], '/');
+  $current_path = trim($_SERVER['REQUEST_URI'], '/');
 
-    // Détection langue dans l'URL
-    $path_parts = explode('/', $current_path);
-    $current_lang = in_array($path_parts[0], $languages) ? $path_parts[0] : 'fr';
+  $path_parts = explode('/', $current_path);
+  $current_lang = in_array($path_parts[0], $languages) ? $path_parts[0] : 'fr';
 
-    // Nettoyer l'URL du code langue
-    if ($current_lang !== 'fr') {
-        array_shift($path_parts);
-    }
-    $clean_path = implode('/', $path_parts);
+  if ($current_lang !== 'fr') {
+      array_shift($path_parts);
+  }
+  $clean_path = implode('/', $path_parts);
 
-    // Génération des hreflangs
-    foreach ($languages as $lang) {
-        $url = home_url(($lang !== 'fr' ? '/' . $lang : '') . '/' . $clean_path);
-        $url = rtrim($url, '/');
-        echo '<link rel="alternate" hreflang="' . esc_attr($lang) . '" href="' . esc_url($url) . '">' . "\n";
-    }
+  // Ajoute un slash final propre
+  $clean_path = $clean_path ? '/' . $clean_path . '/' : '/';
 
-    // Ajouter x-default
-    $url_default = home_url('/' . $clean_path);
-    echo '<link rel="alternate" hreflang="x-default" href="' . esc_url(rtrim($url_default, '/')) . '">' . "\n";
+  // Générer l'URL propre
+  $url = home_url(($current_lang !== 'fr' ? '/' . $current_lang : '') . $clean_path);
+  $url = rtrim($url, '/') . '/'; // Ajout sûr du slash final
+
+  echo '<link rel="alternate" hreflang="' . esc_attr($current_lang) . '" href="' . esc_url($url) . '">' . "\n";
+
+  $url_default = home_url($clean_path);
+  $url_default = rtrim($url_default, '/') . '/'; // Ajout sûr du slash final
+  echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($url_default) . '">' . "\n";
 }
-add_action('wp_head', 'ocade_print_hreflang', 1); // Priorité haute pour s'assurer que le hreflang est ajouté avant d'autres éléments dans le head
-/***************************************************************/
-
+add_action('wp_head', 'ocade_print_hreflang', 1);
+/********************************************************************/
