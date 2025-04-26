@@ -90,6 +90,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
             <?php
+            Ocade_Link('AI Agent', '/n8n/noeuds/ai-agent/');
             Ocade_Link('Basic LLM Chain', '/n8n/noeuds/basic-llm-chain/');
             Ocade_Link('Chat Trigger', '/n8n/noeuds/chat-trigger/');
             Ocade_Link('Edit', '/n8n/noeuds/edit-fields/');
