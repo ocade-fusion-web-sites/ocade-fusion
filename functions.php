@@ -57,10 +57,10 @@ add_action('wp_head', function () {
   if (file_exists($css_full_path)) {
     $version = filemtime($css_full_path);
     $css_url = content_url($css_relative_path) . '?ver=' . $version;
-    ?>
+?>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
+      document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
           const link = document.createElement("link");
           link.rel = "stylesheet";
           link.href = "<?php echo esc_url($css_url); ?>";
@@ -70,7 +70,7 @@ add_action('wp_head', function () {
         }, 3000);
       });
     </script>
-    <?php
+  <?php
   }
 }, 1); // priorité basse
 
@@ -134,7 +134,7 @@ add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
 
 /************************ MATOMO ***********************************/
 function ocadefusion_matomo_script() {
-?>
+  ?>
   <script>
     (function() {
       const _paq = (window._paq = window._paq || []);
@@ -175,7 +175,7 @@ function ocade_print_hreflang() {
   $current_lang = in_array($path_parts[0], $languages) ? $path_parts[0] : 'fr';
 
   if ($current_lang !== 'fr') {
-      array_shift($path_parts);
+    array_shift($path_parts);
   }
   $clean_path = implode('/', $path_parts);
 
@@ -193,4 +193,47 @@ function ocade_print_hreflang() {
   echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($url_default) . '">' . "\n";
 }
 add_action('wp_head', 'ocade_print_hreflang', 1);
+/********************************************************************/
+
+/************************ JSON-LD Utilisation Images ***********************************/
+// Démarre la capture du HTML avant affichage
+add_action('template_redirect', function () {
+  ob_start('ocadefusion_inject_jsonld_images');
+});
+
+function ocadefusion_inject_jsonld_images($html) {
+  if (is_admin() || strpos($html, '<html') === false) return $html; // Ne pas injecter dans l'admin ou si le HTML n'est pas présent
+  // Extraction des images dans tout le HTML
+  preg_match_all('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $html, $matches);
+  $image_urls = [];
+  if (!empty($matches[1])) {
+    foreach ($matches[1] as $src) {
+      if (strpos($src, 'data:image') === 0) continue;
+      if (strpos($src, '/') === 0 && strpos($src, '//') !== 0) $src = home_url($src);
+      if (strpos($src, 'http') === 0) $image_urls[] = esc_url($src);
+    }
+  }
+  if (!empty($image_urls)) {
+    $image_metadata = [];
+    foreach ($image_urls as $img_url) {
+      $image_metadata[] = [
+        "@context" => "https://schema.org",
+        "@type" => "ImageObject",
+        "contentUrl" => $img_url,
+        "license" => "https://ocadefusion.fr/conditions-utilisation-images",
+        "acquireLicensePage" => "https://ocadefusion.fr/contact",
+        "creator" => [
+          "@type" => "Person",
+          "name" => "Valentin Charrier"
+        ],
+        "copyrightNotice" => "© Valentin Charrier " . date('Y'),
+        "creditText" => "Valentin Charrier"
+      ];
+    }
+    $jsonld_script = '<script type="application/ld+json">' . wp_json_encode($image_metadata, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . '</script>';
+    // Injecter juste avant </body>
+    $html = str_replace('</body>', $jsonld_script . "\n</body>", $html);
+  }
+  return $html;
+}
 /********************************************************************/
