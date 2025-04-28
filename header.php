@@ -26,8 +26,9 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="max-image-preview:large">
+  
   <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
-
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />

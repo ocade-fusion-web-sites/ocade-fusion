@@ -23,4 +23,13 @@
 
 </main>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Ocade Fusion",
+  "url": "https://www.ocadefusion.fr/"
+}
+</script>
+
 <?php get_footer(); ?>
