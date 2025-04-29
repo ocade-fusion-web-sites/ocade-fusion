@@ -27,10 +27,20 @@ if (!$footer_html) {
   <?php echo $footer_html; ?>
 </footer>
 
-<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js"></script>
-<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/header-footer.js"></script>
-<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/chatbot.js"></script>
-<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/newsletter.js"></script>
+
+<?php
+  function asset_version($path) {
+    $full_path = get_stylesheet_directory() . $path;
+    if (file_exists($full_path)) return filemtime($full_path);
+    return time(); 
+  }
+?>
+
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/menu-et-sommaire.js?v=<?php echo asset_version('/assets/js/menu-et-sommaire.js'); ?>"></script>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/header-footer.js?v=<?php echo asset_version('/assets/js/header-footer.js'); ?>"></script>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/chatbot.js?v=<?php echo asset_version('/assets/js/chatbot.js'); ?>"></script>
+<script defer src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/newsletter.js?v=<?php echo asset_version('/assets/js/newsletter.js'); ?>"></script>
+
 <?php wp_footer(); ?>
 
 <!-- Chabtot Modal -->
