@@ -90,6 +90,11 @@ window.addEventListener("load", () => {
             <li role="menuitem" class="formulaire-tel" aria-label="Téléphone à OCade Fusion">
               <button title="Téléphone à OCade Fusion" onclick="window.location.href='tel:0634892265';"></button>
             </li>
+            <li role="menuitem" class="formulaire-vcard" aria-label="Télécharger la vCard Ocade Fusion">
+              <a href="/wp-content/ocade-fusion.vcf" download title="Télécharger la vCard Ocade Fusion">
+                <button type="button">Télécharger la vCard</button>
+              </a>
+            </li>
             <li role="menuitem" class="open-newsletter" aria-label="S'inscrire à la newsletter">
               <button id="open-newsletter-modal" title="S'inscrire à la newsletter"></button>
             </li>

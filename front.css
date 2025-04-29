@@ -6032,6 +6032,24 @@ footer .wp-block-columns {
   }
 }
 
+.is-mobile #mobile-footer-menu li.formulaire-tel button:before {
+  display: none;
+}
+
+#mobile-footer-menu li.formulaire-vcard button:before {
+  background-image: url(./assets/svgs/vcard.svg);
+}
+
+@media (min-width: 768px) {
+  #mobile-footer-menu li.formulaire-vcard button:after {
+    content: "Vcard";
+  }
+}
+
+.is-desktop #mobile-footer-menu li.formulaire-vcard button:before {
+  display: none;
+}
+
 #mobile-footer-menu li#ocade-access button:before {
   background-image: url(./assets/svgs/accessibility.svg);
 }
