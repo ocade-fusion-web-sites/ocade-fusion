@@ -92,7 +92,7 @@ window.addEventListener("load", () => {
             </li>
             <li role="menuitem" class="formulaire-vcard" aria-label="Télécharger la vCard Ocade Fusion">
               <a href="/wp-content/ocade-fusion.vcf" download title="Télécharger la vCard Ocade Fusion">
-                <button type="button">Télécharger la vCard</button>
+                <button type="button" aria-label="Bouton Télécharger la vCard Ocade Fusion"></button>
               </a>
             </li>
             <li role="menuitem" class="open-newsletter" aria-label="S'inscrire à la newsletter">

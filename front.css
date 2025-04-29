@@ -5951,6 +5951,7 @@ footer .wp-block-columns {
 }
 
 #mobile-footer-menu li.go-to-top,
+#mobile-footer-menu li.formulaire-tel,
 #mobile-footer-menu li.open-chatbot {
   display: none;
 }
@@ -6027,16 +6028,22 @@ footer .wp-block-columns {
 }
 
 @media (min-width: 768px) {
+  #mobile-footer-menu li.formulaire-tel {
+    display: flex;
+  }
+
   #mobile-footer-menu li.formulaire-tel button:after {
     content: "Téléphone";
   }
 }
 
-.is-mobile #mobile-footer-menu li.formulaire-tel button:before {
-  display: none;
+#mobile-footer-menu li.formulaire-vcard a {
+  height: 3rem;
+  display: flex;
+  justify-content: center;
 }
 
-#mobile-footer-menu li.formulaire-vcard button:before {
+#mobile-footer-menu li.formulaire-vcard a button:before {
   background-image: url(./assets/svgs/vcard.svg);
 }
 
@@ -6044,10 +6051,6 @@ footer .wp-block-columns {
   #mobile-footer-menu li.formulaire-vcard button:after {
     content: "Vcard";
   }
-}
-
-.is-desktop #mobile-footer-menu li.formulaire-vcard button:before {
-  display: none;
 }
 
 #mobile-footer-menu li#ocade-access button:before {
@@ -6106,7 +6109,7 @@ footer .wp-block-columns {
   background: linear-gradient(45deg, var(--wp--preset--color--violet) 40%, var(--wp--preset--color--violet-clair) 50%, var(--wp--preset--color--violet) 60%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
-	opacity: 0.1;
+  opacity: 0.1;
 }
 
 .menu-item-placeholder.media-query-visible-400,
