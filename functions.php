@@ -251,3 +251,26 @@ add_filter('style_loader_src', 'ocade_remove_wp_version_from_assets', 9999);
 add_filter('script_loader_src', 'ocade_remove_wp_version_from_assets', 9999);
 add_filter('xmlrpc_enabled', '__return_false');
 /********************************************************************/
+
+/****************** Rich Result Enrichir Yoast **********************/
+add_action('wp_head', function () {
+  if (is_front_page()) {
+    ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.ocadefusion.fr/#organization",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1 chemin du vieil availles",
+        "addressLocality": "Sèvres-Anxaumont",
+        "postalCode": "86800",
+        "addressCountry": "FR"
+      }
+    }
+    </script>
+    <?php
+  }
+});
+/********************************************************************/
