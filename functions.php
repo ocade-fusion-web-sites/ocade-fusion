@@ -237,3 +237,23 @@ function ocadefusion_inject_jsonld_images($html) {
   return $html;
 }
 /********************************************************************/
+
+/***************************** OWASP Security **********************************/
+// Supprimer la balise <meta name="generator" content="WordPress x.x.x" />
+remove_action('wp_head', 'wp_generator');
+
+// Supprimer la version des scripts et styles
+function ocade_remove_wp_version_from_assets($src) {
+  if (strpos($src, 'ver=')) $src = remove_query_arg('ver', $src);
+  return $src;
+}
+add_filter('style_loader_src', 'ocade_remove_wp_version_from_assets', 9999);
+add_filter('script_loader_src', 'ocade_remove_wp_version_from_assets', 9999);
+
+add_filter('rest_authentication_errors', function ($result) {
+  if (!is_user_logged_in()) return new WP_Error('rest_disabled', 'REST API désactivée pour les utilisateurs non connectés.', array('status' => 403));
+  return $result;
+});
+
+add_filter('xmlrpc_enabled', '__return_false');
+/********************************************************************/
