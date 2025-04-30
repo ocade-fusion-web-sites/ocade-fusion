@@ -254,7 +254,6 @@ add_filter('xmlrpc_enabled', '__return_false');
 
 /****************** Rich Result Enrichir Yoast **********************/
 add_action('wp_head', function () {
-  if (is_front_page()) {
     ?>
     <script type="application/ld+json">
     {
@@ -271,6 +270,5 @@ add_action('wp_head', function () {
     }
     </script>
     <?php
-  }
 });
 /********************************************************************/
