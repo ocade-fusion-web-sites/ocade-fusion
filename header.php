@@ -99,6 +99,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             Ocade_Link('HTTP Request', '/n8n/noeuds/http-request/');
             Ocade_Link('If', '/n8n/noeuds/if/');
             Ocade_Link('Switch', '/n8n/noeuds/switch/');
+            Ocade_Link('Webhook', '/n8n/noeuds/webhook/');
             ?>
           </ul>
         </li>
