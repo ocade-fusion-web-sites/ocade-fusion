@@ -88,6 +88,14 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           </ul>
         </li>
         <li role="menuitem">
+          <button aria-controls="menu-credentials-n8n">Credentials</button>
+          <ul id="menu-credentials-n8n" role="menu">
+            <?php
+            Ocade_Link('Google', '/n8n/credentials/google-credentials/');
+            ?>
+          </ul>
+        </li>
+        <li role="menuitem">
           <button aria-controls="menu-noeuds-n8n">Noeuds</button>
           <ul id="menu-noeuds-n8n" role="menu">
             <?php
