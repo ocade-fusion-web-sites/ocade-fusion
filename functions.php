@@ -53,26 +53,17 @@ add_action('wp_head', function () {
   $css_relative_path = 'accessconfig/css/accessconfig.min.css';
   $css_full_path = WP_CONTENT_DIR . '/' . $css_relative_path;
 
-  // Vérifie que le fichier existe avant d'injecter le lien
   if (file_exists($css_full_path)) {
     $version = filemtime($css_full_path);
     $css_url = content_url($css_relative_path) . '?ver=' . $version;
-?>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(function() {
-          const link = document.createElement("link");
-          link.rel = "stylesheet";
-          link.href = "<?php echo esc_url($css_url); ?>";
-          link.type = "text/css";
-          link.media = "all";
-          document.head.appendChild(link);
-        }, 3000);
-      });
-    </script>
-  <?php
+    ?>
+    <link rel="stylesheet" href="<?php echo esc_url($css_url); ?>" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="<?php echo esc_url($css_url); ?>">
+    </noscript>
+    <?php
   }
-}, 1); // priorité basse
+}, 1);
 
 /***************************************************************/
 
