@@ -92,7 +92,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <ul id="menu-credentials-n8n" role="menu">
             <?php
             Ocade_Link('Discord', '/n8n/credentials/discord-credentials/');
-            Ocade_Link('Google', '/n8n/credentials/google-credentials/');
+            Ocade_Link('Google', '/n8n/credentials/credentials-google/');
             Ocade_Link('LinkedIn', '/n8n/credentials/credentials-linkedin/');
             ?>
           </ul>
