@@ -91,6 +91,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <button aria-controls="menu-credentials-n8n">Credentials</button>
           <ul id="menu-credentials-n8n" role="menu">
             <?php
+            Ocade_Link('Discord', '/n8n/credentials/discord-credentials/');
             Ocade_Link('Google', '/n8n/credentials/google-credentials/');
             Ocade_Link('LinkedIn', '/n8n/credentials/credentials-linkedin/');
             ?>
