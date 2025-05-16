@@ -62,7 +62,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         loading="lazy"
         fetchpriority="low">
     </a>
-
+ 
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
 
     <nav id="menu-principal-nav" role="navigation" aria-label="Menu principal">
