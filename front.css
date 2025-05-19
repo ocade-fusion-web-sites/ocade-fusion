@@ -4960,8 +4960,8 @@ html :where(.is-position-sticky) {
   color: var(--wp--preset--color--gris-clair) !important;
 }
 
-.has-nuit-color {
-  color: var(--wp--preset--color--nuit) !important;
+.has-violet-color {
+  color: var(--wp--preset--color--violet) !important;
 }
 
 .has-violet-color {
@@ -4985,8 +4985,8 @@ html :where(.is-position-sticky) {
   background-color: var(--wp--preset--color--gris-clair) !important;
 }
 
-.has-nuit-background-color {
-  background-color: var(--wp--preset--color--nuit) !important;
+.has-violet-background-color {
+  background-color: var(--wp--preset--color--violet) !important;
 }
 
 .has-violet-background-color {
@@ -5077,7 +5077,7 @@ html main {
 
 button {
   padding: 0.3rem;
-  color: var(--wp--preset--color--nuit);
+  color: var(--wp--preset--color--violet);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -5124,7 +5124,7 @@ html main>.video {
 *:focus,
 *:focus-visible,
 button:hover {
-  outline: 2px solid var(--wp--preset--color--nuit);
+  outline: 2px solid var(--wp--preset--color--violet);
 }
 
 a {
@@ -5170,7 +5170,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--wp--preset--color--nuit);
+  color: var(--wp--preset--color--violet);
 }
 
 
@@ -5199,7 +5199,7 @@ h1 {
 }
 
 h1 strong {
-  color: var(--wp--preset--color--nuit);
+  color: var(--wp--preset--color--violet);
   font-family: inherit;
   font-weight: inherit;
   font-size: inherit;
