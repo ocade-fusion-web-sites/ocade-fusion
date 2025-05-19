@@ -5132,7 +5132,7 @@ a {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 2px;
-  text-decoration-color: var(--wp--preset--color--violet);
+  text-decoration-color: var(--wp--preset--color--violet); 
 }
 
 a:hover {
