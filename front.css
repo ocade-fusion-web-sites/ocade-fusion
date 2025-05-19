@@ -4944,7 +4944,7 @@ html :where(.is-position-sticky) {
   --wp--preset--color--gris-clair: rgb(251 253 255);
   --wp--preset--color--nuit: #32373c;
   --wp--preset--color--violet: #303579;
-  --wp--preset--color--violet--clair: #ececfe;
+  --wp--preset--color--violet--clair: #ececfe; 
 }
 
 /** Colors **/

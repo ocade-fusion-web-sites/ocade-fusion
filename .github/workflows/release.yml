@@ -60,6 +60,10 @@ jobs:
         run: |
           mkdir release-build
           rsync -a --exclude=".git" --exclude=".github" --exclude="README.md" --exclude="*.zip" ./ release-build/
+          # Copier manuellement le fichier minifié s'il a été généré
+          if [ -f front.min.css ]; then
+            cp front.min.css release-build/
+          fi
 
       - name: Create ZIP archive
         run: |
