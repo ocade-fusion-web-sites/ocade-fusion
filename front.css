@@ -5635,12 +5635,12 @@ header li span {
 
 
 header li.entete {
-  border-bottom-color: var(--wp--preset--color--nuit);
+  border-bottom-color: var(--wp--preset--color--violet);
 }
 
 header li.entete.accueil {
   background-color: var(--wp--preset--color--orange);
-  border-bottom-color: var(--wp--preset--color--nuit);
+  border-bottom-color: var(--wp--preset--color--violet);
 }
 
 header li.entete.accueil a {
@@ -5649,7 +5649,7 @@ header li.entete.accueil a {
 
 header li span {
   color: hsl(0, 0%, 100%);
-  background-color: var(--wp--preset--color--nuit);
+  background-color: var(--wp--preset--color--violet);
   font-weight: 500;
 }
 
@@ -5734,7 +5734,7 @@ header ul button {
 }
 
 header ul button:focus-visible {
-  outline: 2px solid var(--wp--preset--color--nuit);
+  outline: 2px solid var(--wp--preset--color--violet);
 }
 
 header ul button:hover {
@@ -6727,7 +6727,7 @@ body>.wp-block-group {
 
 .wp-block-yoast-faq-block .schema-faq-section .schema-faq-answer {
   padding: 0.5rem;
-  color: var(--wp--preset--color--nuit);
+  color: var(--wp--preset--color--violet);
   background-color: white;
   font-size: 0.9rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0 1px 1px;
