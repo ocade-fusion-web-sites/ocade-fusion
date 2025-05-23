@@ -104,6 +104,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             Ocade_Link('AI Agent', '/n8n/noeuds/ai-agent/');
             Ocade_Link('Basic LLM Chain', '/n8n/noeuds/basic-llm-chain/');
             Ocade_Link('Chat Trigger', '/n8n/noeuds/chat-trigger/');
+            Ocade_Link('Classifier Documents', '/n8n/noeuds/classifier-documents/');
             Ocade_Link('Edit', '/n8n/noeuds/edit-fields/');
             Ocade_Link('Form', '/n8n/noeuds/form/');
             Ocade_Link('HTTP Request', '/n8n/noeuds/http-request/');
