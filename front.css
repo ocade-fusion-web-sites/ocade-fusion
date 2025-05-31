@@ -4944,7 +4944,7 @@ html :where(.is-position-sticky) {
   --wp--preset--color--gris-clair: rgb(251 253 255);
   --wp--preset--color--nuit: #32373c;
   --wp--preset--color--violet: #303579;
-  --wp--preset--color--violet--clair: #ececfe; 
+  --wp--preset--color--violet--clair: #ececfe;
 }
 
 /** Colors **/
@@ -5132,7 +5132,7 @@ a {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 2px;
-  text-decoration-color: var(--wp--preset--color--violet); 
+  text-decoration-color: var(--wp--preset--color--violet);
 }
 
 a:hover {
@@ -5535,11 +5535,11 @@ header a.custom-logo-link {
 }
 
 @media (min-width: 768px) {
-  header > a.custom-logo-link > img {
+  header>a.custom-logo-link>img {
     position: fixed;
-    top: -20px;
-    left: -20px;
-    transform: rotate(135deg);
+    top: -4px;
+    left: -36px;
+    transform: rotate(39deg);
   }
 }
 
