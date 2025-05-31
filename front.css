@@ -5503,7 +5503,7 @@ header {
 
 @media (min-width: 768px) {
   header {
-    height: 100px;
+    height: 85px;
   }
 }
 
@@ -5531,6 +5531,15 @@ header a.custom-logo-link {
   header a.custom-logo-link {
     top: 0;
     opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  header > a.custom-logo-link > img {
+    position: fixed;
+    top: -25px;
+    left: -25px;
+    transform: rotate(135deg);
   }
 }
 
