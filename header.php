@@ -54,7 +54,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
   <header role="banner" aria-label="En-tête du site" class="alignfull">
     <a href="https://www.ocadefusion.fr/" class="custom-logo-link" rel="home">
-      <img width="100" height="100"
+      <img width="120" height="120"
         src="<?php echo get_stylesheet_directory_uri(); ?>/assets/svgs/logo.svg"
         class="custom-logo lazy"
         alt="Logo Ocade Fusion"

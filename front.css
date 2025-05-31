@@ -5537,8 +5537,8 @@ header a.custom-logo-link {
 @media (min-width: 768px) {
   header > a.custom-logo-link > img {
     position: fixed;
-    top: -25px;
-    left: -25px;
+    top: -20px;
+    left: -20px;
     transform: rotate(135deg);
   }
 }
