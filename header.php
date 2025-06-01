@@ -27,7 +27,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="max-image-preview:large">
-  
+
   <link rel="manifest" href="<?php echo get_stylesheet_directory_uri(); ?>/manifest.json">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
@@ -62,7 +62,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         loading="lazy"
         fetchpriority="low">
     </a>
- 
+
     <h1><?php echo apply_filters('ocade_h1', get_the_title()); ?></h1>
 
     <nav id="menu-principal-nav" role="navigation" aria-label="Menu principal">
@@ -111,6 +111,15 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             Ocade_Link('If', '/n8n/noeuds/if/');
             Ocade_Link('Switch', '/n8n/noeuds/switch/');
             Ocade_Link('Webhook', '/n8n/noeuds/webhook/');
+            ?>
+          </ul>
+        </li>
+
+        <li role="menuitem">
+          <button aria-controls="menu-workflows-n8n">Workflows</button>
+          <ul id="menu-workflows-n8n" role="menu">
+            <?php
+            Ocade_Link('Watermarks', '/n8n/workflows/watermarks/');
             ?>
           </ul>
         </li>
