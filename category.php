@@ -54,4 +54,13 @@ get_header(); ?>
 
 </main>
 
-<?php get_footer();
+<?php get_footer(); ?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "<?php echo esc_html($categorie->name); ?>",
+  "description": "<?php echo esc_html($categorie->description); ?>",
+  "url": "<?php echo esc_url(get_category_link($categorie->term_id)); ?>"
+}
+</script>

@@ -26,4 +26,13 @@ get_header(); ?>
 
 </main>
 
-<?php get_footer();
+<?php get_footer(); ?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Page introuvable",
+  "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+  "url": "<?php echo esc_url(home_url('/404')); ?>"
+}
+</script>

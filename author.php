@@ -41,4 +41,16 @@ get_header(); ?>
 
 </main>
 
-<?php get_footer();
+<?php get_footer(); ?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "<?php echo esc_html($author->nickname); ?>",
+  "description": "<?php echo esc_html($author->description); ?>",
+  "author": {
+    "@type": "Person",
+    "name": "<?php echo esc_html($author->display_name); ?>"
+  }
+}
+</script>
