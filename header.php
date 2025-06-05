@@ -144,7 +144,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         </p>
         <ul class="sommaire-list"></ul> 
       </nav>
-    <?php endif; ?>
+    <?php endif; ?> 
   </header>
 
   <div id="mobile-footer-placeholder">
