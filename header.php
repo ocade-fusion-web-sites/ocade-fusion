@@ -142,7 +142,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <a href="#body" id="sommaire-title-link" title="Sommaire - Haut de page">Sommaire - Haut de page</a>
           <button onclick="document.getElementById('sommaire').setAttribute('aria-expanded', false); document.getElementById('sommaire-button').focus();">Fermer</button>
         </p>
-        <ul class="sommaire-list"></ul>
+        <ul class="sommaire-list"></ul> 
       </nav>
     <?php endif; ?>
   </header>
