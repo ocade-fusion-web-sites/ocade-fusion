@@ -50,34 +50,6 @@ get_header(); ?>
     wp_reset_postdata();
   }
   ?>
-
-  <?php if (have_posts()) : ?>
-    <ul class="tag-posts">
-      <?php while (have_posts()) : the_post(); ?>
-        <li>
-          <h2><?php the_title(); ?></h2>
-          <p><?php the_excerpt(); ?></p>
-        </li>
-      <?php endwhile; ?>
-    </ul>
-
-    <nav class="pagination">
-      <?php
-      echo paginate_links([
-        'base'      => trailingslashit(get_pagenum_link(1)) . 'page/%#%/',
-        'format'    => '',
-        'current'   => max(1, get_query_var('paged')),
-        'total'     => $GLOBALS['wp_query']->max_num_pages,
-        'prev_text' => __('&laquo; Précédent', 'ocade'),
-        'next_text' => __('Suivant &raquo;', 'ocade'),
-        'type'      => 'list',
-      ]);
-      ?>
-    </nav>
-  <?php else : ?>
-    <p>Aucun article trouvé pour cette étiquette.</p>
-  <?php endif; ?>
-
 </main>
 
 <?php get_footer(); ?>
