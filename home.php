@@ -24,35 +24,6 @@ get_header();
     <?php endwhile; ?>
     <?php wp_reset_postdata(); ?>
   <?php endif; ?>
-
-  <?php if (have_posts()) : ?>
-    <ul class="actualites-list">
-      <?php while (have_posts()) : the_post(); ?>
-        <li>
-          <h2><?php the_title(); ?></h2>
-          <p><?php the_excerpt(); ?></p>
-        </li>
-      <?php endwhile; ?>
-    </ul>
-
-    <nav class="pagination" aria-label="Pagination">
-      <?php
-      echo paginate_links([
-        'base' => trailingslashit(get_pagenum_link(1)) . 'page/%#%/',
-        'format' => '',
-        'current' => max(1, get_query_var('paged')),
-        'total' => $GLOBALS['wp_query']->max_num_pages,
-        'prev_text' => __('&laquo; Précédent', 'ocade'),
-        'next_text' => __('Suivant &raquo;', 'ocade'),
-        'type' => 'list',
-      ]);
-      ?>
-    </nav>
-
-  <?php else : ?>
-    <p>Aucun article trouvé.</p>
-  <?php endif; ?>
-
 </main>
 
 <script type="application/ld+json">
