@@ -1,16 +1,17 @@
 <?php
 // Header
-function Ocade_Link($text, $href, $extra_class = '', $id = '', $target = '_self') {
+function Ocade_Link($text, $href, $extra_class = '', $id = '', $target = '_self', $follow = 'follow') {
   $current_url = $_SERVER['REQUEST_URI'];
   $is_active = ($current_url === $href);
   $classes = trim("$extra_class " . ($is_active ? 'current' : ''));
   $class_attr = $classes ? ' class="' . esc_attr($classes) . '"' : '';
   $id_attr = $id ? ' id="' . esc_attr($id) . '"' : '';
+  $rel_attr = ' rel="' . esc_attr($follow) . '"';
   $text_attr = ' title="' . esc_attr($text) . '"';
   if ($is_active) $text_attr .= ' aria-current="page"';
 
   echo '<li role="menuitem"' . $class_attr . '>';
-  echo '<a href="' . esc_url($href) . '"' . $id_attr . $text_attr . ' target="' . esc_attr($target) . '">' . esc_html($text) . '</a>';
+  echo '<a href="' . esc_url($href) . '"' . $id_attr . $text_attr . $rel_attr . ' target="' . esc_attr($target) . '">' . esc_html($text) . '</a>';
   echo '</li>';
 }
 
@@ -131,8 +132,8 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         Ocade_Link('Plan du site', '/plan-du-site/');
         Ocade_Link('Contact Email', 'mailto:contact@ocadefusion.fr', 'email-link', 'contact-email-link', '_blank');
         Ocade_Link('Contact Téléphone', 'tel:+33634892265', 'phone-link', 'contact-phone-link', '_blank');
-        Ocade_Link('Contact Discord', 'https://discord.gg/ocadefusion', 'discord-link', 'contact-discord-link', '_blank');
-        Ocade_Link("Contact What'sApp", 'https://wa.me/33634892265', 'whatsapp-link', 'contact-whatsapp-link', '_blank');
+        Ocade_Link('Contact Discord', 'https://discord.gg/ocadefusion', 'discord-link', 'contact-discord-link', '_blank', 'nofollow');
+        Ocade_Link("Contact What'sApp", 'https://wa.me/33634892265', 'whatsapp-link', 'contact-whatsapp-link', '_blank', 'nofollow');
         ?>
       </ul>
     </nav>
