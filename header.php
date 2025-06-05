@@ -132,7 +132,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
         Ocade_Link('Plan du site', '/plan-du-site/');
         Ocade_Link('Contact Email', 'mailto:contact@ocadefusion.fr', 'email-link', 'contact-email-link', '_blank');
         Ocade_Link('Contact Téléphone', 'tel:+33634892265', 'phone-link', 'contact-phone-link', '_blank');
-        Ocade_Link('Contact Discord', 'https://discord.gg/ocadefusion', 'discord-link', 'contact-discord-link', '_blank', 'nofollow');
+        Ocade_Link('Contact Discord', 'https://discordapp.com/users/1175045336490848306', 'discord-link', 'contact-discord-link', '_blank', 'nofollow');
         Ocade_Link("Contact What'sApp", 'https://wa.me/33634892265', 'whatsapp-link', 'contact-whatsapp-link', '_blank', 'nofollow');
         ?>
       </ul>
