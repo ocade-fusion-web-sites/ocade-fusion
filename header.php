@@ -125,6 +125,16 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             ?>
           </ul>
         </li>
+
+        <li role="menuitem">
+          <button aria-controls="menu-actualites-n8n">Actualités</button>
+          <ul id="menu-actualites-n8n" role="menu">
+            <?php
+            Ocade_Link('Automatiser Tâches Répétitives PME', '/actualites/comment-automatiser-les-taches-repetitives-en-pme-sans-embaucher/');
+            ?>
+          </ul>
+        </li>
+
         <?php
         Ocade_Link("A propos d'Ocade Fusion", '/a-propos-ocade-fusion/');
         Ocade_Link('Qui est Valentin Charrier ?', '/author/ocade-fusion/');
