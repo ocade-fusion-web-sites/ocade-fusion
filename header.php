@@ -121,6 +121,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <ul id="menu-workflows-n8n" role="menu">
             <?php
             Ocade_Link('Extraction Content File', '/n8n/workflows/extraction-content-file/');
+            Ocade_Link('MCP Serveur', '/n8n/workflows/serveurs-mcp-model-context-protocol/');
             Ocade_Link('Watermarks', '/n8n/workflows/watermarks/');
             ?>
           </ul>
