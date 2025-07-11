@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showLoader();
 
     try {
-      const res = await fetch("https://n8n.ocadefusion.fr/webhook/recherche-n8n", {
+      const res = await fetch("https://n8n.ocade-fusion.com/webhook/recherche-n8n", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
