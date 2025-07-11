@@ -33,7 +33,7 @@ document
 
     try {
       const response = await fetch(
-        "https://n8n.ocadefusion.fr/webhook/newsletter-add",
+        "https://n8n.ocade-fusion.com/webhook/newsletter-add",
         {
           method: "POST",
           headers: {
