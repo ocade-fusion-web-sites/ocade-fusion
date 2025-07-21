@@ -110,6 +110,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             Ocade_Link('Form', '/n8n/noeuds/form/');
             Ocade_Link('HTTP Request', '/n8n/noeuds/http-request/');
             Ocade_Link('If', '/n8n/noeuds/if/');
+            Ocade_Link('Information Extractor', '/n8n/noeuds/maitrisez-le-noeud-information-extractor/');
             Ocade_Link('Schedule Trigger', '/n8n/noeuds/schedule-trigger/');
             Ocade_Link('Switch', '/n8n/noeuds/switch/');
             Ocade_Link('Webhook', '/n8n/noeuds/webhook/');
