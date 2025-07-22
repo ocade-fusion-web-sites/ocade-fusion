@@ -87,7 +87,7 @@ if (!$footer_html) {
         <li>🆓 <strong>Se désinscrire à tout moment</strong>.</li>
       </ul>
 
-      <form id="newsletter-form" method="POST" action="/chemin-vers-handler" novalidate>
+      <form id="newsletter-form" method="POST" action="" novalidate>
         <label for="newsletter-email">Mon Email</label>
         <span id="email-hint" class="hint">ex : nom@exemple.com</span>
         <input
