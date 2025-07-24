@@ -25,15 +25,16 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 <html <?php language_attributes(); ?>>
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-11BPW43110"></script>
-  <script>
+  <!-- Google Analytics -->
+  <script async type="text/plain" data-category="statistics" src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
+  <script type="text/plain" data-category="statistics">
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2XMPEMWDSK');
+</script>
+  <!-- Fin GA -->
 
-    gtag('config', 'G-11BPW43110');
-  </script>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="max-image-preview:large">
@@ -141,7 +142,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 
         <li role="menuitem">
           <button aria-controls="menu-actualites-n8n">Actualités</button>
-          <ul id="menu-actualites-n8n" role="menu"> 
+          <ul id="menu-actualites-n8n" role="menu">
             <?php
             Ocade_Link('Automatiser Tâches Répétitives PME', '/actualites/comment-automatiser-les-taches-repetitives-en-pme-sans-embaucher/');
             ?>
