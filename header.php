@@ -27,7 +27,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 <head>
   <!-- Google Analytics -->
   <script async type="text/plain" data-category="statistics" src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
-  <script type="text/plain" data-category="statistics">
+  <script type="text/javascript" data-category="statistics">
     window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
