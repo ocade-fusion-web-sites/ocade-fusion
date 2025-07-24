@@ -123,37 +123,21 @@ function custom_author_metadesc_ocadefusion($desc) {
 }
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
 
-/************************ MATOMO ***********************************/
-function ocadefusion_matomo_script() {
+/************************ Google Analytics ***********************************/
+function ocadefusion_google_analytics_script() {
   ?>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
   <script>
-    (function() {
-      const _paq = (window._paq = window._paq || []);
-      _paq.push(['disableCookies']);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      _paq.push(['setTrackerUrl', 'https://matomo.ocadefusion.fr/matomo.php']);
-      _paq.push(['setSiteId', '1']);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      const loadMatomo = () => {
-        const g = document.createElement('script');
-        g.src = 'https://matomo.ocadefusion.fr/matomo.js';
-        g.async = true;
-        document.head.appendChild(g);
-      };
-
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadMatomo, {
-          timeout: 3000
-        });
-      } else {
-        setTimeout(loadMatomo, 3000);
-      }
-    })();
+    gtag('config', 'G-2XMPEMWDSK');
   </script>
-<?php
+  <?php
 }
-add_action('wp_footer', 'ocadefusion_matomo_script', 100);
+add_action('wp_footer', 'ocadefusion_google_analytics_script', 100);
 /***************************************************************/
 
 /************************ HREFLANG ***********************************/
