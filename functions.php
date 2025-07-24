@@ -123,6 +123,14 @@ function custom_author_metadesc_ocadefusion($desc) {
 }
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
 
+/************************* Google AdSense ***********************************/
+function ajouter_script_adsense() {
+  echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169166912034962" crossorigin="anonymous"></script>';
+}
+add_action('wp_head', 'ajouter_script_adsense');
+/************************* Google AdSense ***********************************/
+
+
 /************************ HREFLANG ***********************************/
 function ocade_print_hreflang() {
   $languages = ['fr', 'en', 'de', 'es', 'hi', 'it', 'ja', 'pl', 'pt', 'th'];
