@@ -123,23 +123,6 @@ function custom_author_metadesc_ocadefusion($desc) {
 }
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
 
-/************************ Google Analytics ***********************************/
-function ajouter_gtag_dans_head() {
-    ?>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2XMPEMWDSK');
-    </script>
-    <?php
-}
-add_action('wp_head', 'ajouter_gtag_dans_head');
-/***************************************************************/
-
 /************************ HREFLANG ***********************************/
 function ocade_print_hreflang() {
   $languages = ['fr', 'en', 'de', 'es', 'hi', 'it', 'ja', 'pl', 'pt', 'th'];
