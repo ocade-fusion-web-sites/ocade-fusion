@@ -124,20 +124,20 @@ function custom_author_metadesc_ocadefusion($desc) {
 add_filter('wpseo_metadesc', 'custom_author_metadesc_ocadefusion');
 
 /************************ Google Analytics ***********************************/
-function ocadefusion_google_analytics_script() {
-  ?>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+function ajouter_gtag_dans_head() {
+    ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    gtag('config', 'G-2XMPEMWDSK');
-  </script>
-  <?php
+      gtag('config', 'G-2XMPEMWDSK');
+    </script>
+    <?php
 }
-add_action('wp_footer', 'ocadefusion_google_analytics_script', 100);
+add_action('wp_head', 'ajouter_gtag_dans_head');
 /***************************************************************/
 
 /************************ HREFLANG ***********************************/
