@@ -25,18 +25,40 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
 <html <?php language_attributes(); ?>>
 
 <head>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK"></script>
+  <!-- Google Analytics avec exclusion IP -->
   <script>
-    window.dataLayer = window.dataLayer || [];
+    const blockedIPs = ['31.35.151.43', '80.14.29.51', '57.129.71.26'];
+    const blockedSubnets = ['172.68.234.']; // Plage IP (exclusion par début)
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-2XMPEMWDSK');
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => {
+        const ip = data.ip;
+        const isExactBlocked = blockedIPs.includes(ip);
+        const isSubnetBlocked = blockedSubnets.some(prefix => ip.startsWith(prefix));
+
+        if (!isExactBlocked && !isSubnetBlocked) {
+          // IP autorisée → injecter Google Analytics
+          const gtagScript = document.createElement('script');
+          gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-2XMPEMWDSK";
+          gtagScript.async = true;
+          document.head.appendChild(gtagScript);
+
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-2XMPEMWDSK');
+        } else {
+          console.log("GA bloqué pour IP : " + ip);
+        }
+      })
+      .catch(err => console.warn("Erreur IP : ", err));
   </script>
   <!-- Fin GA -->
+
 
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
