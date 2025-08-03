@@ -146,6 +146,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
             Ocade_Link('HTTP Request', '/n8n/noeuds/http-request/');
             Ocade_Link('If', '/n8n/noeuds/if/');
             Ocade_Link('Information Extractor', '/n8n/noeuds/maitrisez-le-noeud-information-extractor/');
+            Ocade_Link('Merge', '/n8n/noeuds/maitriser-le-noeud-merge-pour-automatiser-efficacement/');
             Ocade_Link('Schedule Trigger', '/n8n/noeuds/schedule-trigger/');
             Ocade_Link('Switch', '/n8n/noeuds/switch/');
             Ocade_Link('Webhook', '/n8n/noeuds/webhook/');
@@ -170,6 +171,7 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
           <ul id="menu-actualites-n8n" role="menu">
             <?php
             Ocade_Link('Automatiser Tâches Répétitives PME', '/actualites/comment-automatiser-les-taches-repetitives-en-pme-sans-embaucher/');
+            Ocade_Link('Découvrez Nocodb', '/actualites/integration-airtable-et-nocodb-simplifiee/');
             ?>
           </ul>
         </li>
@@ -210,4 +212,5 @@ $_IS_SOMMARY = $_IS_ARTICLE || $_IS_AUTHOR;
       <div class="menu-item-placeholder media-query-visible-400"></div>
       <div class="menu-item-placeholder media-query-visible-450"></div>
     </div>
+
   </div>
